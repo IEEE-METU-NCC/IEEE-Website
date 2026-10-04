@@ -8,7 +8,8 @@
         "teknofest": "Teknofest",
         "contact": "İletişim",
         "about": "Hakkımızda",
-        "calendar": "Takvim"
+        "calendar": "Takvim",
+        "calculators": "Hesap Makinesi"
       },
       "hero": {
         "title": "IEEE ODTÜ KIBRIS",
@@ -111,6 +112,114 @@
       "calendar": {
         "pageTitle": "Takvim",
         "headerTitle": "IEEE Etkinlik Takvimi"
+      },
+      "calculators": {
+        "pageTitle": "Mühendislik Hesap Makineleri - IEEE ODTÜ KKK",
+        "headerTitle": "Mühendislik Hesap Makineleri",
+        "headerLead": "Elektrik-Elektronik odaklı hızlı hesaplama araçları. Tüm hesaplamalar tarayıcınızda yapılır.",
+        "inputs": "Girdiler",
+        "results": "Sonuçlar",
+        "back": "Kategoriler",
+        "everythingDesc": "Tüm hesap makineleri",
+        "tabs": {
+          "timer555": "555 Timer",
+          "smith": "Smith Chart",
+          "divider": "Voltage Divider",
+          "tau": "RC RL Time Constant (zaman sabiti)",
+          "buck": "Buck Converter",
+          "filter": "Passive Filter"
+        },
+        "filter": {
+          "title": "Passive Filter Hesaplayıcı",
+          "desc": "Low pass, high pass, band pass ve band stop pasif filtrelerin cutoff / merkez frekansını, bant genişliğini ve istenen frekanstaki kazancını hesaplar.",
+          "type": "Filtre Tipi",
+          "topology": "Topoloji",
+          "frequency": "Test frekansı (isteğe bağlı)",
+          "cutoff": "Cutoff frekansı (f<sub>c</sub>)",
+          "center": "Merkez frekansı (f<sub>0</sub>)",
+          "bandwidth": "Bant genişliği (BW)",
+          "q": "Kalite faktörü (Q)",
+          "lower": "Alt cutoff (f<sub>L</sub>)",
+          "upper": "Üst cutoff (f<sub>H</sub>)",
+          "gain": "Test frekansında kazanç",
+          "phase": "Test frekansında faz",
+          "response": "Frekans Cevabı"
+        },
+        "timer555": {
+          "title": "555 Timer Hesaplayıcı",
+          "desc": "NE555 entegresinin astable ve monostable çalışma modları için frekans, periyot ve darbe süresini hesaplar.",
+          "mode": "Çalışma Modu",
+          "astable": "Astable",
+          "monostable": "Monostable",
+          "frequency": "Frekans (f)",
+          "period": "Periyot (T)",
+          "tHigh": "Yüksek süre (t<sub>H</sub>)",
+          "tLow": "Düşük süre (t<sub>L</sub>)",
+          "duty": "Duty cycle (D)",
+          "pulse": "Darbe süresi (T)"
+        },
+        "smith": {
+          "title": "Smith Chart Hesaplayıcı",
+          "desc": "Yük empedansını Smith chart üzerinde gösterir; reflection coefficient, VSWR ve return loss değerlerini hesaplar. Chart'a tıklayarak da empedans seçebilirsiniz.",
+          "z0": "Karakteristik empedans (Z<sub>0</sub> = R<sub>0</sub> + jX<sub>0</sub>)",
+          "length": "Hat boyunca döndürme (ℓ / λ)",
+          "gammaIn": "Hat girişinde Γ<sub>in</sub>",
+          "zin": "Giriş empedansı (Z<sub>in</sub>)",
+          "legendIn": "Hat girişi (Z<sub>in</sub>)",
+          "resistance": "Yük direnci (R)",
+          "reactance": "Yük reaktansı (X)",
+          "frequency": "Frekans (isteğe bağlı)",
+          "normalized": "Normalize empedans (z)",
+          "gamma": "Reflection coefficient (Γ)",
+          "returnLoss": "Return loss",
+          "mismatchLoss": "Mismatch loss",
+          "admittance": "Admitans (Y)",
+          "equivalent": "Eşdeğer seri eleman",
+          "legendPoint": "Yük empedansı",
+          "legendSwr": "Sabit VSWR çemberi"
+        },
+        "divider": {
+          "title": "Voltage Divider Hesaplayıcı",
+          "desc": "İki dirençli voltage divider devresinin çıkış gerilimini, akımını ve dirençlerde harcanan gücü hesaplar. İsterseniz çıkışa bağlı yük direncini de ekleyebilirsiniz.",
+          "vin": "Giriş gerilimi (V<sub>in</sub>)",
+          "load": "Yük direnci R<sub>L</sub> (isteğe bağlı)",
+          "vout": "Çıkış gerilimi (V<sub>out</sub>)",
+          "ratio": "Bölme oranı (V<sub>out</sub>/V<sub>in</sub>)",
+          "current": "Kaynak akımı (I)",
+          "p1": "R<sub>1</sub> üzerindeki güç",
+          "p2": "R<sub>2</sub> üzerindeki güç"
+        },
+        "tau": {
+          "title": "RC / RL Time Constant Hesaplayıcı",
+          "desc": "RC ve RL devrelerinin time constant (τ) değerini, cutoff frekansını ve dolma / boşalma sürelerini hesaplar.",
+          "type": "Devre Tipi",
+          "rc": "RC (Direnç - Kondansatör)",
+          "rl": "RL (Direnç - Bobin)",
+          "tau": "Time constant (τ)",
+          "cutoff": "Cutoff frekansı (f<sub>c</sub>)",
+          "time": "Süre",
+          "rising": "Dolma",
+          "falling": "Boşalma"
+        },
+        "buck": {
+          "title": "Buck Converter Hesaplayıcı",
+          "desc": "Buck (step-down) DC-DC converter için duty cycle değerini, gerekli bobin ve çıkış kondansatörü değerlerini hesaplar.",
+          "vin": "Giriş gerilimi (V<sub>in</sub>)",
+          "vout": "Çıkış gerilimi (V<sub>out</sub>)",
+          "iout": "Çıkış akımı (I<sub>out</sub>)",
+          "fsw": "Anahtarlama frekansı (f<sub>sw</sub>)",
+          "ripple": "Bobin akımı ripple (ΔI<sub>L</sub> / I<sub>out</sub>)",
+          "dv": "Çıkış gerilimi ripple (ΔV<sub>out</sub>)",
+          "error": "Buck converter'da çıkış gerilimi giriş geriliminden küçük olmalıdır.",
+          "duty": "Duty cycle (D)",
+          "ton": "İletim süresi (t<sub>on</sub>)",
+          "inductor": "Minimum bobin (L)",
+          "rippleCurrent": "Bobin akımı ripple (ΔI<sub>L</sub>)",
+          "peak": "Tepe bobin akımı (I<sub>L,pk</sub>)",
+          "capacitor": "Minimum çıkış kondansatörü (C<sub>out</sub>)",
+          "power": "Çıkış gücü (P<sub>out</sub>)",
+          "note": "İdeal (kayıpsız) elemanlar ve sürekli iletim modu (CCM) varsayılır; kondansatör ESR'si hesaba katılmaz."
+        }
       }
     }
   }

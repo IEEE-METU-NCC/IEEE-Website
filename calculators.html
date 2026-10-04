@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="calculators.pageTitle">Mühendislik Hesap Makineleri - IEEE ODTÜ KKK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+    <link rel="stylesheet" href="calculators.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-xl bg-light" data-bs-theme = "light">
+    <div class="container-lg px-lg-3">
+        <a class="navbar-brand" href="index.html">
+        <img src="https://i.postimg.cc/DZfP24t6/metuieee.png" alt="IEEE Logo" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+            <li class="nav-item"><a class="nav-link" href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+            <li class="nav-item"><a class="nav-link" href="teknofest.html" data-i18n="nav.teknofest">Teknofest</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html" data-i18n="nav.contact">İletişim</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav.about">Hakkımızda</a></li>
+            <li class="nav-item"><a class="nav-link" href="calender.html" data-i18n="nav.calendar">Takvim</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="calculators.html" data-i18n="nav.calculators">Hesap Makinesi</a></li>
+            <li class="nav-item"><a class="nav-link" href="https://metucfor.vercel.app/en" target="_blank" rel="noopener noreferrer">METUCFOR</a></li>
+        </ul>
+        <div class="d-flex ms-xl-3 mt-2 mt-xl-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-lang-toggle id="langToggle"></button>
+        </div>
+        </div>
+    </div>
+    </nav>
+    <hr class="border-dark border-2 my-0">
+
+    <header class = "text-center">
+        <h1 class = "display-5 mt-4 mb-2" data-i18n="calculators.headerTitle">Mühendislik Hesap Makineleri</h1>
+        <p class="text-muted px-3 mb-4" data-i18n="calculators.headerLead">Elektrik-Elektronik odaklı hızlı hesaplama araçları. Tüm hesaplamalar tarayıcınızda yapılır.</p>
+    </header>
+
+    <hr>
+
+    <main class="container my-4" id="calculators">
+
+        <!-- Categories -->
+        <div class="row justify-content-center g-4" id="calc-categories">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="circuit">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <path d="M4 32 H13 L18 12 L27 52 L36 12 L45 52 L50 32 H60"/>
+                        <circle cx="4" cy="32" r="2.5"/>
+                        <circle cx="60" cy="32" r="2.5"/>
+                    </svg>
+                    <span class="h5 calc-category-title">Circuit Theory (EEE201/202)</span>
+                    <span class="small text-muted">Voltage Divider · RC RL Time Constant · Passive Filter</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="wave">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <circle cx="32" cy="32" r="27"/>
+                        <path d="M5 32 C12 8, 25 8, 32 32 S52 56, 59 32"/>
+                    </svg>
+                    <span class="h5 calc-category-title">Electromagnetic Waves (EEE303)</span>
+                    <span class="small text-muted">Voltage Divider · Smith Chart</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="semiconductor">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <path d="M4 32 H22 M42 32 H60 M42 16 V48"/>
+                        <path d="M22 16 V48 L42 32 Z"/>
+                    </svg>
+                    <span class="h5 calc-category-title">Semiconductor Devices (EEE212)</span>
+                    <span class="small text-muted">Voltage Divider</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="generic">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect x="14" y="5" width="36" height="54" rx="5"/>
+                        <rect x="21" y="12" width="22" height="11" rx="2"/>
+                        <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
+                    </svg>
+                    <span class="h5 calc-category-title">Generic Calculators</span>
+                    <span class="small text-muted">555 Timer · Buck Converter</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="everything">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect x="7" y="7" width="21" height="21" rx="4"/>
+                        <rect x="36" y="7" width="21" height="21" rx="4"/>
+                        <rect x="7" y="36" width="21" height="21" rx="4"/>
+                        <rect x="36" y="36" width="21" height="21" rx="4"/>
+                    </svg>
+                    <span class="h5 calc-category-title">Everything</span>
+                    <span class="small text-muted" data-i18n="calculators.everythingDesc">Tüm hesap makineleri</span>
+                </button>
+            </div>
+        </div>
+        <!-- Categories END -->
+
+        <!-- Calculator View -->
+        <div class="d-none" id="calc-view">
+        <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 mb-4">
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="calc-back">&larr; <span data-i18n="calculators.back">Kategoriler</span></button>
+            <h2 class="h4 mb-0" id="calc-category-title"></h2>
+        </div>
+
+        <!-- Calculator Tabs -->
+        <ul class="nav nav-pills justify-content-center gap-2 mb-4" id="calcTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="smith-tab" data-bs-toggle="pill" data-bs-target="#smith" type="button" role="tab" aria-controls="smith" aria-selected="false" data-i18n="calculators.tabs.smith">Smith Chart</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="timer555-tab" data-bs-toggle="pill" data-bs-target="#timer555" type="button" role="tab" aria-controls="timer555" aria-selected="true" data-i18n="calculators.tabs.timer555">555 Timer</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="divider-tab" data-bs-toggle="pill" data-bs-target="#divider" type="button" role="tab" aria-controls="divider" aria-selected="false" data-i18n="calculators.tabs.divider">Voltage Divider</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tau-tab" data-bs-toggle="pill" data-bs-target="#tau" type="button" role="tab" aria-controls="tau" aria-selected="false" data-i18n="calculators.tabs.tau">RC RL Time Constant (zaman sabiti)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="filter-tab" data-bs-toggle="pill" data-bs-target="#filter" type="button" role="tab" aria-controls="filter" aria-selected="false" data-i18n="calculators.tabs.filter">Passive Filter</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="buck-tab" data-bs-toggle="pill" data-bs-target="#buck" type="button" role="tab" aria-controls="buck" aria-selected="false" data-i18n="calculators.tabs.buck">Buck Converter</button>
+            </li>
+        </ul>
+        <!-- Calculator Tabs END -->
+
+        <div class="row justify-content-center">
+        <div class="col-lg-10">
+        <div class="tab-content">
+            
+            <!-- Smith Chart -->
+            <div class="tab-pane fade show active" id="smith" role="tabpanel" aria-labelledby="smith-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.smith.title">Smith Chart Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.smith.desc">Yük empedansını Smith chart üzerinde gösterir; reflection coefficient, VSWR ve return loss değerlerini hesaplar. Chart'a tıklayarak da empedans seçebilirsiniz.</p>
+                        <div class="row g-4">
+                            <div class="col-lg-5">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <label for="smith-z0" class="form-label" data-i18n="calculators.smith.z0">Karakteristik empedans (Z<sub>0</sub> = R<sub>0</sub> + jX<sub>0</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="smith-z0" value="50" min="0" step="any" inputmode="decimal" aria-label="R0">
+                                        <span class="input-group-text">+ j</span>
+                                        <input type="number" class="form-control" id="smith-z0x" value="0" step="any" inputmode="decimal" aria-label="X0">
+                                        <span class="input-group-text">Ω</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="smith-r" class="form-label" data-i18n="calculators.smith.resistance">Yük direnci (R)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="smith-r" value="25" min="0" step="any" inputmode="decimal">
+                                        <span class="input-group-text">Ω</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="smith-x" class="form-label" data-i18n="calculators.smith.reactance">Yük reaktansı (X)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">j</span>
+                                        <input type="number" class="form-control" id="smith-x" value="50" step="any" inputmode="decimal">
+                                        <span class="input-group-text">Ω</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="smith-len" class="form-label" data-i18n="calculators.smith.length">Hat boyunca döndürme (ℓ / λ)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="smith-len" value="0" min="0" step="any" inputmode="decimal">
+                                        <span class="input-group-text">λ</span>
+                                        <select class="form-select smith-dir" id="smith-dir" aria-label="Rotation direction">
+                                            <option value="gen">Toward generator</option>
+                                            <option value="load">Toward load</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="smith-f" class="form-label" data-i18n="calculators.smith.frequency">Frekans (isteğe bağlı)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="smith-f" value="100" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="smith-f-unit" aria-label="Frequency unit">
+                                            <option value="1">Hz</option>
+                                            <option value="1e3">kHz</option>
+                                            <option value="1e6" selected>MHz</option>
+                                            <option value="1e9">GHz</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.normalized">Normalize empedans (z)</span>
+                                        <span class="calc-value" id="smith-zn">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.gamma">Reflection coefficient (Γ)</span>
+                                        <span class="calc-value" id="smith-gamma">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>VSWR</span>
+                                        <span class="calc-value" id="smith-vswr">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.returnLoss">Return loss</span>
+                                        <span class="calc-value" id="smith-rl">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.mismatchLoss">Mismatch loss</span>
+                                        <span class="calc-value" id="smith-ml">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.admittance">Admitans (Y)</span>
+                                        <span class="calc-value" id="smith-y">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.equivalent">Eşdeğer seri eleman</span>
+                                        <span class="calc-value" id="smith-eq">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.gammaIn">Hat girişinde Γ<sub>in</sub></span>
+                                        <span class="calc-value" id="smith-gin">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.smith.zin">Giriş empedansı (Z<sub>in</sub>)</span>
+                                        <span class="calc-value" id="smith-zin">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-7 text-center">
+                                <svg class="smith-chart" id="smith-chart" viewBox="-240 -240 480 480" role="img" aria-label="Smith chart"></svg>
+                                <p class="small text-muted mb-0">
+                                    <span class="smith-legend smith-legend-point"></span> <span data-i18n="calculators.smith.legendPoint">Yük empedansı</span>
+                                    <span class="smith-legend smith-legend-swr ms-3"></span> <span data-i18n="calculators.smith.legendSwr">Sabit VSWR çemberi</span>
+                                    <span class="smith-legend smith-legend-point smith-legend-in ms-3"></span> <span data-i18n="calculators.smith.legendIn">Hat girişi (Z<sub>in</sub>)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0 mt-3">Γ = (Z<sub>L</sub> − Z<sub>0</sub>) / (Z<sub>L</sub> + Z<sub>0</sub>) &nbsp;·&nbsp; VSWR = (1 + |Γ|) / (1 − |Γ|) &nbsp;·&nbsp; RL = −20·log<sub>10</sub>|Γ| &nbsp;·&nbsp; Γ<sub>in</sub> = Γ·e<sup>∓j4πℓ/λ</sup></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Smith Chart END -->
+
+            <!-- 555 Timer -->
+            <div class="tab-pane fade" id="timer555" role="tabpanel" aria-labelledby="timer555-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.timer555.title">555 Timer Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.timer555.desc">NE555 entegresinin astable ve monostable çalışma modları için frekans, periyot ve darbe süresini hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <label for="t555-mode" class="form-label" data-i18n="calculators.timer555.mode">Çalışma Modu</label>
+                                    <select class="form-select" id="t555-mode">
+                                        <option value="astable" data-i18n="calculators.timer555.astable">Astable</option>
+                                        <option value="monostable" data-i18n="calculators.timer555.monostable">Monostable</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="t555-r1" class="form-label">R<sub>1</sub></label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="t555-r1" value="1" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="t555-r1-unit" aria-label="R1 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-t555-mode="astable">
+                                    <label for="t555-r2" class="form-label">R<sub>2</sub></label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="t555-r2" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="t555-r2-unit" aria-label="R2 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="t555-c" class="form-label">C</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="t555-c" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="t555-c-unit" aria-label="C unit">
+                                            <option value="1e-12">pF</option>
+                                            <option value="1e-9">nF</option>
+                                            <option value="1e-6" selected>µF</option>
+                                            <option value="1e-3">mF</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-t555-mode="astable">
+                                        <span data-i18n="calculators.timer555.frequency">Frekans (f)</span>
+                                        <span class="calc-value" id="t555-f">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-t555-mode="astable">
+                                        <span data-i18n="calculators.timer555.period">Periyot (T)</span>
+                                        <span class="calc-value" id="t555-period">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-t555-mode="astable">
+                                        <span data-i18n="calculators.timer555.tHigh">Yüksek süre (t<sub>H</sub>)</span>
+                                        <span class="calc-value" id="t555-thigh">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-t555-mode="astable">
+                                        <span data-i18n="calculators.timer555.tLow">Düşük süre (t<sub>L</sub>)</span>
+                                        <span class="calc-value" id="t555-tlow">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-t555-mode="astable">
+                                        <span data-i18n="calculators.timer555.duty">Duty cycle (D)</span>
+                                        <span class="calc-value" id="t555-duty">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-t555-mode="monostable">
+                                        <span data-i18n="calculators.timer555.pulse">Darbe süresi (T)</span>
+                                        <span class="calc-value" id="t555-pulse">—</span>
+                                    </li>
+                                </ul>
+                                <svg class="calc-waveform" id="t555-wave" viewBox="0 0 320 90" role="img" aria-label="555 output waveform">
+                                    <line x1="10" y1="75" x2="310" y2="75" class="calc-wave-axis"/>
+                                    <polyline id="t555-wave-line" class="calc-wave-line" points=""/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0 mt-3" data-t555-mode="astable">f = 1.44 / ((R<sub>1</sub> + 2R<sub>2</sub>)·C) &nbsp;·&nbsp; t<sub>H</sub> = 0.693·(R<sub>1</sub> + R<sub>2</sub>)·C &nbsp;·&nbsp; t<sub>L</sub> = 0.693·R<sub>2</sub>·C</p>
+                        <p class="small text-muted mb-0 mt-3" data-t555-mode="monostable">T = 1.1·R<sub>1</sub>·C</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 555 Timer END -->
+
+            <!-- Voltage Divider -->
+            <div class="tab-pane fade" id="divider" role="tabpanel" aria-labelledby="divider-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.divider.title">Voltage Divider Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.divider.desc">İki dirençli voltage divider devresinin çıkış gerilimini, akımını ve dirençlerde harcanan gücü hesaplar. İsterseniz çıkışa bağlı yük direncini de ekleyebilirsiniz.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <label for="div-vin" class="form-label" data-i18n="calculators.divider.vin">Giriş gerilimi (V<sub>in</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="div-vin" value="12" step="any" inputmode="decimal">
+                                        <span class="input-group-text">V</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="div-r1" class="form-label">R<sub>1</sub></label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="div-r1" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="div-r1-unit" aria-label="R1 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="div-r2" class="form-label">R<sub>2</sub></label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="div-r2" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="div-r2-unit" aria-label="R2 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="div-rl" class="form-label" data-i18n="calculators.divider.load">Yük direnci R<sub>L</sub> (isteğe bağlı)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="div-rl" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="div-rl-unit" aria-label="RL unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.divider.vout">Çıkış gerilimi (V<sub>out</sub>)</span>
+                                        <span class="calc-value" id="div-vout">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.divider.ratio">Bölme oranı (V<sub>out</sub>/V<sub>in</sub>)</span>
+                                        <span class="calc-value" id="div-ratio">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.divider.current">Kaynak akımı (I)</span>
+                                        <span class="calc-value" id="div-i">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.divider.p1">R<sub>1</sub> üzerindeki güç</span>
+                                        <span class="calc-value" id="div-p1">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.divider.p2">R<sub>2</sub> üzerindeki güç</span>
+                                        <span class="calc-value" id="div-p2">—</span>
+                                    </li>
+                                </ul>
+                                <svg class="calc-schematic" viewBox="0 0 220 170" role="img" aria-label="Voltage divider schematic">
+                                    <polyline class="calc-wire" points="20,20 90,20 90,35"/>
+                                    <rect class="calc-wire" x="80" y="35" width="20" height="40"/>
+                                    <polyline class="calc-wire" points="90,75 90,95"/>
+                                    <rect class="calc-wire" x="80" y="95" width="20" height="40"/>
+                                    <polyline class="calc-wire" points="90,135 90,150"/>
+                                    <polyline class="calc-wire" points="75,150 105,150"/>
+                                    <polyline class="calc-wire" points="81,155 99,155"/>
+                                    <polyline class="calc-wire" points="87,160 93,160"/>
+                                    <polyline class="calc-wire" points="90,85 160,85"/>
+                                    <circle class="calc-node" cx="90" cy="85" r="3"/>
+                                    <circle class="calc-terminal" cx="20" cy="20" r="3"/>
+                                    <circle class="calc-terminal" cx="160" cy="85" r="3"/>
+                                    <text x="20" y="12" text-anchor="middle">Vin</text>
+                                    <text x="168" y="89">Vout</text>
+                                    <text x="108" y="59">R1</text>
+                                    <text x="108" y="119">R2</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0 mt-3">V<sub>out</sub> = V<sub>in</sub> · (R<sub>2</sub> ∥ R<sub>L</sub>) / (R<sub>1</sub> + R<sub>2</sub> ∥ R<sub>L</sub>)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Voltage Divider END -->
+
+            <!-- Time Constant -->
+            <div class="tab-pane fade" id="tau" role="tabpanel" aria-labelledby="tau-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.tau.title">RC / RL Time Constant Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.tau.desc">RC ve RL devrelerinin time constant (τ) değerini, cutoff frekansını ve dolma / boşalma sürelerini hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <label for="tau-type" class="form-label" data-i18n="calculators.tau.type">Devre Tipi</label>
+                                    <select class="form-select" id="tau-type">
+                                        <option value="rc" data-i18n="calculators.tau.rc">RC (Direnç - Kondansatör)</option>
+                                        <option value="rl" data-i18n="calculators.tau.rl">RL (Direnç - Bobin)</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tau-r" class="form-label">R</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="tau-r" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="tau-r-unit" aria-label="R unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-tau-type="rc">
+                                    <label for="tau-c" class="form-label">C</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="tau-c" value="100" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="tau-c-unit" aria-label="C unit">
+                                            <option value="1e-12">pF</option>
+                                            <option value="1e-9">nF</option>
+                                            <option value="1e-6" selected>µF</option>
+                                            <option value="1e-3">mF</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-tau-type="rl">
+                                    <label for="tau-l" class="form-label">L</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="tau-l" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="tau-l-unit" aria-label="L unit">
+                                            <option value="1e-9">nH</option>
+                                            <option value="1e-6">µH</option>
+                                            <option value="1e-3" selected>mH</option>
+                                            <option value="1">H</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.tau.tau">Time constant (τ)</span>
+                                        <span class="calc-value" id="tau-value">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.tau.cutoff">Cutoff frekansı (f<sub>c</sub>)</span>
+                                        <span class="calc-value" id="tau-fc">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm align-middle text-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">t</th>
+                                                <th scope="col" data-i18n="calculators.tau.time">Süre</th>
+                                                <th scope="col" data-i18n="calculators.tau.rising">Dolma</th>
+                                                <th scope="col" data-i18n="calculators.tau.falling">Boşalma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tau-table"></tbody>
+                                    </table>
+                                </div>
+                                <svg class="calc-schematic mt-3" id="tau-schematic" viewBox="0 0 260 150" role="img" aria-label="RC / RL circuit schematic"></svg>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0 mt-3" data-tau-type="rc">τ = R·C &nbsp;·&nbsp; f<sub>c</sub> = 1 / (2π·τ) &nbsp;·&nbsp; v(t) = V·(1 − e<sup>−t/τ</sup>)</p>
+                        <p class="small text-muted mb-0 mt-3" data-tau-type="rl">τ = L / R &nbsp;·&nbsp; f<sub>c</sub> = 1 / (2π·τ) &nbsp;·&nbsp; i(t) = I·(1 − e<sup>−t/τ</sup>)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Time Constant END -->
+
+            <!-- Passive Filter -->
+            <div class="tab-pane fade" id="filter" role="tabpanel" aria-labelledby="filter-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.filter.title">Passive Filter Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.filter.desc">Low pass, high pass, band pass ve band stop pasif filtrelerin cutoff / merkez frekansını, bant genişliğini ve istenen frekanstaki kazancını hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <label for="filter-type" class="form-label" data-i18n="calculators.filter.type">Filtre Tipi</label>
+                                    <select class="form-select" id="filter-type">
+                                        <option value="lp">Low Pass</option>
+                                        <option value="hp">High Pass</option>
+                                        <option value="bp">Band Pass</option>
+                                        <option value="bs">Band Stop</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" data-filter-kind="first">
+                                    <label for="filter-topology" class="form-label" data-i18n="calculators.filter.topology">Topoloji</label>
+                                    <select class="form-select" id="filter-topology">
+                                        <option value="rc">RC</option>
+                                        <option value="rl">RL</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="filter-r" class="form-label">R</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="filter-r" value="1" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="filter-r-unit" aria-label="R unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="filter-c-group">
+                                    <label for="filter-c" class="form-label">C</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="filter-c" value="100" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="filter-c-unit" aria-label="C unit">
+                                            <option value="1e-12">pF</option>
+                                            <option value="1e-9" selected>nF</option>
+                                            <option value="1e-6">µF</option>
+                                            <option value="1e-3">mF</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="filter-l-group">
+                                    <label for="filter-l" class="form-label">L</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="filter-l" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="filter-l-unit" aria-label="L unit">
+                                            <option value="1e-9">nH</option>
+                                            <option value="1e-6">µH</option>
+                                            <option value="1e-3" selected>mH</option>
+                                            <option value="1">H</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="filter-f" class="form-label" data-i18n="calculators.filter.frequency">Test frekansı (isteğe bağlı)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="filter-f" value="1" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="filter-f-unit" aria-label="Frequency unit">
+                                            <option value="1">Hz</option>
+                                            <option value="1e3" selected>kHz</option>
+                                            <option value="1e6">MHz</option>
+                                            <option value="1e9">GHz</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <svg class="calc-schematic mt-4" id="filter-schematic" viewBox="0 0 260 150" role="img" aria-label="Filter circuit schematic"></svg>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-filter-kind="first">
+                                        <span data-i18n="calculators.filter.cutoff">Cutoff frekansı (f<sub>c</sub>)</span>
+                                        <span class="calc-value" id="filter-fc">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-filter-kind="second">
+                                        <span data-i18n="calculators.filter.center">Merkez frekansı (f<sub>0</sub>)</span>
+                                        <span class="calc-value" id="filter-f0">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-filter-kind="second">
+                                        <span data-i18n="calculators.filter.bandwidth">Bant genişliği (BW)</span>
+                                        <span class="calc-value" id="filter-bw">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-filter-kind="second">
+                                        <span data-i18n="calculators.filter.q">Kalite faktörü (Q)</span>
+                                        <span class="calc-value" id="filter-q">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-filter-kind="second">
+                                        <span data-i18n="calculators.filter.lower">Alt cutoff (f<sub>L</sub>)</span>
+                                        <span class="calc-value" id="filter-fl">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" data-filter-kind="second">
+                                        <span data-i18n="calculators.filter.upper">Üst cutoff (f<sub>H</sub>)</span>
+                                        <span class="calc-value" id="filter-fh">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.filter.gain">Test frekansında kazanç</span>
+                                        <span class="calc-value" id="filter-gain">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.filter.phase">Test frekansında faz</span>
+                                        <span class="calc-value" id="filter-phase">—</span>
+                                    </li>
+                                </ul>
+                                <h6 class="text-primary mb-2" data-i18n="calculators.filter.response">Frekans Cevabı</h6>
+                                <svg class="calc-plot" viewBox="0 0 320 150" role="img" aria-label="Filter frequency response">
+                                    <line class="calc-wave-axis" x1="35" y1="10" x2="310" y2="10"/>
+                                    <line class="calc-wave-axis" x1="35" y1="67.5" x2="310" y2="67.5"/>
+                                    <line class="calc-wave-axis" x1="35" y1="125" x2="310" y2="125"/>
+                                    <line class="calc-wave-axis" x1="172.5" y1="10" x2="172.5" y2="125"/>
+                                    <text x="30" y="13" text-anchor="end">0 dB</text>
+                                    <text x="30" y="71" text-anchor="end">−20</text>
+                                    <text x="30" y="128" text-anchor="end">−40</text>
+                                    <text x="35" y="142" id="filter-plot-min"></text>
+                                    <text x="172.5" y="142" text-anchor="middle" id="filter-plot-mid"></text>
+                                    <text x="310" y="142" text-anchor="end" id="filter-plot-max"></text>
+                                    <polyline class="calc-wave-line" id="filter-plot-line" points=""/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0 mt-3" data-filter-kind="first">RC: f<sub>c</sub> = 1 / (2π·R·C) &nbsp;·&nbsp; RL: f<sub>c</sub> = R / (2π·L)</p>
+                        <p class="small text-muted mb-0 mt-3" data-filter-kind="second">f<sub>0</sub> = 1 / (2π·√(L·C)) &nbsp;·&nbsp; BW = R / (2π·L) &nbsp;·&nbsp; Q = f<sub>0</sub> / BW</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Passive Filter END -->
+
+            <!-- Buck Converter -->
+            <div class="tab-pane fade" id="buck" role="tabpanel" aria-labelledby="buck-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.buck.title">Buck Converter Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.buck.desc">Buck (step-down) DC-DC converter için duty cycle değerini, gerekli bobin ve çıkış kondansatörü değerlerini hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <label for="buck-vin" class="form-label" data-i18n="calculators.buck.vin">Giriş gerilimi (V<sub>in</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="buck-vin" value="12" min="0" step="any" inputmode="decimal">
+                                        <span class="input-group-text">V</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="buck-vout" class="form-label" data-i18n="calculators.buck.vout">Çıkış gerilimi (V<sub>out</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="buck-vout" value="5" min="0" step="any" inputmode="decimal">
+                                        <span class="input-group-text">V</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="buck-iout" class="form-label" data-i18n="calculators.buck.iout">Çıkış akımı (I<sub>out</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="buck-iout" value="2" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="buck-iout-unit" aria-label="Iout unit">
+                                            <option value="1e-3">mA</option>
+                                            <option value="1" selected>A</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="buck-fsw" class="form-label" data-i18n="calculators.buck.fsw">Anahtarlama frekansı (f<sub>sw</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="buck-fsw" value="500" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="buck-fsw-unit" aria-label="fsw unit">
+                                            <option value="1">Hz</option>
+                                            <option value="1e3" selected>kHz</option>
+                                            <option value="1e6">MHz</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="buck-ripple" class="form-label" data-i18n="calculators.buck.ripple">Bobin akımı ripple (ΔI<sub>L</sub> / I<sub>out</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="buck-ripple" value="30" min="0" max="200" step="any" inputmode="decimal">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="buck-dv" class="form-label" data-i18n="calculators.buck.dv">Çıkış gerilimi ripple (ΔV<sub>out</sub>)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="buck-dv" value="50" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="buck-dv-unit" aria-label="Ripple voltage unit">
+                                            <option value="1e-3" selected>mV</option>
+                                            <option value="1">V</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <div class="alert alert-warning d-none" role="alert" id="buck-error" data-i18n="calculators.buck.error">Buck converter'da çıkış gerilimi giriş geriliminden küçük olmalıdır.</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.buck.duty">Duty cycle (D)</span>
+                                        <span class="calc-value" id="buck-duty">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.buck.ton">İletim süresi (t<sub>on</sub>)</span>
+                                        <span class="calc-value" id="buck-ton">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.buck.inductor">Minimum bobin (L)</span>
+                                        <span class="calc-value" id="buck-l">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.buck.rippleCurrent">Bobin akımı ripple (ΔI<sub>L</sub>)</span>
+                                        <span class="calc-value" id="buck-dil">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.buck.peak">Tepe bobin akımı (I<sub>L,pk</sub>)</span>
+                                        <span class="calc-value" id="buck-ipk">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.buck.capacitor">Minimum çıkış kondansatörü (C<sub>out</sub>)</span>
+                                        <span class="calc-value" id="buck-c">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.buck.power">Çıkış gücü (P<sub>out</sub>)</span>
+                                        <span class="calc-value" id="buck-p">—</span>
+                                    </li>
+                                </ul>
+                                <svg class="calc-schematic calc-schematic-wide mt-4" viewBox="0 0 330 160" role="img" aria-label="Buck converter schematic">
+                                    <polyline class="calc-wire" points="15,40 50,40"/>
+                                    <polyline class="calc-wire" points="50,40 76,27"/>
+                                    <polyline class="calc-wire" points="80,40 130,40"/>
+                                    <path class="calc-wire" d="M130,40 a10,10 0 0 1 20,0 a10,10 0 0 1 20,0 a10,10 0 0 1 20,0"/>
+                                    <polyline class="calc-wire" points="190,40 300,40"/>
+                                    <polyline class="calc-wire" points="105,40 105,75"/>
+                                    <polyline class="calc-wire" points="95,75 115,75"/>
+                                    <polygon class="calc-wire" points="95,95 115,95 105,75"/>
+                                    <polyline class="calc-wire" points="105,95 105,130"/>
+                                    <polyline class="calc-wire" points="225,40 225,81"/>
+                                    <polyline class="calc-wire" points="213,81 237,81"/>
+                                    <polyline class="calc-wire" points="213,89 237,89"/>
+                                    <polyline class="calc-wire" points="225,89 225,130"/>
+                                    <polyline class="calc-wire" points="270,40 270,65"/>
+                                    <rect class="calc-wire" x="262" y="65" width="16" height="40"/>
+                                    <polyline class="calc-wire" points="270,105 270,130"/>
+                                    <polyline class="calc-wire" points="15,130 270,130"/>
+                                    <circle class="calc-node" cx="105" cy="40" r="3"/>
+                                    <circle class="calc-node" cx="225" cy="40" r="3"/>
+                                    <circle class="calc-node" cx="270" cy="40" r="3"/>
+                                    <circle class="calc-node" cx="105" cy="130" r="3"/>
+                                    <circle class="calc-node" cx="225" cy="130" r="3"/>
+                                    <circle class="calc-terminal" cx="15" cy="40" r="3"/>
+                                    <circle class="calc-terminal" cx="15" cy="130" r="3"/>
+                                    <circle class="calc-terminal" cx="50" cy="40" r="3"/>
+                                    <circle class="calc-terminal" cx="80" cy="40" r="3"/>
+                                    <circle class="calc-terminal" cx="300" cy="40" r="3"/>
+                                    <text x="15" y="29" text-anchor="middle">Vin</text>
+                                    <text x="15" y="149" text-anchor="middle">GND</text>
+                                    <text x="65" y="20" text-anchor="middle">S</text>
+                                    <text x="160" y="22" text-anchor="middle">L</text>
+                                    <text x="121" y="90">D</text>
+                                    <text x="243" y="89">C</text>
+                                    <text x="284" y="89">R</text>
+                                    <text x="300" y="29" text-anchor="middle">Vout</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-1 mt-3">D = V<sub>out</sub> / V<sub>in</sub> &nbsp;·&nbsp; L = V<sub>out</sub>·(V<sub>in</sub> − V<sub>out</sub>) / (ΔI<sub>L</sub>·f<sub>sw</sub>·V<sub>in</sub>) &nbsp;·&nbsp; C<sub>out</sub> = ΔI<sub>L</sub> / (8·f<sub>sw</sub>·ΔV<sub>out</sub>)</p>
+                        <p class="small text-muted mb-0" data-i18n="calculators.buck.note">İdeal (kayıpsız) elemanlar ve sürekli iletim modu (CCM) varsayılır; kondansatör ESR'si hesaba katılmaz.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Buck Converter END -->
+
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- Calculator View END -->
+
+    </main>
+
+    <footer class = "bg-light text-center mt-5 py-3" data-bs-theme = "light">
+        <div class="container">
+            <span class="lead me-3" data-i18n="footer.follow">Bizi takip edin:</span>
+            <a href="https://www.instagram.com/ieeemetuncc/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" height="40" class="me-1">
+            </a>
+            <a href="https://www.linkedin.com/company/ieee-metu-nothern-cyprus-student-branch/" target="_blank" class="text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" height="40" class="me-1">
+            </a>
+        </div>
+
+    </footer>
+
+    <script src="https://unpkg.com/i18next@23.11.2/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js"></script>
+    <script src="calculators.js"></script>
+</body>
+</html>
