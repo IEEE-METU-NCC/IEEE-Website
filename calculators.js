@@ -582,8 +582,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentCategory) return;
 
         const ids = CATEGORIES[currentCategory];
-        $('calc-category-title').textContent =
-            document.querySelector(`[data-category="${currentCategory}"] .calc-category-title`).textContent;
+        // Copy the button's title, keeping its translation key so the language toggle updates it too
+        const source = document.querySelector(`[data-category="${currentCategory}"] .calc-category-title`);
+        const title = $('calc-category-title');
+        title.textContent = source.textContent;
+        if (source.hasAttribute('data-i18n')) title.setAttribute('data-i18n', source.getAttribute('data-i18n'));
+        else title.removeAttribute('data-i18n');
         Object.keys(calculators).forEach(id => $(id + '-tab').parentElement.classList.add('d-none'));
         ids.forEach(id => {
             const item = $(id + '-tab').parentElement;

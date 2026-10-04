@@ -121,6 +121,9 @@
         "results": "Sonuçlar",
         "back": "Kategoriler",
         "everythingDesc": "Tüm hesap makineleri",
+        "categories": {
+          "generic": "Diğer Hesap Makineleri"
+        },
         "tabs": {
           "timer555": "555 Timer",
           "smith": "Smith Chart",

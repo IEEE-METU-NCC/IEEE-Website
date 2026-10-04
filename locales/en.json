@@ -117,6 +117,9 @@
         "results": "Results",
         "back": "Categories",
         "everythingDesc": "All calculators",
+        "categories": {
+          "generic": "Generic Calculators"
+        },
         "tabs": {
           "timer555": "555 Timer",
           "smith": "Smith Chart",

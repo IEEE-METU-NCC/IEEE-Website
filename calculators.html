@@ -86,7 +86,7 @@
                         <rect x="21" y="12" width="22" height="11" rx="2"/>
                         <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
                     </svg>
-                    <span class="h5 calc-category-title">Generic Calculators</span>
+                    <span class="h5 calc-category-title" data-i18n="calculators.categories.generic">Diğer Hesap Makineleri</span>
                     <span class="small text-muted">555 Timer · Buck Converter</span>
                 </button>
             </div>
@@ -107,13 +107,13 @@
 
         <!-- Calculator View -->
         <div class="d-none" id="calc-view">
-        <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 mb-4">
-            <button type="button" class="btn btn-sm btn-outline-secondary" id="calc-back">&larr; <span data-i18n="calculators.back">Kategoriler</span></button>
-            <h2 class="h4 mb-0" id="calc-category-title"></h2>
-        </div>
+        <h2 class="h4 text-center mb-3" id="calc-category-title"></h2>
 
         <!-- Calculator Tabs -->
-        <ul class="nav nav-pills justify-content-center gap-2 mb-4" id="calcTabs" role="tablist">
+        <ul class="nav nav-pills justify-content-center align-items-center gap-2 mb-4" id="calcTabs" role="tablist">
+            <li class="nav-item me-2" role="presentation">
+                <button type="button" class="btn btn-outline-secondary text-nowrap" id="calc-back">&larr; <span data-i18n="calculators.back">Kategoriler</span></button>
+            </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="smith-tab" data-bs-toggle="pill" data-bs-target="#smith" type="button" role="tab" aria-controls="smith" aria-selected="false" data-i18n="calculators.tabs.smith">Smith Chart</button>
             </li>
