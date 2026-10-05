@@ -118,7 +118,8 @@
         "back": "Categories",
         "everythingDesc": "All calculators",
         "categories": {
-          "generic": "Generic Calculators"
+          "generic": "Generic Calculators",
+          "everything": "Everything"
         },
         "tabs": {
           "timer555": "555 Timer",

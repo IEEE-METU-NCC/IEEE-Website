@@ -122,7 +122,8 @@
         "back": "Kategoriler",
         "everythingDesc": "Tüm hesap makineleri",
         "categories": {
-          "generic": "Diğer Hesap Makineleri"
+          "generic": "Diğer Hesap Makineleri",
+          "everything": "Tümü"
         },
         "tabs": {
           "timer555": "555 Timer",
