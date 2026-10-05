@@ -1,0 +1,180 @@
+/* Kategori butonları */
+.calc-category {
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.calc-category:hover,
+.calc-category:focus-visible {
+    transform: scale(1.05);
+    border-color: var(--bs-primary);
+}
+
+.calc-category-icon {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 0.5rem;
+    fill: none;
+    stroke: var(--bs-primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.calc-unit {
+    flex: 0 0 5.5rem !important;
+}
+
+.calc-value {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+/* 555 çıkış dalga şekli */
+.calc-waveform {
+    width: 100%;
+    max-height: 110px;
+}
+
+.calc-wave-axis {
+    stroke: var(--bs-border-color);
+    stroke-width: 1;
+    stroke-dasharray: 4 4;
+}
+
+.calc-wave-line {
+    fill: none;
+    stroke: var(--bs-primary);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+}
+
+/* Gerilim bölücü şeması */
+.calc-schematic {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    font-size: 12px;
+    fill: var(--bs-body-color);
+}
+
+.calc-schematic-wide {
+    max-width: 380px;
+}
+
+/* Filtre frekans cevabı */
+.calc-plot {
+    width: 100%;
+    font-size: 10px;
+    fill: var(--bs-secondary-color);
+}
+
+.calc-wire {
+    fill: none;
+    stroke: var(--bs-body-color);
+    stroke-width: 1.5;
+}
+
+.calc-node {
+    fill: var(--bs-body-color);
+}
+
+.calc-terminal {
+    fill: var(--bs-body-bg);
+    stroke: var(--bs-body-color);
+    stroke-width: 1.5;
+}
+
+/* Smith abağı */
+.smith-chart {
+    width: 100%;
+    max-width: 520px;
+    cursor: crosshair;
+    user-select: none;
+}
+
+.smith-grid circle,
+.smith-grid line {
+    fill: none;
+    stroke: var(--bs-secondary-color);
+    stroke-width: 0.75;
+    opacity: 0.6;
+}
+
+.smith-outline {
+    fill: none;
+    stroke: var(--bs-body-color);
+    stroke-width: 1.5;
+}
+
+.smith-label {
+    font-size: 11px;
+    fill: var(--bs-secondary-color);
+    pointer-events: none;
+}
+
+.smith-swr {
+    fill: none;
+    stroke: var(--bs-primary);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+}
+
+.smith-ray {
+    stroke: rgb(204, 0, 0);
+    stroke-width: 1;
+}
+
+.smith-point {
+    fill: rgb(204, 0, 0);
+    stroke: #fff;
+    stroke-width: 1.5;
+}
+
+.smith-arc {
+    fill: none;
+    stroke: var(--bs-primary);
+    stroke-width: 3;
+}
+
+.smith-point-in {
+    fill: var(--bs-primary);
+    stroke: #fff;
+    stroke-width: 1.5;
+}
+
+.smith-legend-in {
+    background-color: var(--bs-primary) !important;
+}
+
+.smith-dir {
+    flex: 0 0 11rem !important;
+}
+
+.smith-legend {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.smith-legend-point {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background-color: rgb(204, 0, 0);
+}
+
+.smith-legend-swr {
+    width: 1.5rem;
+    border-top: 2px dashed var(--bs-primary);
+}
+
+/* Sekmeye #hash ile gelindiginde sticky navbar kartin ustunu kapatmasin */
+#calculators .tab-pane {
+    scroll-margin-top: 150px;
+}

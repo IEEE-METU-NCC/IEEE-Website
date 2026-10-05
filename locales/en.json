@@ -7,7 +7,8 @@
         "teknofest": "Teknofest",
         "contact": "Contact",
         "about": "About",
-        "calendar": "Calendar"
+        "calendar": "Calendar",
+        "calculators": "Calculators"
       },
       "hero": {
         "title": "IEEE METU NCC",
@@ -107,6 +108,117 @@
       "calendar": {
         "pageTitle": "Calendar",
         "headerTitle": "IEEE Events Calendar"
+      },
+      "calculators": {
+        "pageTitle": "Engineering Calculators - IEEE METU NCC",
+        "headerTitle": "Engineering Calculators",
+        "headerLead": "Quick calculation tools focused on Electrical and Electronics Engineering. Everything is computed in your browser.",
+        "inputs": "Inputs",
+        "results": "Results",
+        "back": "Categories",
+        "everythingDesc": "All calculators",
+        "categories": {
+          "generic": "Generic Calculators"
+        },
+        "tabs": {
+          "timer555": "555 Timer",
+          "smith": "Smith Chart",
+          "divider": "Voltage Divider",
+          "tau": "RC RL Time Constant",
+          "buck": "Buck Converter",
+          "filter": "Passive Filter"
+        },
+        "filter": {
+          "title": "Passive Filter Calculator",
+          "desc": "Calculates the cutoff / center frequency, bandwidth and the gain at a chosen frequency for passive low pass, high pass, band pass and band stop filters.",
+          "type": "Filter Type",
+          "topology": "Topology",
+          "frequency": "Test frequency (optional)",
+          "cutoff": "Cutoff frequency (f<sub>c</sub>)",
+          "center": "Center frequency (f<sub>0</sub>)",
+          "bandwidth": "Bandwidth (BW)",
+          "q": "Quality factor (Q)",
+          "lower": "Lower cutoff (f<sub>L</sub>)",
+          "upper": "Upper cutoff (f<sub>H</sub>)",
+          "gain": "Gain at test frequency",
+          "phase": "Phase at test frequency",
+          "response": "Frequency Response"
+        },
+        "timer555": {
+          "title": "555 Timer Calculator",
+          "desc": "Calculates the frequency, period and pulse width of the NE555 in astable and monostable modes.",
+          "mode": "Operating Mode",
+          "astable": "Astable",
+          "monostable": "Monostable",
+          "frequency": "Frequency (f)",
+          "period": "Period (T)",
+          "tHigh": "High time (t<sub>H</sub>)",
+          "tLow": "Low time (t<sub>L</sub>)",
+          "duty": "Duty cycle (D)",
+          "pulse": "Pulse width (T)"
+        },
+        "smith": {
+          "title": "Smith Chart Calculator",
+          "desc": "Plots the load impedance on the Smith chart and calculates the reflection coefficient, VSWR and return loss. You can also click on the chart to pick an impedance.",
+          "z0": "Characteristic impedance (Z<sub>0</sub> = R<sub>0</sub> + jX<sub>0</sub>)",
+          "length": "Rotation along the line (ℓ / λ)",
+          "gammaIn": "Γ<sub>in</sub> at line input",
+          "zin": "Input impedance (Z<sub>in</sub>)",
+          "legendIn": "Line input (Z<sub>in</sub>)",
+          "resistance": "Load resistance (R)",
+          "reactance": "Load reactance (X)",
+          "frequency": "Frequency (optional)",
+          "normalized": "Normalized impedance (z)",
+          "gamma": "Reflection coefficient (Γ)",
+          "returnLoss": "Return loss",
+          "mismatchLoss": "Mismatch loss",
+          "admittance": "Admittance (Y)",
+          "equivalent": "Equivalent series element",
+          "legendPoint": "Load impedance",
+          "legendSwr": "Constant VSWR circle"
+        },
+        "divider": {
+          "title": "Voltage Divider Calculator",
+          "desc": "Calculates the output voltage, current and resistor power dissipation of a two-resistor voltage divider. Optionally add a load resistor connected to the output.",
+          "vin": "Input voltage (V<sub>in</sub>)",
+          "load": "Load resistor R<sub>L</sub> (optional)",
+          "vout": "Output voltage (V<sub>out</sub>)",
+          "ratio": "Division ratio (V<sub>out</sub>/V<sub>in</sub>)",
+          "current": "Source current (I)",
+          "p1": "Power in R<sub>1</sub>",
+          "p2": "Power in R<sub>2</sub>"
+        },
+        "tau": {
+          "title": "RC / RL Time Constant Calculator",
+          "desc": "Calculates the time constant (τ), cutoff frequency and charge / discharge times of RC and RL circuits.",
+          "type": "Circuit Type",
+          "rc": "RC (Resistor - Capacitor)",
+          "rl": "RL (Resistor - Inductor)",
+          "tau": "Time constant (τ)",
+          "cutoff": "Cutoff frequency (f<sub>c</sub>)",
+          "time": "Time",
+          "rising": "Charge",
+          "falling": "Discharge"
+        },
+        "buck": {
+          "title": "Buck Converter Calculator",
+          "desc": "Calculates the duty cycle and the required inductor and output capacitor values for a step-down (buck) DC-DC converter.",
+          "vin": "Input voltage (V<sub>in</sub>)",
+          "vout": "Output voltage (V<sub>out</sub>)",
+          "iout": "Output current (I<sub>out</sub>)",
+          "fsw": "Switching frequency (f<sub>sw</sub>)",
+          "ripple": "Inductor current ripple (ΔI<sub>L</sub> / I<sub>out</sub>)",
+          "dv": "Output voltage ripple (ΔV<sub>out</sub>)",
+          "error": "In a buck converter the output voltage must be lower than the input voltage.",
+          "duty": "Duty cycle (D)",
+          "ton": "On time (t<sub>on</sub>)",
+          "inductor": "Minimum inductor (L)",
+          "rippleCurrent": "Inductor current ripple (ΔI<sub>L</sub>)",
+          "peak": "Peak inductor current (I<sub>L,pk</sub>)",
+          "capacitor": "Minimum output capacitor (C<sub>out</sub>)",
+          "power": "Output power (P<sub>out</sub>)",
+          "note": "Assumes ideal (lossless) components and continuous conduction mode (CCM); capacitor ESR is not included."
+        }
       }
     }
 }
