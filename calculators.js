@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Calculators listed under each category button, in tab order
     const CATEGORIES = {
         circuit: ['divider', 'tau', 'filter'],
-        wave: ['divider', 'smith'],
+        wave: ['smith'],
         semiconductor: ['divider'],
         generic: ['timer555', 'buck'],
         everything: ['timer555', 'smith', 'divider', 'tau', 'filter', 'buck']
