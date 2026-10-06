@@ -46,6 +46,14 @@
       "footer": {
         "follow": "Follow us:"
       },
+      "apex": {
+        "pageTitle": "Apex Racing FSAE - IEEE METU NCC",
+        "badge": "Under Construction",
+        "title": "This page is under construction",
+        "lead": "We are building the page for our Apex Racing FSAE team. It will be here very soon!",
+        "backHome": "Back to Home",
+        "contact": "Contact Us"
+      },
       "contact": {
         "pageTitle": "Contact - IEEE METU NCC",
         "headerTitle": "Contact",
