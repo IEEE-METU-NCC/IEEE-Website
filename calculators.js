@@ -705,6 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
         circuit: ['divider', 'tau', 'filter', 'threephase'],
         wave: ['smith'],
         semiconductor: ['divider'],
+        microwave: ['filter', 'smith'],
         generic: ['timer555', 'buck'],
         everything: ['timer555', 'smith', 'divider', 'tau', 'filter', 'threephase', 'buck']
     };
