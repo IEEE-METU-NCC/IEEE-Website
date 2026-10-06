@@ -1,10 +1,14 @@
 // i18n initialization for index.html
 // Simple key-based replacement using data-i18n attributes
 
+// update cacheKey const to prevent translation keys not being updated
+
 document.addEventListener("DOMContentLoaded", async function() {
+  // Changes once per hour, so cached locale files are reused within the hour
+  const cacheKey = 234523423232325234;
   const [enRes, trRes] = await Promise.all([
-      fetch('./locales/en.json').then(res => res.json()),
-      fetch('./locales/tr.json').then(res => res.json())
+      fetch(`./locales/en.json?v=${cacheKey}`).then(res => res.json()),
+      fetch(`./locales/tr.json?v=${cacheKey}`).then(res => res.json())
     ]);
 
     const resources = {
@@ -28,6 +32,8 @@ function updateContent() {
   document.documentElement.lang = i18next.language;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
+    // Keep the text already in the HTML if the key is missing
+    if (!i18next.exists(key)) return;
     const text = i18next.t(key);
     if (el.tagName === 'INPUT') {
       if (el.hasAttribute('placeholder')) {
