@@ -56,7 +56,7 @@
                         <circle cx="60" cy="32" r="2.5"/>
                     </svg>
                     <span class="h5 calc-category-title">Circuit Theory (EEE201/202)</span>
-                    <span class="small text-muted">Voltage Divider · RC RL Time Constant · Passive Filter</span>
+                    <span class="small text-muted">Voltage Divider · RC RL Time Constant · Passive Filter · Three Phase</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
@@ -128,6 +128,9 @@
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="filter-tab" data-bs-toggle="pill" data-bs-target="#filter" type="button" role="tab" aria-controls="filter" aria-selected="false" data-i18n="calculators.tabs.filter">Passive Filter</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="threephase-tab" data-bs-toggle="pill" data-bs-target="#threephase" type="button" role="tab" aria-controls="threephase" aria-selected="false" data-i18n="calculators.tabs.threephase">Three Phase (3 faz)</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="buck-tab" data-bs-toggle="pill" data-bs-target="#buck" type="button" role="tab" aria-controls="buck" aria-selected="false" data-i18n="calculators.tabs.buck">Buck Converter</button>
@@ -672,6 +675,122 @@
                 </div>
             </div>
             <!-- Passive Filter END -->
+
+            <!-- Three Phase -->
+            <div class="tab-pane fade" id="threephase" role="tabpanel" aria-labelledby="threephase-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.threephase.title">Three Phase Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.threephase.desc">Dengeli üç fazlı sistemde kaynak ve yükün star (Y) / delta (Δ) bağlantısına göre line ve phase gerilimlerini, akımlarını ve gücü hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-6">
+                                        <label for="tp-source" class="form-label" data-i18n="calculators.threephase.source">Kaynak bağlantısı</label>
+                                        <select class="form-select" id="tp-source">
+                                            <option value="y" selected data-i18n="calculators.threephase.star">Star (Y)</option>
+                                            <option value="delta" data-i18n="calculators.threephase.delta">Delta (Δ)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="tp-load" class="form-label" data-i18n="calculators.threephase.load">Yük bağlantısı</label>
+                                        <select class="form-select" id="tp-load">
+                                            <option value="y" data-i18n="calculators.threephase.star">Star (Y)</option>
+                                            <option value="delta" selected data-i18n="calculators.threephase.delta">Delta (Δ)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tp-v" class="form-label" data-i18n="calculators.threephase.voltage">Kaynak gerilimi</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="tp-v" value="400" min="0" step="any" inputmode="decimal">
+                                        <span class="input-group-text">V</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tp-vtype" class="form-label" data-i18n="calculators.threephase.voltageType">Girilen gerilimin türü</label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="tp-vtype" aria-label="Line or phase voltage">
+                                            <option value="line" data-i18n="calculators.threephase.vLine">Line (hat)</option>
+                                            <option value="phase" data-i18n="calculators.threephase.vPhase">Phase (faz)</option>
+                                        </select>
+                                        <select class="form-select" id="tp-v-unit" aria-label="RMS, amplitude or peak-to-peak">
+                                            <option value="1">RMS</option>
+                                            <option value="0.7071067811865476">Amplitude (peak)</option>
+                                            <option value="0.3535533905932738">Peak-to-peak</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tp-r" class="form-label" data-i18n="calculators.threephase.impedance">R Load</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="tp-r" value="30" min="0" step="any" inputmode="decimal" aria-label="R">
+                                        <span class="input-group-text">+ j</span>
+                                        <input type="number" class="form-control" id="tp-x" value="40" step="any" inputmode="decimal" aria-label="X">
+                                        <span class="input-group-text">Ω</span>
+                                    </div>
+                                </div>
+                                <svg class="calc-schematic calc-schematic-wide mt-4" viewBox="0 0 420 195" role="img" aria-label="Three phase circuit schematic">
+                                    <text x="85" y="13" text-anchor="middle" data-i18n="calculators.threephase.sourceLabel">Kaynak</text>
+                                    <text x="335" y="13" text-anchor="middle" data-i18n="calculators.threephase.loadLabel">Yük</text>
+                                    <g id="tp-schematic"></g>
+                                </svg>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.lineVoltage">Line gerilimi (V<sub>L</sub>)</span>
+                                        <span class="calc-value" id="tp-vl">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.lineCurrent">Line akımı (I<sub>L</sub>)</span>
+                                        <span class="calc-value" id="tp-il">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.sourcePhaseVoltage">Kaynak phase gerilimi</span>
+                                        <span class="calc-value" id="tp-vs">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.sourcePhaseCurrent">Kaynak phase akımı</span>
+                                        <span class="calc-value" id="tp-is">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.loadPhaseVoltage">Yük phase gerilimi</span>
+                                        <span class="calc-value" id="tp-vp">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.loadPhaseCurrent">Yük phase akımı</span>
+                                        <span class="calc-value" id="tp-ip">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.powerFactor">Güç faktörü (cos θ)</span>
+                                        <span class="calc-value" id="tp-pf">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.realPower">Aktif güç (P)</span>
+                                        <span class="calc-value" id="tp-p">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.reactivePower">Reaktif güç (Q)</span>
+                                        <span class="calc-value" id="tp-q">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.apparentPower">Görünür güç (|S|)</span>
+                                        <span class="calc-value" id="tp-s">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-1 mt-3">Y: V<sub>L</sub> = √3·V<sub>φ</sub>, I<sub>L</sub> = I<sub>φ</sub> &nbsp;·&nbsp; Δ: V<sub>L</sub> = V<sub>φ</sub>, I<sub>L</sub> = √3·I<sub>φ</sub> &nbsp;·&nbsp; P = √3·V<sub>L</sub>·I<sub>L</sub>·cos θ</p>
+                        <p class="small text-muted mb-0" data-i18n="calculators.threephase.note">Dengeli sistem, abc (pozitif) faz sırası ve ideal (empedanssız) hatlar varsayılır. Girilen gerilim RMS'e çevrilir, sonuçlar RMS'tir; açılar a fazına aittir ve V<sub>an</sub> = 0° referans alınır.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Three Phase END -->
 
             <!-- Buck Converter -->
             <div class="tab-pane fade" id="buck" role="tabpanel" aria-labelledby="buck-tab">

@@ -91,6 +91,18 @@
     stroke-width: 1.5;
 }
 
+/* Üç faz şemasındaki VL / IL işaretleri */
+.calc-mark {
+    fill: var(--bs-primary);
+    stroke: var(--bs-primary);
+    stroke-width: 1.5;
+}
+
+.calc-mark-text {
+    fill: var(--bs-primary);
+    font-weight: 600;
+}
+
 /* Smith abağı */
 .smith-chart {
     width: 100%;

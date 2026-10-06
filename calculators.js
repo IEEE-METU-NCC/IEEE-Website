@@ -499,6 +499,145 @@ document.addEventListener('DOMContentLoaded', () => {
         drawFilterResponse(center, response);
     }
 
+    // ---------- Three Phase ----------
+
+    // Draws one branch from p1 to p2 with an AC source or an impedance in the middle
+    function drawBranch(g, [x1, y1], [x2, y2], kind) {
+        const half = Math.hypot(x2 - x1, y2 - y1) / 2;
+        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        const branch = svgEl('g', { transform: `translate(${(x1 + x2) / 2} ${(y1 + y2) / 2}) rotate(${angle})` }, g);
+        const size = kind === 'source' ? 11 : 15;
+        svgEl('polyline', { class: 'calc-wire', points: `${-half},0 ${-size},0` }, branch);
+        svgEl('polyline', { class: 'calc-wire', points: `${size},0 ${half},0` }, branch);
+        if (kind === 'source') {
+            svgEl('circle', { class: 'calc-wire', cx: 0, cy: 0, r: size }, branch);
+            // Sine symbol, rotated back so that it always stays upright
+            svgEl('path', { class: 'calc-wire', d: 'M-6,0 q3,-7 6,0 t6,0', transform: `rotate(${-angle})` }, branch);
+        } else {
+            svgEl('rect', { class: 'calc-wire', x: -size, y: -7, width: 2 * size, height: 14 }, branch);
+        }
+    }
+
+    // Three-phase schematic: source on the left, load on the right, each 'y' or 'delta'
+    function drawThreePhase(source, load) {
+        const g = $('tp-schematic');
+        g.replaceChildren();
+        const rows = [40, 110, 180];
+        const label = (x, y, text, anchor = 'middle', cls = '') => {
+            svgEl('text', { x, y, 'text-anchor': anchor, class: cls }, g).textContent = text;
+        };
+
+        // Blue measurement marks: an arrowhead centered on a wire, and a double-headed span
+        const arrow = (x, y, angle, points = '-6,-5 6,0 -6,5') => {
+            svgEl('polygon', { class: 'calc-mark', points, transform: `translate(${x} ${y}) rotate(${angle})` }, g);
+        };
+        const span = ([x1, y1], [x2, y2]) => {
+            const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+            svgEl('polyline', { class: 'calc-mark', points: `${x1},${y1} ${x2},${y2}` }, g);
+            arrow(x1, y1, angle + 180, '-8,-4 0,0 -8,4');
+            arrow(x2, y2, angle, '-8,-4 0,0 -8,4');
+        };
+        const mark = (x, y, text, anchor) => label(x, y, text, anchor, 'calc-mark-text');
+
+        // "outer" is the far side of the bank, "inner" the side facing the lines
+        [[source, 'source', 70, 130, 'n'], [load, 'load', 350, 290, 'N']].forEach(([config, kind, outer, inner, neutral]) => {
+            const [a, b, c] = [[outer, rows[0]], [inner, rows[1]], [outer, rows[2]]];
+            // +1 when the lines are to the right of the bank (source), -1 for the load
+            const dir = outer < inner ? 1 : -1;
+            const [away, toward] = dir > 0 ? ['end', 'start'] : ['start', 'end'];
+            if (config === 'y') {
+                const center = [outer, rows[1]];
+                [a, b, c].forEach(end => drawBranch(g, center, end, kind));
+                svgEl('circle', { class: 'calc-node', cx: center[0], cy: center[1], r: 3 }, g);
+                label(outer - 9 * dir, rows[1] + 4, neutral, away);
+
+                // Phase a: voltage between a and the neutral, current through that winding
+                span([outer - 22 * dir, rows[1] - 12], [outer - 22 * dir, rows[0] + 12]);
+                mark(outer - 27 * dir, 79, 'Vφ', away);
+                arrow(outer, rows[0] + 12, kind === 'source' ? -90 : 90);
+                mark(outer + 9 * dir, rows[0] + 17, 'Iφ', toward);
+            } else {
+                [[a, b], [b, c], [c, a]].forEach(([from, to]) => drawBranch(g, from, to, kind));
+                [a, b, c].forEach(([x, y]) => svgEl('circle', { class: 'calc-node', cx: x, cy: y, r: 3 }, g));
+
+                // Phase a is the branch between a and b: voltage across it (drawn beside
+                // the branch, outside the triangle) and the current flowing through it
+                const length = Math.hypot(b[0] - a[0], b[1] - a[1]);
+                const [ux, uy] = [(b[0] - a[0]) / length, (b[1] - a[1]) / length];
+                const [mx, my] = [(a[0] + b[0]) / 2 + 16 * uy * dir, (a[1] + b[1]) / 2 - 16 * ux * dir];
+                span([mx - 23 * ux, my - 23 * uy], [mx + 23 * ux, my + 23 * uy]);
+                mark(mx + 8 * dir, my - 3, 'Vφ', toward);
+                const angle = Math.atan2(uy, ux) * 180 / Math.PI;
+                arrow(outer + 51 * dir, 99.5, kind === 'source' ? angle + 180 : angle);
+                mark(outer + 40 * dir, 109, 'Iφ', away);
+            }
+        });
+
+        // Lines a, b and c
+        [[70, 350], [130, 290], [70, 350]].forEach(([from, to], i) => {
+            svgEl('polyline', { class: 'calc-wire', points: `${from},${rows[i]} ${to},${rows[i]}` }, g);
+            label(160, rows[i] - 8, 'abc'[i]);
+            label(260, rows[i] - 8, 'ABC'[i]);
+        });
+
+        // Line current arrow on line a, line voltage between lines b and c
+        arrow(210, rows[0], 0);
+        mark(210, rows[0] - 12, 'IL', 'middle');
+        span([210, rows[1] + 7], [210, rows[2] - 7]);
+        mark(218, (rows[1] + rows[2]) / 2 + 4, 'VL', 'start');
+    }
+
+    function calcThreePhase() {
+        const source = $('tp-source').value;
+        const load = $('tp-load').value;
+        drawThreePhase(source, load);
+
+        const v = readValue('tp-v');
+        let r = readValue('tp-r', 'nonNegative');
+        const x = readValue('tp-x', 'any');
+        // A short circuit (Z = 0) has no finite solution
+        if (r === 0 && x === 0) {
+            $('tp-r').classList.add('is-invalid');
+            r = NaN;
+        }
+        if (Number.isNaN(v + r + x)) {
+            clearResults(['tp-vl', 'tp-il', 'tp-vs', 'tp-is', 'tp-vp', 'tp-ip', 'tp-pf', 'tp-p', 'tp-q', 'tp-s']);
+            return;
+        }
+
+        const SQRT3 = Math.sqrt(3);
+        const phasor = (mag, unit, angle) => `${formatSI(mag, unit)} ∠ ${formatNumber(angle)}°`;
+
+        // Entered voltage is either line-to-line or across one source winding;
+        // readValue has already scaled it from amplitude / peak-to-peak to RMS
+        const vLine = $('tp-vtype').value === 'phase' && source === 'y' ? v * SQRT3 : v;
+        const vNeutral = vLine / SQRT3;
+        const zMag = Math.hypot(r, x);
+        const theta = Math.atan2(x, r) * 180 / Math.PI;
+        // Per-phase equivalent: a delta load becomes a Y load of Z / 3
+        const iLine = vNeutral / (load === 'y' ? zMag : zMag / 3);
+
+        // Phase a quantities with Van = 0°: in a Y the phase voltage is Van and the phase current
+        // is the line current, in a delta they are Vab (leads by 30°) and IL / √3 (leads by 30°)
+        const phaseVoltage = config => config === 'y' ? phasor(vNeutral, 'V', 0) : phasor(vLine, 'V', 30);
+        const phaseCurrent = config => config === 'y' ? phasor(iLine, 'A', -theta) : phasor(iLine / SQRT3, 'A', 30 - theta);
+
+        const iLoad = load === 'y' ? iLine : iLine / SQRT3;
+        const pf = r / zMag;
+        setResults({
+            'tp-vl': phasor(vLine, 'V', 30),
+            'tp-il': phasor(iLine, 'A', -theta),
+            'tp-vs': phaseVoltage(source),
+            'tp-is': phaseCurrent(source),
+            'tp-vp': phaseVoltage(load),
+            'tp-ip': phaseCurrent(load),
+            'tp-pf': formatNumber(pf) + (x > 0 ? ' lagging' : x < 0 ? ' leading' : ''),
+            'tp-p': formatSI(3 * iLoad * iLoad * r, 'W'),
+            'tp-q': formatSI(3 * iLoad * iLoad * x, 'var'),
+            'tp-s': formatSI(SQRT3 * vLine * iLine, 'VA')
+        });
+    }
+
     // ---------- Buck Converter ----------
 
     function calcBuck() {
@@ -543,6 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
         divider: calcDivider,
         tau: calcTau,
         filter: calcFilter,
+        threephase: calcThreePhase,
         buck: calcBuck
     };
 
@@ -562,11 +702,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calculators listed under each category button, in tab order
     const CATEGORIES = {
-        circuit: ['divider', 'tau', 'filter'],
+        circuit: ['divider', 'tau', 'filter', 'threephase'],
         wave: ['smith'],
         semiconductor: ['divider'],
         generic: ['timer555', 'buck'],
-        everything: ['timer555', 'smith', 'divider', 'tau', 'filter', 'buck']
+        everything: ['timer555', 'smith', 'divider', 'tau', 'filter', 'threephase', 'buck']
     };
     let currentCategory = null;
 
