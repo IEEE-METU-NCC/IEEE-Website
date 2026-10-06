@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const SI_PREFIXES = [[1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p']];
 
     // 0.00047 , 'F' -> "470 µF"
-    function formatSI(value, unit) {
+    function formatSI(value, unit, digits = 4) {
         if (Number.isNaN(value)) return EMPTY;
         if (!Number.isFinite(value)) return '∞';
         if (value === 0) return '0 ' + unit;
         // Rounded first so that 0.9999999 s becomes "1 s" instead of "1000 ms"
-        const abs = parseFloat(Math.abs(value).toPrecision(4));
+        const abs = parseFloat(Math.abs(value).toPrecision(digits));
         const [factor, prefix] = SI_PREFIXES.find(([f]) => abs >= f) || SI_PREFIXES[SI_PREFIXES.length - 1];
-        return formatNumber(value / factor) + ' ' + prefix + unit;
+        return formatNumber(value / factor, digits) + ' ' + prefix + unit;
     }
 
     function formatComplex(re, im) {
@@ -740,6 +740,228 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ---------- Series / Parallel Resistors ----------
+
+    const RES_PER_ROW = 4;
+
+    // Rows are numbered by their position, so the ids always run R1, R2, ... without gaps
+    function numberResistors() {
+        const rows = [...$('res-list').children];
+        rows.forEach((row, i) => {
+            const n = i + 1;
+            const input = row.querySelector('input');
+            const unit = row.querySelector('select');
+            const remove = row.querySelector('[data-res-remove]');
+            row.querySelector('.res-name').innerHTML = `R<sub>${n}</sub>`;
+            input.id = `res-r${n}`;
+            input.setAttribute('aria-label', `R${n}`);
+            unit.id = `res-r${n}-unit`;
+            unit.setAttribute('aria-label', `R${n} unit`);
+            remove.setAttribute('aria-label', `Remove R${n}`);
+            remove.disabled = rows.length === 1;
+        });
+    }
+
+    // Draws every resistor between the terminals A and B, four per row.
+    // Series: one chain that snakes through the rows (left to right, then right to left, ...).
+    // Parallel: each row hangs between a top and a bottom rail; the top rails are joined
+    // by a bus on the left, the bottom rails by a bus on the right.
+    function drawResistors(mode, values) {
+        const svg = $('res-schematic');
+        svg.replaceChildren();
+        const count = values.length;
+        const rows = Math.ceil(count / RES_PER_ROW);
+        // A single row that is not full is centered
+        const g = svgEl('g', { transform: `translate(${rows === 1 ? (RES_PER_ROW - count) * 35 : 0} 0)` }, svg);
+        const wire = points => svgEl('polyline', { class: 'calc-wire', points }, g);
+        const label = (x, y, text, anchor = 'middle', cls = '') => {
+            svgEl('text', { x, y, 'text-anchor': anchor, class: cls }, g).textContent = text;
+        };
+        const node = (x, y) => svgEl('circle', { class: 'calc-node', cx: x, cy: y, r: 3 }, g);
+        const terminals = [];
+        let height;
+
+        if (mode === 'series') {
+            const rowY = row => 32 + 62 * row;
+            let endX = 40;
+            wire(`30,${rowY(0)} 40,${rowY(0)}`);
+            terminals.push([30, rowY(0), 'A']);
+            values.forEach((value, i) => {
+                const row = Math.floor(i / RES_PER_ROW), col = i % RES_PER_ROW;
+                const y = rowY(row);
+                // Odd rows run right to left
+                const dir = row % 2 ? -1 : 1;
+                const start = dir > 0 ? 40 + 70 * col : 320 - 70 * col;
+                const mid = start + 35 * dir;
+                endX = start + 70 * dir;
+                wire(`${start},${y} ${mid - 17 * dir},${y}`);
+                svgEl('rect', { class: 'calc-wire', x: mid - 17, y: y - 8, width: 34, height: 16 }, g);
+                wire(`${mid + 17 * dir},${y} ${endX},${y}`);
+                label(mid, y - 14, `R${i + 1}`);
+                label(mid, y + 22, formatSI(value, 'Ω'), 'middle', 'calc-part-value');
+                // A full row turns down into the next one
+                if (col === RES_PER_ROW - 1 && i < count - 1) wire(`${endX},${y} ${endX},${rowY(row + 1)}`);
+            });
+            const lastY = rowY(rows - 1), dir = rows % 2 ? 1 : -1;
+            wire(`${endX},${lastY} ${endX + 10 * dir},${lastY}`);
+            terminals.push([endX + 10 * dir, lastY, 'B']);
+            height = lastY + 32;
+        } else {
+            const railGap = 70, leftBus = 30, rightBus = 340;
+            const topY = row => 25 + 95 * row;
+            const colX = col => 60 + 70 * col;
+            const outX = colX(Math.min(count, RES_PER_ROW) - 1) + 80;
+            values.forEach((value, i) => {
+                const x = colX(i % RES_PER_ROW), top = topY(Math.floor(i / RES_PER_ROW));
+                wire(`${x},${top} ${x},${top + 17}`);
+                svgEl('rect', { class: 'calc-wire', x: x - 8, y: top + 17, width: 16, height: 36 }, g);
+                wire(`${x},${top + 53} ${x},${top + railGap}`);
+                label(x + 14, top + 32, `R${i + 1}`, 'start');
+                label(x + 14, top + 45, formatSI(value, 'Ω'), 'start', 'calc-part-value');
+            });
+            for (let row = 0; row < rows; row++) {
+                const inRow = Math.min(RES_PER_ROW, count - RES_PER_ROW * row);
+                const top = topY(row), bottom = top + railGap;
+                wire(`${row === 0 ? 15 : leftBus},${top} ${colX(inRow - 1)},${top}`);
+                wire(`${colX(0)},${bottom} ${row === 0 ? outX : rightBus},${bottom}`);
+                // Junctions: every resistor except the one at the corner of the rail
+                for (let col = 0; col < inRow - 1; col++) {
+                    node(colX(col), top);
+                    node(colX(col + 1), bottom);
+                }
+                if (row < rows - 1) {
+                    node(leftBus, top);
+                    node(rightBus, bottom);
+                }
+            }
+            if (rows > 1) {
+                wire(`${leftBus},${topY(0)} ${leftBus},${topY(rows - 1)}`);
+                wire(`${rightBus},${topY(0) + railGap} ${rightBus},${topY(rows - 1) + railGap}`);
+            }
+            terminals.push([15, topY(0), 'A'], [outX, topY(0) + railGap, 'B']);
+            height = topY(rows - 1) + railGap + 20;
+        }
+
+        terminals.forEach(([x, y, name]) => {
+            svgEl('circle', { class: 'calc-terminal', cx: x, cy: y, r: 3 }, g);
+            label(x, y - 10, name);
+        });
+        svg.setAttribute('viewBox', `0 0 360 ${height}`);
+    }
+
+    function calcResistors() {
+        const mode = document.querySelector('input[name="res-mode"]:checked').value;
+        showVariant('data-res-mode', mode);
+
+        const values = [...$('res-list').children].map((row, i) => readValue(`res-r${i + 1}`));
+        drawResistors(mode, values);
+
+        const total = mode === 'series'
+            ? values.reduce((sum, r) => sum + r, 0)
+            : 1 / values.reduce((sum, r) => sum + 1 / r, 0);
+        setResults({
+            'res-req': formatSI(total, 'Ω'),
+            'res-g': formatSI(1 / total, 'S')
+        });
+    }
+
+    function editResistorList(e) {
+        const list = $('res-list');
+        if (e.target.closest('#res-add')) {
+            // The new resistor starts as a copy of the last one (cloning does not keep the selected unit)
+            const last = list.lastElementChild;
+            const row = last.cloneNode(true);
+            row.querySelector('select').value = last.querySelector('select').value;
+            list.appendChild(row);
+            row.querySelector('input').select();
+        } else if (e.target.closest('[data-res-remove]')) {
+            e.target.closest('.input-group').remove();
+        } else {
+            return;
+        }
+        numberResistors();
+        calcResistors();
+    }
+
+    // ---------- Resistor Color Code ----------
+
+    // IEC 60062. The position is the digit, and 10^position the multiplier (gold ×0.1, silver ×0.01).
+    // name: shown until the translations load, tol: tolerance in %, tcr: temperature coefficient in ppm/K
+    const CC_COLORS = [
+        { id: 'black', name: 'Siyah', hex: '#111111', tcr: 250 },
+        { id: 'brown', name: 'Kahverengi', hex: '#8b4513', tol: 1, tcr: 100 },
+        { id: 'red', name: 'Kırmızı', hex: '#d62828', tol: 2, tcr: 50 },
+        { id: 'orange', name: 'Turuncu', hex: '#f77f00', tol: 0.05, tcr: 15 },
+        { id: 'yellow', name: 'Sarı', hex: '#ffd60a', tol: 0.02, tcr: 25 },
+        { id: 'green', name: 'Yeşil', hex: '#2a9d3a', tol: 0.5, tcr: 20 },
+        { id: 'blue', name: 'Mavi', hex: '#1d4ed8', tol: 0.25, tcr: 10 },
+        { id: 'violet', name: 'Mor', hex: '#8e44ad', tol: 0.1, tcr: 5 },
+        { id: 'grey', name: 'Gri', hex: '#8d8d8d', tol: 0.01, tcr: 1 },
+        { id: 'white', name: 'Beyaz', hex: '#ffffff' },
+        { id: 'gold', name: 'Altın', hex: '#c9a227', tol: 5 },
+        { id: 'silver', name: 'Gümüş', hex: '#c0c0c0', tol: 10 }
+    ];
+    const ccExponent = index => index < 10 ? index : 9 - index;
+
+    // Band selects: [id, default color, what the color at "index" means there (undefined: not allowed)]
+    const CC_SELECTS = [
+        ['cc-d1', 1, (color, index) => index < 10 ? index : undefined],
+        ['cc-d2', 0, (color, index) => index < 10 ? index : undefined],
+        ['cc-d3', 0, (color, index) => index < 10 ? index : undefined],
+        ['cc-mult', 2, (color, index) => '×' + (index < 10 ? formatSI(10 ** index, 'Ω') : formatNumber(10 ** ccExponent(index)) + ' Ω')],
+        ['cc-tol', 10, color => color.tol && `±${color.tol} %`],
+        ['cc-tcr', 1, color => color.tcr && `${color.tcr} ppm/K`]
+    ];
+
+    // Fills the selects with "Color (meaning)" options, keeping the current choice.
+    // Runs again when the language changes, since the options are not in the HTML.
+    function fillColorSelects() {
+        CC_SELECTS.forEach(([id, initial, meaning]) => {
+            const select = $(id);
+            const selected = select.value || initial;
+            select.replaceChildren();
+            CC_COLORS.forEach((color, index) => {
+                const text = meaning(color, index);
+                if (text === undefined) return;
+                const key = `calculators.colorcode.colors.${color.id}`;
+                select.add(new Option(`${i18next.exists(key) ? i18next.t(key) : color.name} (${text})`, index));
+            });
+            select.value = selected;
+        });
+    }
+
+    function calcColorCode() {
+        const bands = Number(document.querySelector('input[name="cc-bands"]:checked').value);
+        $('cc-d3-group').classList.toggle('d-none', bands < 5);
+        $('cc-tcr-group').classList.toggle('d-none', bands < 6);
+        $('cc-tcr-row').classList.toggle('d-none', bands < 6);
+
+        const picked = id => CC_COLORS[$(id).value];
+        CC_SELECTS.forEach(([id]) => { $(id + '-swatch').style.backgroundColor = picked(id).hex; });
+
+        // Digits and multiplier sit together on the left, tolerance (and TCR) on the right
+        const digits = bands > 4 ? ['cc-d1', 'cc-d2', 'cc-d3'] : ['cc-d1', 'cc-d2'];
+        const left = [...digits, 'cc-mult'];
+        const right = bands > 5 ? ['cc-tol', 'cc-tcr'] : ['cc-tol'];
+        const marks = $('cc-band-marks');
+        marks.replaceChildren();
+        [...left, ...right].forEach((id, i) => {
+            const x = i < left.length ? 84 + 26 * i : 236 - 26 * (left.length + right.length - 1 - i);
+            svgEl('rect', { class: 'cc-band', x, y: 20.75, width: 14, height: 48.5, fill: picked(id).hex }, marks);
+        });
+
+        const number = digits.reduce((sum, id) => sum * 10 + Number($(id).value), 0);
+        const resistance = number * 10 ** ccExponent(Number($('cc-mult').value));
+        const tolerance = picked('cc-tol').tol;
+        setResults({
+            'cc-r': formatSI(resistance, 'Ω'),
+            'cc-tolerance': `±${tolerance} %`,
+            'cc-min': formatSI(resistance * (1 - tolerance / 100), 'Ω', 6),
+            'cc-max': formatSI(resistance * (1 + tolerance / 100), 'Ω', 6),
+            'cc-tcr-value': `${picked('cc-tcr').tcr} ppm/K`
+        });
+    }
+
     // ---------- Wiring ----------
 
     const calculators = {
@@ -750,10 +972,14 @@ document.addEventListener('DOMContentLoaded', () => {
         filter: calcFilter,
         threephase: calcThreePhase,
         buck: calcBuck,
-        pcbtrace: calcPcbTrace
+        pcbtrace: calcPcbTrace,
+        resistors: calcResistors,
+        colorcode: calcColorCode
     };
 
     buildSmithChart();
+    fillColorSelects();
+    i18next.on('languageChanged', fillColorSelects);
     // Tooltips take their text from a (translated) hidden element, so they follow the language toggle
     document.querySelectorAll('[data-calc-tip]').forEach(el => {
         new bootstrap.Tooltip(el, { title: () => $(el.getAttribute('data-calc-tip')).textContent });
@@ -764,6 +990,8 @@ document.addEventListener('DOMContentLoaded', () => {
         calculate();
     });
 
+    $('resistors').addEventListener('click', editResistorList);
+
     smithChart.addEventListener('pointerdown', pickSmithPoint);
     smithChart.addEventListener('pointermove', e => {
         if (e.pointerType === 'mouse' && e.buttons === 1) pickSmithPoint(e);
@@ -773,12 +1001,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calculators listed under each category button, in tab order
     const CATEGORIES = {
-        circuit: ['divider', 'tau', 'filter', 'threephase'],
+        circuit: ['divider', 'resistors', 'tau', 'filter', 'threephase'],
         wave: ['smith'],
         semiconductor: ['divider'],
         microwave: ['filter', 'smith'],
-        generic: ['timer555', 'buck', 'pcbtrace'],
-        everything: ['timer555', 'smith', 'divider', 'tau', 'filter', 'threephase', 'buck', 'pcbtrace']
+        generic: ['timer555', 'buck', 'pcbtrace', 'colorcode'],
+        everything: ['timer555', 'smith', 'divider', 'resistors', 'tau', 'filter', 'threephase', 'buck', 'pcbtrace', 'colorcode']
     };
     let currentCategory = null;
 

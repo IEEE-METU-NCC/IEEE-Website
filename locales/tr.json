@@ -133,7 +133,9 @@
           "buck": "Buck Converter",
           "filter": "Passive Filter",
           "threephase": "Three Phase (3 faz)",
-          "pcbtrace": "PCB Trace Width (yol genişliği)"
+          "pcbtrace": "PCB Trace Width (yol genişliği)",
+          "resistors": "Series Parallel Resistors (seri paralel direnç)",
+          "colorcode": "Resistor Color Code (direnç renk kodu)"
         },
         "threephase": {
           "title": "Three Phase Hesaplayıcı",
@@ -277,6 +279,45 @@
           "drop": "Gerilim düşümü (V<sub>drop</sub>)",
           "loss": "Güç kaybı (P<sub>loss</sub>)",
           "note": "IPC-2152 standardı, PCB bakır alanı kalınlığını doğrusal bir formül ile değil bir eğri ile hesaplamanızı sağlayan, 2009 yılında çıkarılmış bir standarttır. Daha 'geleneksel' olan IPC-2221 standardını da tercih edebilirsiniz ama modern PCB'lerde bu gereksiz maliyetlere ve alan kaplanmasına sebebiyet verebilir."
+        },
+        "resistors": {
+          "title": "Seri / Paralel Direnç Hesaplayıcı",
+          "desc": "Seri veya paralel bağlı dirençlerin eşdeğer direncini hesaplar. İstediğiniz kadar direnç ekleyebilirsiniz; devre şeması eklediğiniz dirençlerle birlikte güncellenir.",
+          "mode": "Bağlantı tipi",
+          "series": "Seri",
+          "parallel": "Paralel",
+          "add": "Direnç ekle",
+          "equivalent": "Eşdeğer direnç (R<sub>eq</sub>)",
+          "conductance": "Toplam iletkenlik (G)"
+        },
+        "colorcode": {
+          "title": "Direnç Renk Kodu Hesaplayıcı",
+          "desc": "4, 5 veya 6 bantlı bir direncin renk bantlarından direnç değerini, toleransını ve tolerans aralığını hesaplar.",
+          "bands": "Bant sayısı",
+          "digit1": "1. rakam",
+          "digit2": "2. rakam",
+          "digit3": "3. rakam",
+          "multiplier": "Çarpan",
+          "tolerance": "Tolerans",
+          "tcr": "Sıcaklık katsayısı (TCR)",
+          "resistance": "Direnç (R)",
+          "min": "En düşük değer (R<sub>min</sub>)",
+          "max": "En yüksek değer (R<sub>max</sub>)",
+          "note": "Renk değerleri IEC 60062 standardına göredir. Bantlar, uca daha yakın olan taraftan başlanarak okunur; tolerans bandı diğerlerinden biraz ayrı durur.",
+          "colors": {
+            "black": "Siyah",
+            "brown": "Kahverengi",
+            "red": "Kırmızı",
+            "orange": "Turuncu",
+            "yellow": "Sarı",
+            "green": "Yeşil",
+            "blue": "Mavi",
+            "violet": "Mor",
+            "grey": "Gri",
+            "white": "Beyaz",
+            "gold": "Altın",
+            "silver": "Gümüş"
+          }
         }
       }
     }

@@ -56,7 +56,7 @@
                         <circle cx="60" cy="32" r="2.5"/>
                     </svg>
                     <span class="h5 calc-category-title">Circuit Theory (EEE201/202)</span>
-                    <span class="small text-muted">Voltage Divider · RC RL Time Constant · Passive Filter · Three Phase</span>
+                    <span class="small text-muted">Voltage Divider · Series Parallel Resistors · RC RL Time Constant · Passive Filter · Three Phase</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
@@ -97,7 +97,7 @@
                         <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
                     </svg>
                     <span class="h5 calc-category-title" data-i18n="calculators.categories.generic">Diğer Hesap Makineleri</span>
-                    <span class="small text-muted">555 Timer · Buck Converter · PCB Trace Width</span>
+                    <span class="small text-muted">555 Timer · Buck Converter · PCB Trace Width · Resistor Color Code</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
@@ -147,6 +147,12 @@
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pcbtrace-tab" data-bs-toggle="pill" data-bs-target="#pcbtrace" type="button" role="tab" aria-controls="pcbtrace" aria-selected="false" data-i18n="calculators.tabs.pcbtrace">PCB Trace Width (yol genişliği)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="resistors-tab" data-bs-toggle="pill" data-bs-target="#resistors" type="button" role="tab" aria-controls="resistors" aria-selected="false" data-i18n="calculators.tabs.resistors">Series Parallel Resistors (seri paralel direnç)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="colorcode-tab" data-bs-toggle="pill" data-bs-target="#colorcode" type="button" role="tab" aria-controls="colorcode" aria-selected="false" data-i18n="calculators.tabs.colorcode">Resistor Color Code (direnç renk kodu)</button>
             </li>
         </ul>
         <!-- Calculator Tabs END -->
@@ -1123,6 +1129,176 @@
                 </div>
             </div>
             <!-- PCB Trace Width END -->
+
+            <!-- Series / Parallel Resistors -->
+            <div class="tab-pane fade" id="resistors" role="tabpanel" aria-labelledby="resistors-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.resistors.title">Seri / Paralel Direnç Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.resistors.desc">Seri veya paralel bağlı dirençlerin eşdeğer direncini hesaplar. İstediğiniz kadar direnç ekleyebilirsiniz; devre şeması eklediğiniz dirençlerle birlikte güncellenir.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <div class="form-label" id="res-mode-label" data-i18n="calculators.resistors.mode">Bağlantı tipi</div>
+                                    <div class="btn-group" role="group" aria-labelledby="res-mode-label">
+                                        <input type="radio" class="btn-check" name="res-mode" id="res-mode-series" value="series" autocomplete="off" checked>
+                                        <label class="btn btn-outline-primary" for="res-mode-series" data-i18n="calculators.resistors.series">Seri</label>
+                                        <input type="radio" class="btn-check" name="res-mode" id="res-mode-parallel" value="parallel" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="res-mode-parallel" data-i18n="calculators.resistors.parallel">Paralel</label>
+                                    </div>
+                                </div>
+                                <div id="res-list">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text res-name">R<sub>1</sub></span>
+                                        <input type="number" class="form-control" id="res-r1" value="1" min="0" step="any" inputmode="decimal" aria-label="R1">
+                                        <select class="form-select calc-unit" id="res-r1-unit" aria-label="R1 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                        <button type="button" class="btn btn-outline-secondary" data-res-remove aria-label="Remove R1">&times;</button>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text res-name">R<sub>2</sub></span>
+                                        <input type="number" class="form-control" id="res-r2" value="2.2" min="0" step="any" inputmode="decimal" aria-label="R2">
+                                        <select class="form-select calc-unit" id="res-r2-unit" aria-label="R2 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                        <button type="button" class="btn btn-outline-secondary" data-res-remove aria-label="Remove R2">&times;</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary" id="res-add">+ <span data-i18n="calculators.resistors.add">Direnç ekle</span></button>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.resistors.equivalent">Eşdeğer direnç (R<sub>eq</sub>)</span>
+                                        <span class="calc-value" id="res-req">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.resistors.conductance">Toplam iletkenlik (G)</span>
+                                        <span class="calc-value" id="res-g">—</span>
+                                    </li>
+                                </ul>
+                                <svg class="calc-schematic calc-schematic-wide" id="res-schematic" viewBox="0 0 360 64" role="img" aria-label="Resistor network schematic"></svg>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0 mt-3" data-res-mode="series">R<sub>eq</sub> = R<sub>1</sub> + R<sub>2</sub> + … + R<sub>n</sub> &nbsp;·&nbsp; G = 1 / R<sub>eq</sub></p>
+                        <p class="small text-muted mb-0 mt-3" data-res-mode="parallel">1 / R<sub>eq</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub> + … + 1 / R<sub>n</sub> &nbsp;·&nbsp; G = 1 / R<sub>eq</sub></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Series / Parallel Resistors END -->
+
+            <!-- Resistor Color Code -->
+            <div class="tab-pane fade" id="colorcode" role="tabpanel" aria-labelledby="colorcode-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.colorcode.title">Direnç Renk Kodu Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.colorcode.desc">4, 5 veya 6 bantlı bir direncin renk bantlarından direnç değerini, toleransını ve tolerans aralığını hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <div class="form-label" id="cc-bands-label" data-i18n="calculators.colorcode.bands">Bant sayısı</div>
+                                    <div class="btn-group" role="group" aria-labelledby="cc-bands-label">
+                                        <input type="radio" class="btn-check" name="cc-bands" id="cc-bands-4" value="4" autocomplete="off" checked>
+                                        <label class="btn btn-outline-primary" for="cc-bands-4">4</label>
+                                        <input type="radio" class="btn-check" name="cc-bands" id="cc-bands-5" value="5" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="cc-bands-5">5</label>
+                                        <input type="radio" class="btn-check" name="cc-bands" id="cc-bands-6" value="6" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="cc-bands-6">6</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-d1" class="form-label" data-i18n="calculators.colorcode.digit1">1. rakam</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-d1-swatch"></span>
+                                        <select class="form-select" id="cc-d1"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-d2" class="form-label" data-i18n="calculators.colorcode.digit2">2. rakam</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-d2-swatch"></span>
+                                        <select class="form-select" id="cc-d2"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="cc-d3-group">
+                                    <label for="cc-d3" class="form-label" data-i18n="calculators.colorcode.digit3">3. rakam</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-d3-swatch"></span>
+                                        <select class="form-select" id="cc-d3"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-mult" class="form-label" data-i18n="calculators.colorcode.multiplier">Çarpan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-mult-swatch"></span>
+                                        <select class="form-select" id="cc-mult"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-tol" class="form-label" data-i18n="calculators.colorcode.tolerance">Tolerans</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-tol-swatch"></span>
+                                        <select class="form-select" id="cc-tol"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="cc-tcr-group">
+                                    <label for="cc-tcr" class="form-label" data-i18n="calculators.colorcode.tcr">Sıcaklık katsayısı (TCR)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-tcr-swatch"></span>
+                                        <select class="form-select" id="cc-tcr"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <svg class="calc-schematic calc-schematic-wide mb-3" viewBox="0 0 330 90" role="img" aria-label="Resistor with its color bands">
+                                    <polyline class="calc-wire" points="10,45 60,45"/>
+                                    <polyline class="calc-wire" points="270,45 320,45"/>
+                                    <rect class="cc-body" x="60" y="20" width="210" height="50" rx="14"/>
+                                    <g id="cc-band-marks"></g>
+                                </svg>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.resistance">Direnç (R)</span>
+                                        <span class="calc-value" id="cc-r">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.tolerance">Tolerans</span>
+                                        <span class="calc-value" id="cc-tolerance">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.min">En düşük değer (R<sub>min</sub>)</span>
+                                        <span class="calc-value" id="cc-min">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.max">En yüksek değer (R<sub>max</sub>)</span>
+                                        <span class="calc-value" id="cc-max">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" id="cc-tcr-row">
+                                        <span data-i18n="calculators.colorcode.tcr">Sıcaklık katsayısı (TCR)</span>
+                                        <span class="calc-value" id="cc-tcr-value">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-1 mt-3">R = d<sub>1</sub>d<sub>2</sub>[d<sub>3</sub>] × 10<sup>m</sup> &nbsp;·&nbsp; R<sub>min,max</sub> = R·(1 ∓ tol)</p>
+                        <p class="small text-muted mb-0" data-i18n="calculators.colorcode.note">Renk değerleri IEC 60062 standardına göredir. Bantlar, uca daha yakın olan taraftan başlanarak okunur; tolerans bandı diğerlerinden biraz ayrı durur.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Resistor Color Code END -->
 
         </div>
         </div>
