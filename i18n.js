@@ -5,7 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", async function() {
   // Changes once per hour, so cached locale files are reused within the hour
-  const cacheKey = 23452345241;
+  const cacheKey = 23452345242;
   const [enRes, trRes] = await Promise.all([
       fetch(`./locales/en.json?v=${cacheKey}`).then(res => res.json()),
       fetch(`./locales/tr.json?v=${cacheKey}`).then(res => res.json())

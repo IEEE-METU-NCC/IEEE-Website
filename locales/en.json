@@ -118,6 +118,7 @@
         "back": "Categories",
         "everythingDesc": "All calculators",
         "categories": {
+          "pcb": "PCB Calculators",
           "generic": "Generic Calculators",
           "everything": "Everything"
         },

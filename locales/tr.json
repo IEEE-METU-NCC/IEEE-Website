@@ -122,6 +122,7 @@
         "back": "Kategoriler",
         "everythingDesc": "Tüm hesap makineleri",
         "categories": {
+          "pcb": "PCB Hesap Makineleri",
           "generic": "Diğer Hesap Makineleri",
           "everything": "Tümü"
         },

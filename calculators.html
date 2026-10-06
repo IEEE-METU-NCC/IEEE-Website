@@ -49,6 +49,31 @@
         <!-- Categories -->
         <div class="row justify-content-center g-4" id="calc-categories">
             <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="pcb">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect x="5" y="9" width="54" height="46" rx="5"/>
+                        <path d="M18.5 21 H27 L35 29 H45.5 M45.5 43 H34 L28 37 H18.5"/>
+                        <circle cx="16" cy="21" r="2.5"/>
+                        <circle cx="48" cy="29" r="2.5"/>
+                        <circle cx="48" cy="43" r="2.5"/>
+                        <circle cx="16" cy="37" r="2.5"/>
+                    </svg>
+                    <span class="h5 calc-category-title" data-i18n="calculators.categories.pcb">PCB Hesap Makineleri</span>
+                    <span class="small text-muted">PCB Trace Width</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="generic">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect x="14" y="5" width="36" height="54" rx="5"/>
+                        <rect x="21" y="12" width="22" height="11" rx="2"/>
+                        <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
+                    </svg>
+                    <span class="h5 calc-category-title" data-i18n="calculators.categories.generic">Diğer Hesap Makineleri</span>
+                    <span class="small text-muted">555 Timer · Buck Converter · Resistor Color Code · Series Parallel Resistors · Voltage Divider</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
                 <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="circuit">
                     <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
                         <path d="M4 32 H13 L18 12 L27 52 L36 12 L45 52 L50 32 H60"/>
@@ -56,7 +81,7 @@
                         <circle cx="60" cy="32" r="2.5"/>
                     </svg>
                     <span class="h5 calc-category-title">Circuit Theory (EEE201/202)</span>
-                    <span class="small text-muted">Voltage Divider · Series Parallel Resistors · RC RL Time Constant · Passive Filter · Three Phase</span>
+                    <span class="small text-muted">Voltage Divider · Series Parallel Resistors · Resistor Color Code · RC RL Time Constant · Passive Filter · Three Phase</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
@@ -70,16 +95,6 @@
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
-                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="semiconductor">
-                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
-                        <path d="M4 32 H22 M42 32 H60 M42 16 V48"/>
-                        <path d="M22 16 V48 L42 32 Z"/>
-                    </svg>
-                    <span class="h5 calc-category-title">Semiconductor Devices (EEE212)</span>
-                    <span class="small text-muted">Voltage Divider</span>
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
                 <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="microwave">
                     <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
                         <circle cx="32" cy="32" r="27"/>
@@ -87,17 +102,6 @@
                     </svg>
                     <span class="h5 calc-category-title">Microwaves (EEE427/428)</span>
                     <span class="small text-muted">Passive Filter · Smith Chart</span>
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="generic">
-                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
-                        <rect x="14" y="5" width="36" height="54" rx="5"/>
-                        <rect x="21" y="12" width="22" height="11" rx="2"/>
-                        <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
-                    </svg>
-                    <span class="h5 calc-category-title" data-i18n="calculators.categories.generic">Diğer Hesap Makineleri</span>
-                    <span class="small text-muted">555 Timer · Buck Converter · PCB Trace Width · Resistor Color Code</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">

@@ -1001,11 +1001,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calculators listed under each category button, in tab order
     const CATEGORIES = {
-        circuit: ['divider', 'resistors', 'tau', 'filter', 'threephase'],
+        circuit: ['divider', 'resistors', 'colorcode', 'tau', 'filter', 'threephase'],
         wave: ['smith'],
-        semiconductor: ['divider'],
         microwave: ['filter', 'smith'],
-        generic: ['timer555', 'buck', 'pcbtrace', 'colorcode'],
+        pcb: ['pcbtrace'],
+        generic: ['timer555', 'buck', 'colorcode', 'resistors', 'divider'],
         everything: ['timer555', 'smith', 'divider', 'resistors', 'tau', 'filter', 'threephase', 'buck', 'pcbtrace', 'colorcode']
     };
     let currentCategory = null;
