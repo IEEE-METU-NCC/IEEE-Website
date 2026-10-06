@@ -128,7 +128,8 @@
           "tau": "RC RL Time Constant",
           "buck": "Buck Converter",
           "filter": "Passive Filter",
-          "threephase": "Three Phase"
+          "threephase": "Three Phase",
+          "pcbtrace": "PCB Trace Width"
         },
         "threephase": {
           "title": "Three Phase Calculator",
@@ -246,6 +247,32 @@
           "capacitor": "Minimum output capacitor (C<sub>out</sub>)",
           "power": "Output power (P<sub>out</sub>)",
           "note": "Assumes ideal (lossless) components and continuous conduction mode (CCM); capacitor ESR is not included."
+        },
+        "pcbtrace": {
+          "title": "PCB Trace Width Calculator",
+          "desc": "Calculates the width a copper PCB conductor (trace) needs to carry a given current according to IPC-2152, along with its resistance, voltage drop and power loss.",
+          "current": "Current (I)",
+          "thickness": "Copper thickness (t)",
+          "rise": "Temperature rise (ΔT)",
+          "ambient": "Ambient temperature (T<sub>a</sub>)",
+          "length": "Trace length (ℓ)",
+          "currentTip": "The current flowing through the copper trace.",
+          "thicknessTip": "The copper weight of the trace; 1 oz or 2 oz is usually chosen. If you are not sure, calculate for 1 oz.",
+          "riseTip": "5 °C is used for very sensitive components, 10 °C for general electronic circuits and 20 °C for circuits that tolerate high temperatures. For a safe result, calculate with 7 °C or 10 °C.",
+          "ambientTip": "The ambient temperature; used for the power loss calculation.",
+          "lengthTip": "The length of the copper trace; used for the power loss calculation.",
+          "plane": "Nearby copper plane",
+          "planeNo": "No",
+          "planeYes": "Yes",
+          "planeHelp": "If you are not sure, choose \"No\".",
+          "planeDistance": "Distance to plane (d)",
+          "external": "External layer",
+          "internal": "Internal layer",
+          "width": "Required trace width (W)",
+          "resistance": "Resistance (R)",
+          "drop": "Voltage drop (V<sub>drop</sub>)",
+          "loss": "Power loss (P<sub>loss</sub>)",
+          "note": "IPC-2152 is a standard published in 2009 that lets you size PCB copper traces from a curve rather than a linear formula. You can also use the more 'traditional' IPC-2221 standard, but on modern PCBs it can lead to unnecessary cost and wasted board area."
         }
       }
     }

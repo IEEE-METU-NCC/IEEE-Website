@@ -97,7 +97,7 @@
                         <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
                     </svg>
                     <span class="h5 calc-category-title" data-i18n="calculators.categories.generic">Diğer Hesap Makineleri</span>
-                    <span class="small text-muted">555 Timer · Buck Converter</span>
+                    <span class="small text-muted">555 Timer · Buck Converter · PCB Trace Width</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
@@ -144,6 +144,9 @@
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="buck-tab" data-bs-toggle="pill" data-bs-target="#buck" type="button" role="tab" aria-controls="buck" aria-selected="false" data-i18n="calculators.tabs.buck">Buck Converter</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pcbtrace-tab" data-bs-toggle="pill" data-bs-target="#pcbtrace" type="button" role="tab" aria-controls="pcbtrace" aria-selected="false" data-i18n="calculators.tabs.pcbtrace">PCB Trace Width (yol genişliği)</button>
             </li>
         </ul>
         <!-- Calculator Tabs END -->
@@ -944,6 +947,182 @@
                 </div>
             </div>
             <!-- Buck Converter END -->
+
+            <!-- PCB Trace Width -->
+            <div class="tab-pane fade" id="pcbtrace" role="tabpanel" aria-labelledby="pcbtrace-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.pcbtrace.title">PCB Trace Width Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.pcbtrace.desc">IPC-2152'ye göre bir bakır PCB yolunun (trace) taşıyacağı akım için gereken genişliği; yolun direncini, gerilim düşümünü ve güç kaybını hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3" data-calc-tip="pcb-i-tip">
+                                    <label for="pcb-i" class="form-label" data-i18n="calculators.pcbtrace.current">Akım (I)</label>
+                                    <span class="visually-hidden" id="pcb-i-tip" data-i18n="calculators.pcbtrace.currentTip">Bakır trace üzerinden geçen akım.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-i" aria-describedby="pcb-i-tip" value="2" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-i-unit" aria-label="Current unit">
+                                            <option value="1e-3">mA</option>
+                                            <option value="1" selected>A</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-t-tip">
+                                    <label for="pcb-t" class="form-label" data-i18n="calculators.pcbtrace.thickness">Bakır kalınlığı (t)</label>
+                                    <span class="visually-hidden" id="pcb-t-tip" data-i18n="calculators.pcbtrace.thicknessTip">Bakır yolun ağırlığıdır; genellikle 1 oz veya 2 oz tercih edilir. Emin değilseniz 1 oz için hesaplayın.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-t" aria-describedby="pcb-t-tip" value="1" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-t-unit" aria-label="Thickness unit">
+                                            <option value="0.035" selected>oz/ft²</option>
+                                            <option value="1">mm</option>
+                                            <option value="1e-3">µm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-dt-tip">
+                                    <label for="pcb-dt" class="form-label" data-i18n="calculators.pcbtrace.rise">Sıcaklık artışı (ΔT)</label>
+                                    <span class="visually-hidden" id="pcb-dt-tip" data-i18n="calculators.pcbtrace.riseTip">Aşırı hassas komponentler için 5 °C, genel elektronik devreleri için 10 °C ve yüksek sıcaklığa dayanıklı devrelerde 20 °C kullanılır. Güvenli hesaplama için 7 °C veya 10 °C ile hesaplama yapınız.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-dt" aria-describedby="pcb-dt-tip" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-dt-unit" aria-label="Temperature rise unit">
+                                            <option value="1" selected>°C</option>
+                                            <option value="0.5555555555555556">°F</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-ta-tip">
+                                    <label for="pcb-ta" class="form-label" data-i18n="calculators.pcbtrace.ambient">Ortam sıcaklığı (T<sub>a</sub>)</label>
+                                    <span class="visually-hidden" id="pcb-ta-tip" data-i18n="calculators.pcbtrace.ambientTip">Ortam sıcaklığı; enerji kaybı hesabı için kullanılır.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-ta" aria-describedby="pcb-ta-tip" value="27" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-ta-scale" aria-label="Ambient temperature unit">
+                                            <option value="c" selected>°C</option>
+                                            <option value="f">°F</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-len-tip">
+                                    <label for="pcb-len" class="form-label" data-i18n="calculators.pcbtrace.length">Yol uzunluğu (ℓ)</label>
+                                    <span class="visually-hidden" id="pcb-len-tip" data-i18n="calculators.pcbtrace.lengthTip">Bakır trace uzunluğu; enerji kaybı hesabı için kullanılır.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-len" aria-describedby="pcb-len-tip" value="200" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-len-unit" aria-label="Length unit">
+                                            <option value="1" selected>mm</option>
+                                            <option value="10">cm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-label" id="pcb-plane-label" data-i18n="calculators.pcbtrace.plane">Yakında bakır plane</div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="btn-group" role="group" aria-labelledby="pcb-plane-label">
+                                            <input type="radio" class="btn-check" name="pcb-plane" id="pcb-plane-no" value="no" autocomplete="off" checked>
+                                            <label class="btn btn-outline-primary" for="pcb-plane-no" data-i18n="calculators.pcbtrace.planeNo">Yok</label>
+                                            <input type="radio" class="btn-check" name="pcb-plane" id="pcb-plane-yes" value="yes" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="pcb-plane-yes" data-i18n="calculators.pcbtrace.planeYes">Var</label>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-secondary rounded-circle calc-help" data-calc-tip="pcb-plane-tip">
+                                            <span aria-hidden="true">?</span>
+                                            <span class="visually-hidden" id="pcb-plane-tip" data-i18n="calculators.pcbtrace.planeHelp">Bu konuda fikriniz yoksa "Yok"u seçin.</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-none" data-pcb-plane="yes">
+                                    <label for="pcb-d" class="form-label" data-i18n="calculators.pcbtrace.planeDistance">Plane'e uzaklık (d)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-d" value="1.6" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-d-unit" aria-label="Plane distance unit">
+                                            <option value="1" selected>mm</option>
+                                            <option value="1e-3">µm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <svg class="calc-schematic calc-schematic-wide mb-4" viewBox="0 0 330 162" role="img" aria-label="PCB cross section with an external and an internal trace">
+                                    <rect class="calc-wire" x="20" y="50" width="290" height="90"/>
+                                    <rect class="calc-mark" x="45" y="38" width="90" height="12"/>
+                                    <rect class="calc-mark" x="195" y="85" width="90" height="12"/>
+                                    <rect class="calc-mark d-none" x="20" y="126" width="290" height="5" data-pcb-plane="yes"/>
+                                    <polyline class="calc-wire" points="45,27 135,27"/>
+                                    <polyline class="calc-wire" points="45,22 45,32"/>
+                                    <polyline class="calc-wire" points="135,22 135,32"/>
+                                    <polyline class="calc-wire" points="145,38 155,38"/>
+                                    <polyline class="calc-wire" points="145,50 155,50"/>
+                                    <polyline class="calc-wire" points="150,38 150,50"/>
+                                    <text x="90" y="19" text-anchor="middle">W</text>
+                                    <text x="160" y="48">t</text>
+                                    <polyline class="calc-wire" points="195,74 285,74"/>
+                                    <polyline class="calc-wire" points="195,69 195,79"/>
+                                    <polyline class="calc-wire" points="285,69 285,79"/>
+                                    <polyline class="calc-wire" points="175,85 185,85"/>
+                                    <polyline class="calc-wire" points="175,97 185,97"/>
+                                    <polyline class="calc-wire" points="180,85 180,97"/>
+                                    <text x="240" y="66" text-anchor="middle">W</text>
+                                    <text x="170" y="95" text-anchor="end">t</text>
+                                    <text x="90" y="67" text-anchor="middle" data-i18n="calculators.pcbtrace.external">Dış katman</text>
+                                    <text x="240" y="113" text-anchor="middle" data-i18n="calculators.pcbtrace.internal">İç katman</text>
+                                    <text class="d-none" x="28" y="121" data-pcb-plane="yes">Plane</text>
+                                    <text x="165" y="156" text-anchor="middle">PCB</text>
+                                </svg>
+                                <h6 class="mb-2" data-i18n="calculators.pcbtrace.external">Dış katman</h6>
+                                <ul class="list-group list-group-flush mb-4">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.width">Gerekli yol genişliği (W)</span>
+                                        <span class="calc-value" id="pcb-ext-w">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.resistance">Direnç (R)</span>
+                                        <span class="calc-value" id="pcb-ext-r">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.drop">Gerilim düşümü (V<sub>drop</sub>)</span>
+                                        <span class="calc-value" id="pcb-ext-v">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.loss">Güç kaybı (P<sub>loss</sub>)</span>
+                                        <span class="calc-value" id="pcb-ext-p">—</span>
+                                    </li>
+                                </ul>
+                                <h6 class="mb-2" data-i18n="calculators.pcbtrace.internal">İç katman</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.width">Gerekli yol genişliği (W)</span>
+                                        <span class="calc-value" id="pcb-int-w">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.resistance">Direnç (R)</span>
+                                        <span class="calc-value" id="pcb-int-r">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.drop">Gerilim düşümü (V<sub>drop</sub>)</span>
+                                        <span class="calc-value" id="pcb-int-v">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.loss">Güç kaybı (P<sub>loss</sub>)</span>
+                                        <span class="calc-value" id="pcb-int-p">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-1 mt-3">
+                            <span data-i18n="calculators.pcbtrace.external">Dış katman</span>: ΔT = 215.3·I<sup>2</sup>·W<sup>−1.15</sup>·t<sup>−1</sup><br>
+                            <span data-i18n="calculators.pcbtrace.internal">İç katman</span>: ΔT = C·I<sup>a</sup>·W<sup>−b</sup>·t<sup>−1.52</sup><br>
+                            0.5 oz: C = 130, a = 2, b = 1.10 &nbsp;·&nbsp; 1 oz: C = 200, a = 1.9, b = 1.10 &nbsp;·&nbsp; 2 oz: C = 300.3, a = 2, b = 1.15 &nbsp;·&nbsp; 3 oz: C = 300, a = 1.9, b = 1.15<br>
+                            k<sub>plane</sub> = 0.00313·d [mil] + 0.4045 ≤ 1<br>
+                            R = (ρ·ℓ / (W·t))·(1 + α·(T<sub>a</sub> + ΔT − 25 °C))<br>
+                            V<sub>drop</sub> = I·R &nbsp;·&nbsp; P<sub>loss</sub> = I²·R<br>
+                            ρ = 1.7×10⁻⁸ Ω·m &nbsp;·&nbsp; α = 3.9×10⁻³ /°C &nbsp;·&nbsp; 1 oz/ft² = 35 µm
+                        </p>
+                        <p class="small text-muted mb-0" data-i18n="calculators.pcbtrace.note">IPC-2152 standardı, PCB bakır alanı kalınlığını doğrusal bir formül ile değil bir eğri ile hesaplamanızı sağlayan, 2009 yılında çıkarılmış bir standarttır. Daha 'geleneksel' olan IPC-2221 standardını da tercih edebilirsiniz ama modern PCB'lerde bu gereksiz maliyetlere ve alan kaplanmasına sebebiyet verebilir.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- PCB Trace Width END -->
 
         </div>
         </div>

@@ -27,6 +27,16 @@
     flex: 0 0 5.5rem !important;
 }
 
+/* Yuvarlak "?" yardım butonu */
+.calc-help {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    line-height: 1.85rem;
+    font-weight: 600;
+}
+
 .calc-value {
     font-weight: 600;
     font-variant-numeric: tabular-nums;

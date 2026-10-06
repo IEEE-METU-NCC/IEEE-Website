@@ -132,7 +132,8 @@
           "tau": "RC RL Time Constant (zaman sabiti)",
           "buck": "Buck Converter",
           "filter": "Passive Filter",
-          "threephase": "Three Phase (3 faz)"
+          "threephase": "Three Phase (3 faz)",
+          "pcbtrace": "PCB Trace Width (yol genişliği)"
         },
         "threephase": {
           "title": "Three Phase Hesaplayıcı",
@@ -250,6 +251,32 @@
           "capacitor": "Minimum çıkış kondansatörü (C<sub>out</sub>)",
           "power": "Çıkış gücü (P<sub>out</sub>)",
           "note": "İdeal (kayıpsız) elemanlar ve sürekli iletim modu (CCM) varsayılır; kondansatör ESR'si hesaba katılmaz."
+        },
+        "pcbtrace": {
+          "title": "PCB Trace Width Hesaplayıcı",
+          "desc": "IPC-2152'ye göre bir bakır PCB yolunun (trace) taşıyacağı akım için gereken genişliği; yolun direncini, gerilim düşümünü ve güç kaybını hesaplar.",
+          "current": "Akım (I)",
+          "thickness": "Bakır kalınlığı (t)",
+          "rise": "Sıcaklık artışı (ΔT)",
+          "ambient": "Ortam sıcaklığı (T<sub>a</sub>)",
+          "length": "Yol uzunluğu (ℓ)",
+          "currentTip": "Bakır trace üzerinden geçen akım.",
+          "thicknessTip": "Bakır yolun ağırlığıdır; genellikle 1 oz veya 2 oz tercih edilir. Emin değilseniz 1 oz için hesaplayın.",
+          "riseTip": "Aşırı hassas komponentler için 5 °C, genel elektronik devreleri için 10 °C ve yüksek sıcaklığa dayanıklı devrelerde 20 °C kullanılır. Güvenli hesaplama için 7 °C veya 10 °C ile hesaplama yapınız.",
+          "ambientTip": "Ortam sıcaklığı; enerji kaybı hesabı için kullanılır.",
+          "lengthTip": "Bakır trace uzunluğu; enerji kaybı hesabı için kullanılır.",
+          "plane": "Yakında bakır plane",
+          "planeNo": "Yok",
+          "planeYes": "Var",
+          "planeHelp": "Bu konuda fikriniz yoksa \"Yok\"u seçin.",
+          "planeDistance": "Plane'e uzaklık (d)",
+          "external": "Dış katman",
+          "internal": "İç katman",
+          "width": "Gerekli yol genişliği (W)",
+          "resistance": "Direnç (R)",
+          "drop": "Gerilim düşümü (V<sub>drop</sub>)",
+          "loss": "Güç kaybı (P<sub>loss</sub>)",
+          "note": "IPC-2152 standardı, PCB bakır alanı kalınlığını doğrusal bir formül ile değil bir eğri ile hesaplamanızı sağlayan, 2009 yılında çıkarılmış bir standarttır. Daha 'geleneksel' olan IPC-2221 standardını da tercih edebilirsiniz ama modern PCB'lerde bu gereksiz maliyetlere ve alan kaplanmasına sebebiyet verebilir."
         }
       }
     }

@@ -674,6 +674,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ---------- PCB Trace Width ----------
+
+    const MIL = 0.0254;             // mm
+    const OZ = 0.035;               // mm of copper per oz/ft²
+    const COPPER_RHO = 1.7e-5;      // Ω·mm at 25 °C
+    const COPPER_ALPHA = 3.9e-3;    // 1/°C
+
+    // IPC-2152 only gives charts. These are the Brooks & Adam fits of its still-air charts:
+    // ΔT = c · I^a · W^-b · Th^-e with the width W and the thickness Th in mils.
+    const PCB_EXTERNAL = { c: 215.3, a: 2, b: 1.15, e: 1 };
+    // The internal charts are fitted per copper weight: [oz/ft², fit].
+    // Where the constant depends on the width (0.5 oz, 3 oz) the largest one is used.
+    const PCB_INTERNAL = [
+        [0.5, { c: 130, a: 2, b: 1.10, e: 1.52 }],
+        [1, { c: 200, a: 1.9, b: 1.10, e: 1.52 }],
+        [2, { c: 300.3, a: 2, b: 1.15, e: 1.52 }],
+        [3, { c: 300, a: 1.9, b: 1.15, e: 1.52 }]
+    ];
+
+    function calcPcbTrace() {
+        const plane = document.querySelector('input[name="pcb-plane"]:checked').value;
+        showVariant('data-pcb-plane', plane);
+
+        const current = readValue('pcb-i');
+        const thickness = readValue('pcb-t');   // mm
+        const rise = readValue('pcb-dt');       // °C
+        const length = readValue('pcb-len');    // mm
+        const distance = plane === 'yes' ? readValue('pcb-d') : 0;   // mm
+        let ambient = readValue('pcb-ta', 'any');
+        if ($('pcb-ta-scale').value === 'f') ambient = (ambient - 32) * 5 / 9;
+
+        if (Number.isNaN(current + thickness + rise + length + distance + ambient)) {
+            clearResults(['w', 'r', 'v', 'p'].flatMap(id => ['pcb-ext-' + id, 'pcb-int-' + id]));
+            return;
+        }
+
+        // Width in mils that gives the wanted temperature rise
+        const fitWidth = ({ c, a, b, e }) => (c * current ** a / (rise * (thickness / MIL) ** e)) ** (1 / b);
+
+        // Internal: interpolated between the two nearest copper weights, nearest one outside 0.5–3 oz
+        const oz = thickness / OZ;
+        const upper = Math.max(1, PCB_INTERNAL.findIndex(([weight]) => weight >= oz));
+        const [[ozLow, fitLow], [ozHigh, fitHigh]] = upper === 0 ? PCB_INTERNAL.slice(-2) : PCB_INTERNAL.slice(upper - 1, upper + 1);
+        const mix = Math.min(1, Math.max(0, (oz - ozLow) / (ozHigh - ozLow)));
+        const widths = {
+            ext: fitWidth(PCB_EXTERNAL),
+            int: fitWidth(fitLow) * (1 - mix) + fitWidth(fitHigh) * mix
+        };
+
+        // A nearby plane spreads the heat: IPC-2152 plane proximity modifier on the cross-section
+        const planeFactor = plane === 'yes' ? Math.min(1, 3.1298662911e-3 * distance / MIL + 4.0450883823e-1) : 1;
+        // Copper resistivity at the trace temperature (ambient + rise)
+        const rho = COPPER_RHO * (1 + COPPER_ALPHA * (ambient + rise - 25));
+
+        Object.entries(widths).forEach(([layer, mils]) => {
+            const width = mils * MIL * planeFactor;   // mm
+            const resistance = rho * length / (width * thickness);
+            setResults({
+                [`pcb-${layer}-w`]: formatNumber(width) + ' mm',
+                [`pcb-${layer}-r`]: formatSI(resistance, 'Ω'),
+                [`pcb-${layer}-v`]: formatSI(current * resistance, 'V'),
+                [`pcb-${layer}-p`]: formatSI(current * current * resistance, 'W')
+            });
+        });
+    }
+
     // ---------- Wiring ----------
 
     const calculators = {
@@ -683,10 +749,15 @@ document.addEventListener('DOMContentLoaded', () => {
         tau: calcTau,
         filter: calcFilter,
         threephase: calcThreePhase,
-        buck: calcBuck
+        buck: calcBuck,
+        pcbtrace: calcPcbTrace
     };
 
     buildSmithChart();
+    // Tooltips take their text from a (translated) hidden element, so they follow the language toggle
+    document.querySelectorAll('[data-calc-tip]').forEach(el => {
+        new bootstrap.Tooltip(el, { title: () => $(el.getAttribute('data-calc-tip')).textContent });
+    });
     Object.entries(calculators).forEach(([id, calculate]) => {
         $(id).addEventListener('input', calculate);
         $(id).addEventListener('change', calculate);
@@ -706,8 +777,8 @@ document.addEventListener('DOMContentLoaded', () => {
         wave: ['smith'],
         semiconductor: ['divider'],
         microwave: ['filter', 'smith'],
-        generic: ['timer555', 'buck'],
-        everything: ['timer555', 'smith', 'divider', 'tau', 'filter', 'threephase', 'buck']
+        generic: ['timer555', 'buck', 'pcbtrace'],
+        everything: ['timer555', 'smith', 'divider', 'tau', 'filter', 'threephase', 'buck', 'pcbtrace']
     };
     let currentCategory = null;
 
