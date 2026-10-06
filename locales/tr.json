@@ -48,6 +48,14 @@
         "follow": "Bizi takip edin:"
       }
       ,
+      "apex": {
+        "pageTitle": "Apex Racing FSAE - IEEE ODTÜ KKK",
+        "badge": "Yapım Aşamasında",
+        "title": "Bu sayfa yapım aşamasında",
+        "lead": "Apex Racing FSAE takımımızın sayfasını hazırlıyoruz. Çok yakında burada olacak!",
+        "backHome": "Ana Sayfaya Dön",
+        "contact": "Bize Ulaşın"
+      },
       "contact": {
         "pageTitle": "İletişim - IEEE ODTÜ KKK",
         "headerTitle": "İletişim",
