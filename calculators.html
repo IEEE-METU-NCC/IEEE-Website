@@ -49,6 +49,31 @@
         <!-- Categories -->
         <div class="row justify-content-center g-4" id="calc-categories">
             <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="pcb">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect x="5" y="9" width="54" height="46" rx="5"/>
+                        <path d="M18.5 21 H27 L35 29 H45.5 M45.5 43 H34 L28 37 H18.5"/>
+                        <circle cx="16" cy="21" r="2.5"/>
+                        <circle cx="48" cy="29" r="2.5"/>
+                        <circle cx="48" cy="43" r="2.5"/>
+                        <circle cx="16" cy="37" r="2.5"/>
+                    </svg>
+                    <span class="h5 calc-category-title" data-i18n="calculators.categories.pcb">PCB Hesap Makineleri</span>
+                    <span class="small text-muted">PCB Trace Width</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="generic">
+                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect x="14" y="5" width="36" height="54" rx="5"/>
+                        <rect x="21" y="12" width="22" height="11" rx="2"/>
+                        <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
+                    </svg>
+                    <span class="h5 calc-category-title" data-i18n="calculators.categories.generic">Diğer Hesap Makineleri</span>
+                    <span class="small text-muted">555 Timer · Buck Converter · Resistor Color Code · Series Parallel Resistors · Voltage Divider</span>
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
                 <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="circuit">
                     <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
                         <path d="M4 32 H13 L18 12 L27 52 L36 12 L45 52 L50 32 H60"/>
@@ -56,7 +81,7 @@
                         <circle cx="60" cy="32" r="2.5"/>
                     </svg>
                     <span class="h5 calc-category-title">Circuit Theory (EEE201/202)</span>
-                    <span class="small text-muted">Voltage Divider · RC RL Time Constant · Passive Filter</span>
+                    <span class="small text-muted">Voltage Divider · Series Parallel Resistors · Resistor Color Code · RC RL Time Constant · Passive Filter · Three Phase</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
@@ -70,24 +95,13 @@
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
-                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="semiconductor">
+                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="microwave">
                     <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
-                        <path d="M4 32 H22 M42 32 H60 M42 16 V48"/>
-                        <path d="M22 16 V48 L42 32 Z"/>
+                        <circle cx="32" cy="32" r="27"/>
+                        <path d="M5 32 C12 8, 25 8, 32 32 S52 56, 59 32"/>
                     </svg>
-                    <span class="h5 calc-category-title">Semiconductor Devices (EEE212)</span>
-                    <span class="small text-muted">Voltage Divider</span>
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <button type="button" class="card calc-category shadow-sm h-100 w-100 p-4" data-category="generic">
-                    <svg class="calc-category-icon" viewBox="0 0 64 64" aria-hidden="true">
-                        <rect x="14" y="5" width="36" height="54" rx="5"/>
-                        <rect x="21" y="12" width="22" height="11" rx="2"/>
-                        <path d="M22 33 H26 M30 33 H34 M38 33 H42 M22 42 H26 M30 42 H34 M38 42 H42 M22 51 H26 M30 51 H34 M38 51 H42"/>
-                    </svg>
-                    <span class="h5 calc-category-title" data-i18n="calculators.categories.generic">Diğer Hesap Makineleri</span>
-                    <span class="small text-muted">555 Timer · Buck Converter</span>
+                    <span class="h5 calc-category-title">Microwaves (EEE427/428)</span>
+                    <span class="small text-muted">Passive Filter · Smith Chart</span>
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4">
@@ -130,7 +144,19 @@
                 <button class="nav-link" id="filter-tab" data-bs-toggle="pill" data-bs-target="#filter" type="button" role="tab" aria-controls="filter" aria-selected="false" data-i18n="calculators.tabs.filter">Passive Filter</button>
             </li>
             <li class="nav-item" role="presentation">
+                <button class="nav-link" id="threephase-tab" data-bs-toggle="pill" data-bs-target="#threephase" type="button" role="tab" aria-controls="threephase" aria-selected="false" data-i18n="calculators.tabs.threephase">Three Phase (3 faz)</button>
+            </li>
+            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="buck-tab" data-bs-toggle="pill" data-bs-target="#buck" type="button" role="tab" aria-controls="buck" aria-selected="false" data-i18n="calculators.tabs.buck">Buck Converter</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pcbtrace-tab" data-bs-toggle="pill" data-bs-target="#pcbtrace" type="button" role="tab" aria-controls="pcbtrace" aria-selected="false" data-i18n="calculators.tabs.pcbtrace">PCB Trace Width (yol genişliği)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="resistors-tab" data-bs-toggle="pill" data-bs-target="#resistors" type="button" role="tab" aria-controls="resistors" aria-selected="false" data-i18n="calculators.tabs.resistors">Series Parallel Resistors (seri paralel direnç)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="colorcode-tab" data-bs-toggle="pill" data-bs-target="#colorcode" type="button" role="tab" aria-controls="colorcode" aria-selected="false" data-i18n="calculators.tabs.colorcode">Resistor Color Code (direnç renk kodu)</button>
             </li>
         </ul>
         <!-- Calculator Tabs END -->
@@ -673,6 +699,122 @@
             </div>
             <!-- Passive Filter END -->
 
+            <!-- Three Phase -->
+            <div class="tab-pane fade" id="threephase" role="tabpanel" aria-labelledby="threephase-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.threephase.title">Three Phase Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.threephase.desc">Dengeli üç fazlı sistemde kaynak ve yükün star (Y) / delta (Δ) bağlantısına göre line ve phase gerilimlerini, akımlarını ve gücü hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-6">
+                                        <label for="tp-source" class="form-label" data-i18n="calculators.threephase.source">Kaynak bağlantısı</label>
+                                        <select class="form-select" id="tp-source">
+                                            <option value="y" selected data-i18n="calculators.threephase.star">Star (Y)</option>
+                                            <option value="delta" data-i18n="calculators.threephase.delta">Delta (Δ)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="tp-load" class="form-label" data-i18n="calculators.threephase.load">Yük bağlantısı</label>
+                                        <select class="form-select" id="tp-load">
+                                            <option value="y" data-i18n="calculators.threephase.star">Star (Y)</option>
+                                            <option value="delta" selected data-i18n="calculators.threephase.delta">Delta (Δ)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tp-v" class="form-label" data-i18n="calculators.threephase.voltage">Kaynak gerilimi</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="tp-v" value="400" min="0" step="any" inputmode="decimal">
+                                        <span class="input-group-text">V</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tp-vtype" class="form-label" data-i18n="calculators.threephase.voltageType">Girilen gerilimin türü</label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="tp-vtype" aria-label="Line or phase voltage">
+                                            <option value="line" data-i18n="calculators.threephase.vLine">Line (hat)</option>
+                                            <option value="phase" data-i18n="calculators.threephase.vPhase">Phase (faz)</option>
+                                        </select>
+                                        <select class="form-select" id="tp-v-unit" aria-label="RMS, amplitude or peak-to-peak">
+                                            <option value="1">RMS</option>
+                                            <option value="0.7071067811865476">Amplitude (peak)</option>
+                                            <option value="0.3535533905932738">Peak-to-peak</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tp-r" class="form-label" data-i18n="calculators.threephase.impedance">R Load</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="tp-r" value="30" min="0" step="any" inputmode="decimal" aria-label="R">
+                                        <span class="input-group-text">+ j</span>
+                                        <input type="number" class="form-control" id="tp-x" value="40" step="any" inputmode="decimal" aria-label="X">
+                                        <span class="input-group-text">Ω</span>
+                                    </div>
+                                </div>
+                                <svg class="calc-schematic calc-schematic-wide mt-4" viewBox="0 0 420 195" role="img" aria-label="Three phase circuit schematic">
+                                    <text x="85" y="13" text-anchor="middle" data-i18n="calculators.threephase.sourceLabel">Kaynak</text>
+                                    <text x="335" y="13" text-anchor="middle" data-i18n="calculators.threephase.loadLabel">Yük</text>
+                                    <g id="tp-schematic"></g>
+                                </svg>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.lineVoltage">Line gerilimi (V<sub>L</sub>)</span>
+                                        <span class="calc-value" id="tp-vl">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.lineCurrent">Line akımı (I<sub>L</sub>)</span>
+                                        <span class="calc-value" id="tp-il">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.sourcePhaseVoltage">Kaynak phase gerilimi</span>
+                                        <span class="calc-value" id="tp-vs">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.sourcePhaseCurrent">Kaynak phase akımı</span>
+                                        <span class="calc-value" id="tp-is">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.loadPhaseVoltage">Yük phase gerilimi</span>
+                                        <span class="calc-value" id="tp-vp">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.loadPhaseCurrent">Yük phase akımı</span>
+                                        <span class="calc-value" id="tp-ip">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.powerFactor">Güç faktörü (cos θ)</span>
+                                        <span class="calc-value" id="tp-pf">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.realPower">Aktif güç (P)</span>
+                                        <span class="calc-value" id="tp-p">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.reactivePower">Reaktif güç (Q)</span>
+                                        <span class="calc-value" id="tp-q">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.threephase.apparentPower">Görünür güç (|S|)</span>
+                                        <span class="calc-value" id="tp-s">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-1 mt-3">Y: V<sub>L</sub> = √3·V<sub>φ</sub>, I<sub>L</sub> = I<sub>φ</sub> &nbsp;·&nbsp; Δ: V<sub>L</sub> = V<sub>φ</sub>, I<sub>L</sub> = √3·I<sub>φ</sub> &nbsp;·&nbsp; P = √3·V<sub>L</sub>·I<sub>L</sub>·cos θ</p>
+                        <p class="small text-muted mb-0" data-i18n="calculators.threephase.note">Dengeli sistem, abc (pozitif) faz sırası ve ideal (empedanssız) hatlar varsayılır. Girilen gerilim RMS'e çevrilir, sonuçlar RMS'tir; açılar a fazına aittir ve V<sub>an</sub> = 0° referans alınır.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Three Phase END -->
+
             <!-- Buck Converter -->
             <div class="tab-pane fade" id="buck" role="tabpanel" aria-labelledby="buck-tab">
                 <div class="card shadow">
@@ -815,6 +957,352 @@
                 </div>
             </div>
             <!-- Buck Converter END -->
+
+            <!-- PCB Trace Width -->
+            <div class="tab-pane fade" id="pcbtrace" role="tabpanel" aria-labelledby="pcbtrace-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.pcbtrace.title">PCB Trace Width Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.pcbtrace.desc">IPC-2152'ye göre bir bakır PCB yolunun (trace) taşıyacağı akım için gereken genişliği; yolun direncini, gerilim düşümünü ve güç kaybını hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3" data-calc-tip="pcb-i-tip">
+                                    <label for="pcb-i" class="form-label" data-i18n="calculators.pcbtrace.current">Akım (I)</label>
+                                    <span class="visually-hidden" id="pcb-i-tip" data-i18n="calculators.pcbtrace.currentTip">Bakır trace üzerinden geçen akım.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-i" aria-describedby="pcb-i-tip" value="2" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-i-unit" aria-label="Current unit">
+                                            <option value="1e-3">mA</option>
+                                            <option value="1" selected>A</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-t-tip">
+                                    <label for="pcb-t" class="form-label" data-i18n="calculators.pcbtrace.thickness">Bakır kalınlığı (t)</label>
+                                    <span class="visually-hidden" id="pcb-t-tip" data-i18n="calculators.pcbtrace.thicknessTip">Bakır yolun ağırlığıdır; genellikle 1 oz veya 2 oz tercih edilir. Emin değilseniz 1 oz için hesaplayın.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-t" aria-describedby="pcb-t-tip" value="1" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-t-unit" aria-label="Thickness unit">
+                                            <option value="0.035" selected>oz/ft²</option>
+                                            <option value="1">mm</option>
+                                            <option value="1e-3">µm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-dt-tip">
+                                    <label for="pcb-dt" class="form-label" data-i18n="calculators.pcbtrace.rise">Sıcaklık artışı (ΔT)</label>
+                                    <span class="visually-hidden" id="pcb-dt-tip" data-i18n="calculators.pcbtrace.riseTip">Aşırı hassas komponentler için 5 °C, genel elektronik devreleri için 10 °C ve yüksek sıcaklığa dayanıklı devrelerde 20 °C kullanılır. Güvenli hesaplama için 7 °C veya 10 °C ile hesaplama yapınız.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-dt" aria-describedby="pcb-dt-tip" value="10" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-dt-unit" aria-label="Temperature rise unit">
+                                            <option value="1" selected>°C</option>
+                                            <option value="0.5555555555555556">°F</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-ta-tip">
+                                    <label for="pcb-ta" class="form-label" data-i18n="calculators.pcbtrace.ambient">Ortam sıcaklığı (T<sub>a</sub>)</label>
+                                    <span class="visually-hidden" id="pcb-ta-tip" data-i18n="calculators.pcbtrace.ambientTip">Ortam sıcaklığı; enerji kaybı hesabı için kullanılır.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-ta" aria-describedby="pcb-ta-tip" value="27" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-ta-scale" aria-label="Ambient temperature unit">
+                                            <option value="c" selected>°C</option>
+                                            <option value="f">°F</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-calc-tip="pcb-len-tip">
+                                    <label for="pcb-len" class="form-label" data-i18n="calculators.pcbtrace.length">Yol uzunluğu (ℓ)</label>
+                                    <span class="visually-hidden" id="pcb-len-tip" data-i18n="calculators.pcbtrace.lengthTip">Bakır trace uzunluğu; enerji kaybı hesabı için kullanılır.</span>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-len" aria-describedby="pcb-len-tip" value="200" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-len-unit" aria-label="Length unit">
+                                            <option value="1" selected>mm</option>
+                                            <option value="10">cm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-label" id="pcb-plane-label" data-i18n="calculators.pcbtrace.plane">Yakında bakır plane</div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="btn-group" role="group" aria-labelledby="pcb-plane-label">
+                                            <input type="radio" class="btn-check" name="pcb-plane" id="pcb-plane-no" value="no" autocomplete="off" checked>
+                                            <label class="btn btn-outline-primary" for="pcb-plane-no" data-i18n="calculators.pcbtrace.planeNo">Yok</label>
+                                            <input type="radio" class="btn-check" name="pcb-plane" id="pcb-plane-yes" value="yes" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="pcb-plane-yes" data-i18n="calculators.pcbtrace.planeYes">Var</label>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-secondary rounded-circle calc-help" data-calc-tip="pcb-plane-tip">
+                                            <span aria-hidden="true">?</span>
+                                            <span class="visually-hidden" id="pcb-plane-tip" data-i18n="calculators.pcbtrace.planeHelp">Bu konuda fikriniz yoksa "Yok"u seçin.</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-none" data-pcb-plane="yes">
+                                    <label for="pcb-d" class="form-label" data-i18n="calculators.pcbtrace.planeDistance">Plane'e uzaklık (d)</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="pcb-d" value="1.6" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="pcb-d-unit" aria-label="Plane distance unit">
+                                            <option value="1" selected>mm</option>
+                                            <option value="1e-3">µm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <svg class="calc-schematic calc-schematic-wide mb-4" viewBox="0 0 330 162" role="img" aria-label="PCB cross section with an external and an internal trace">
+                                    <rect class="calc-wire" x="20" y="50" width="290" height="90"/>
+                                    <rect class="calc-mark" x="45" y="38" width="90" height="12"/>
+                                    <rect class="calc-mark" x="195" y="85" width="90" height="12"/>
+                                    <rect class="calc-mark d-none" x="20" y="126" width="290" height="5" data-pcb-plane="yes"/>
+                                    <polyline class="calc-wire" points="45,27 135,27"/>
+                                    <polyline class="calc-wire" points="45,22 45,32"/>
+                                    <polyline class="calc-wire" points="135,22 135,32"/>
+                                    <polyline class="calc-wire" points="145,38 155,38"/>
+                                    <polyline class="calc-wire" points="145,50 155,50"/>
+                                    <polyline class="calc-wire" points="150,38 150,50"/>
+                                    <text x="90" y="19" text-anchor="middle">W</text>
+                                    <text x="160" y="48">t</text>
+                                    <polyline class="calc-wire" points="195,74 285,74"/>
+                                    <polyline class="calc-wire" points="195,69 195,79"/>
+                                    <polyline class="calc-wire" points="285,69 285,79"/>
+                                    <polyline class="calc-wire" points="175,85 185,85"/>
+                                    <polyline class="calc-wire" points="175,97 185,97"/>
+                                    <polyline class="calc-wire" points="180,85 180,97"/>
+                                    <text x="240" y="66" text-anchor="middle">W</text>
+                                    <text x="170" y="95" text-anchor="end">t</text>
+                                    <text x="90" y="67" text-anchor="middle" data-i18n="calculators.pcbtrace.external">Dış katman</text>
+                                    <text x="240" y="113" text-anchor="middle" data-i18n="calculators.pcbtrace.internal">İç katman</text>
+                                    <text class="d-none" x="28" y="121" data-pcb-plane="yes">Plane</text>
+                                    <text x="165" y="156" text-anchor="middle">PCB</text>
+                                </svg>
+                                <h6 class="mb-2" data-i18n="calculators.pcbtrace.external">Dış katman</h6>
+                                <ul class="list-group list-group-flush mb-4">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.width">Gerekli yol genişliği (W)</span>
+                                        <span class="calc-value" id="pcb-ext-w">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.resistance">Direnç (R)</span>
+                                        <span class="calc-value" id="pcb-ext-r">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.drop">Gerilim düşümü (V<sub>drop</sub>)</span>
+                                        <span class="calc-value" id="pcb-ext-v">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.loss">Güç kaybı (P<sub>loss</sub>)</span>
+                                        <span class="calc-value" id="pcb-ext-p">—</span>
+                                    </li>
+                                </ul>
+                                <h6 class="mb-2" data-i18n="calculators.pcbtrace.internal">İç katman</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.width">Gerekli yol genişliği (W)</span>
+                                        <span class="calc-value" id="pcb-int-w">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.resistance">Direnç (R)</span>
+                                        <span class="calc-value" id="pcb-int-r">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.drop">Gerilim düşümü (V<sub>drop</sub>)</span>
+                                        <span class="calc-value" id="pcb-int-v">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.pcbtrace.loss">Güç kaybı (P<sub>loss</sub>)</span>
+                                        <span class="calc-value" id="pcb-int-p">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-1 mt-3">
+                            <span data-i18n="calculators.pcbtrace.external">Dış katman</span>: ΔT = 215.3·I<sup>2</sup>·W<sup>−1.15</sup>·t<sup>−1</sup><br>
+                            <span data-i18n="calculators.pcbtrace.internal">İç katman</span>: ΔT = C·I<sup>a</sup>·W<sup>−b</sup>·t<sup>−1.52</sup><br>
+                            0.5 oz: C = 130, a = 2, b = 1.10 &nbsp;·&nbsp; 1 oz: C = 200, a = 1.9, b = 1.10 &nbsp;·&nbsp; 2 oz: C = 300.3, a = 2, b = 1.15 &nbsp;·&nbsp; 3 oz: C = 300, a = 1.9, b = 1.15<br>
+                            k<sub>plane</sub> = 0.00313·d [mil] + 0.4045 ≤ 1<br>
+                            R = (ρ·ℓ / (W·t))·(1 + α·(T<sub>a</sub> + ΔT − 25 °C))<br>
+                            V<sub>drop</sub> = I·R &nbsp;·&nbsp; P<sub>loss</sub> = I²·R<br>
+                            ρ = 1.7×10⁻⁸ Ω·m &nbsp;·&nbsp; α = 3.9×10⁻³ /°C &nbsp;·&nbsp; 1 oz/ft² = 35 µm
+                        </p>
+                        <p class="small text-muted mb-0" data-i18n="calculators.pcbtrace.note">IPC-2152 standardı, PCB bakır alanı kalınlığını doğrusal bir formül ile değil bir eğri ile hesaplamanızı sağlayan, 2009 yılında çıkarılmış bir standarttır. Daha 'geleneksel' olan IPC-2221 standardını da tercih edebilirsiniz ama modern PCB'lerde bu gereksiz maliyetlere ve alan kaplanmasına sebebiyet verebilir.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- PCB Trace Width END -->
+
+            <!-- Series / Parallel Resistors -->
+            <div class="tab-pane fade" id="resistors" role="tabpanel" aria-labelledby="resistors-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.resistors.title">Seri / Paralel Direnç Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.resistors.desc">Seri veya paralel bağlı dirençlerin eşdeğer direncini hesaplar. İstediğiniz kadar direnç ekleyebilirsiniz; devre şeması eklediğiniz dirençlerle birlikte güncellenir.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <div class="form-label" id="res-mode-label" data-i18n="calculators.resistors.mode">Bağlantı tipi</div>
+                                    <div class="btn-group" role="group" aria-labelledby="res-mode-label">
+                                        <input type="radio" class="btn-check" name="res-mode" id="res-mode-series" value="series" autocomplete="off" checked>
+                                        <label class="btn btn-outline-primary" for="res-mode-series" data-i18n="calculators.resistors.series">Seri</label>
+                                        <input type="radio" class="btn-check" name="res-mode" id="res-mode-parallel" value="parallel" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="res-mode-parallel" data-i18n="calculators.resistors.parallel">Paralel</label>
+                                    </div>
+                                </div>
+                                <div id="res-list">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text res-name">R<sub>1</sub></span>
+                                        <input type="number" class="form-control" id="res-r1" value="1" min="0" step="any" inputmode="decimal" aria-label="R1">
+                                        <select class="form-select calc-unit" id="res-r1-unit" aria-label="R1 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                        <button type="button" class="btn btn-outline-secondary" data-res-remove aria-label="Remove R1">&times;</button>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text res-name">R<sub>2</sub></span>
+                                        <input type="number" class="form-control" id="res-r2" value="2.2" min="0" step="any" inputmode="decimal" aria-label="R2">
+                                        <select class="form-select calc-unit" id="res-r2-unit" aria-label="R2 unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                        <button type="button" class="btn btn-outline-secondary" data-res-remove aria-label="Remove R2">&times;</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary" id="res-add">+ <span data-i18n="calculators.resistors.add">Direnç ekle</span></button>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.resistors.equivalent">Eşdeğer direnç (R<sub>eq</sub>)</span>
+                                        <span class="calc-value" id="res-req">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.resistors.conductance">Toplam iletkenlik (G)</span>
+                                        <span class="calc-value" id="res-g">—</span>
+                                    </li>
+                                </ul>
+                                <svg class="calc-schematic calc-schematic-wide" id="res-schematic" viewBox="0 0 360 64" role="img" aria-label="Resistor network schematic"></svg>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0 mt-3" data-res-mode="series">R<sub>eq</sub> = R<sub>1</sub> + R<sub>2</sub> + … + R<sub>n</sub> &nbsp;·&nbsp; G = 1 / R<sub>eq</sub></p>
+                        <p class="small text-muted mb-0 mt-3" data-res-mode="parallel">1 / R<sub>eq</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub> + … + 1 / R<sub>n</sub> &nbsp;·&nbsp; G = 1 / R<sub>eq</sub></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Series / Parallel Resistors END -->
+
+            <!-- Resistor Color Code -->
+            <div class="tab-pane fade" id="colorcode" role="tabpanel" aria-labelledby="colorcode-tab">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0" data-i18n="calculators.colorcode.title">Direnç Renk Kodu Hesaplayıcı</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4" data-i18n="calculators.colorcode.desc">4, 5 veya 6 bantlı bir direncin renk bantlarından direnç değerini, toleransını ve tolerans aralığını hesaplar.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
+                                <div class="mb-3">
+                                    <div class="form-label" id="cc-bands-label" data-i18n="calculators.colorcode.bands">Bant sayısı</div>
+                                    <div class="btn-group" role="group" aria-labelledby="cc-bands-label">
+                                        <input type="radio" class="btn-check" name="cc-bands" id="cc-bands-4" value="4" autocomplete="off" checked>
+                                        <label class="btn btn-outline-primary" for="cc-bands-4">4</label>
+                                        <input type="radio" class="btn-check" name="cc-bands" id="cc-bands-5" value="5" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="cc-bands-5">5</label>
+                                        <input type="radio" class="btn-check" name="cc-bands" id="cc-bands-6" value="6" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="cc-bands-6">6</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-d1" class="form-label" data-i18n="calculators.colorcode.digit1">1. rakam</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-d1-swatch"></span>
+                                        <select class="form-select" id="cc-d1"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-d2" class="form-label" data-i18n="calculators.colorcode.digit2">2. rakam</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-d2-swatch"></span>
+                                        <select class="form-select" id="cc-d2"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="cc-d3-group">
+                                    <label for="cc-d3" class="form-label" data-i18n="calculators.colorcode.digit3">3. rakam</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-d3-swatch"></span>
+                                        <select class="form-select" id="cc-d3"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-mult" class="form-label" data-i18n="calculators.colorcode.multiplier">Çarpan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-mult-swatch"></span>
+                                        <select class="form-select" id="cc-mult"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cc-tol" class="form-label" data-i18n="calculators.colorcode.tolerance">Tolerans</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-tol-swatch"></span>
+                                        <select class="form-select" id="cc-tol"></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="cc-tcr-group">
+                                    <label for="cc-tcr" class="form-label" data-i18n="calculators.colorcode.tcr">Sıcaklık katsayısı (TCR)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text cc-swatch" id="cc-tcr-swatch"></span>
+                                        <select class="form-select" id="cc-tcr"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3" data-i18n="calculators.results">Sonuçlar</h6>
+                                <svg class="calc-schematic calc-schematic-wide mb-3" viewBox="0 0 330 90" role="img" aria-label="Resistor with its color bands">
+                                    <polyline class="calc-wire" points="10,45 60,45"/>
+                                    <polyline class="calc-wire" points="270,45 320,45"/>
+                                    <rect class="cc-body" x="60" y="20" width="210" height="50" rx="14"/>
+                                    <g id="cc-band-marks"></g>
+                                </svg>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.resistance">Direnç (R)</span>
+                                        <span class="calc-value" id="cc-r">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.tolerance">Tolerans</span>
+                                        <span class="calc-value" id="cc-tolerance">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.min">En düşük değer (R<sub>min</sub>)</span>
+                                        <span class="calc-value" id="cc-min">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span data-i18n="calculators.colorcode.max">En yüksek değer (R<sub>max</sub>)</span>
+                                        <span class="calc-value" id="cc-max">—</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" id="cc-tcr-row">
+                                        <span data-i18n="calculators.colorcode.tcr">Sıcaklık katsayısı (TCR)</span>
+                                        <span class="calc-value" id="cc-tcr-value">—</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-1 mt-3">R = d<sub>1</sub>d<sub>2</sub>[d<sub>3</sub>] × 10<sup>m</sup> &nbsp;·&nbsp; R<sub>min,max</sub> = R·(1 ∓ tol)</p>
+                        <p class="small text-muted mb-0" data-i18n="calculators.colorcode.note">Renk değerleri IEC 60062 standardına göredir. Bantlar, uca daha yakın olan taraftan başlanarak okunur; tolerans bandı diğerlerinden biraz ayrı durur.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Resistor Color Code END -->
 
         </div>
         </div>

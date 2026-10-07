@@ -27,6 +27,16 @@
     flex: 0 0 5.5rem !important;
 }
 
+/* Yuvarlak "?" yardım butonu */
+.calc-help {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    line-height: 1.85rem;
+    font-weight: 600;
+}
+
 .calc-value {
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -89,6 +99,46 @@
     fill: var(--bs-body-bg);
     stroke: var(--bs-body-color);
     stroke-width: 1.5;
+}
+
+/* Üç faz şemasındaki VL / IL işaretleri */
+.calc-mark {
+    fill: var(--bs-primary);
+    stroke: var(--bs-primary);
+    stroke-width: 1.5;
+}
+
+.calc-mark-text {
+    fill: var(--bs-primary);
+    font-weight: 600;
+}
+
+/* Şemadaki eleman değerleri (seri / paralel direnç) */
+.calc-part-value {
+    font-size: 10px;
+    fill: var(--bs-secondary-color);
+}
+
+/* Seri / paralel direnç satırlarındaki "R1" etiketi */
+.res-name {
+    min-width: 3.25rem;
+    justify-content: center;
+}
+
+/* Direnç renk kodu */
+.cc-swatch {
+    width: 2.75rem;
+}
+
+.cc-body {
+    fill: #e9d8b4;
+    stroke: var(--bs-body-color);
+    stroke-width: 1.5;
+}
+
+.cc-band {
+    stroke: var(--bs-body-color);
+    stroke-width: 0.5;
 }
 
 /* Smith abağı */
