@@ -96,8 +96,6 @@
             "cutLine": "Kesikli çizgi, cross-section'ın alındığı hattır.",
             "glossary": "Process Sözlüğü",
             "glossaryHint": "Bir terime tıklayın, simülasyon ilgili adıma gitsin.",
-            "quizTitle": "Kendini Test Et: Process Sırası",
-            "quizReset": "Yeniden Başla",
             "back": "← Section 2'ye Dön"
         }
     }

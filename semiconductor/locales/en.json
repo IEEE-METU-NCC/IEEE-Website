@@ -96,8 +96,6 @@
             "cutLine": "The dashed line marks where the cross-section is taken.",
             "glossary": "Process Glossary",
             "glossaryHint": "Click a term to jump to the related step in the simulation.",
-            "quizTitle": "Test Yourself: Process Order",
-            "quizReset": "Start Over",
             "back": "← Back to Section 2"
         }
     }

@@ -209,26 +209,15 @@
 
     // Sözlük terimi -> ilgili adım
     const TERMS = [
+        { name: 'Epitaxial growth', step: 0, text: { tr: 'Wafer üzerinde yüksek kaliteli ince crystalline silicon layer\'lar oluşturma.', en: 'Forming thin, high-quality crystalline silicon layers on the wafer.' } },
         { name: 'Oxidation', step: 1, text: { tr: '1000–1200 °C\'de O₂ veya water vapor ile ≈1 µm SiO₂ büyütme.', en: 'Growing ≈1 µm of SiO₂ at 1000–1200 °C in O₂ or water vapor.' } },
-        { name: 'Evaporation', step: 10, text: { tr: 'Metali vacuum içinde melting point\'ine kadar ısıtarak thin film deposition.', en: 'Depositing thin metal films by heating the metal to its melting point in vacuum.' } },
-        { name: 'Sputtering', step: 10, text: { tr: 'Yüzeyi metal ya da insulator ion\'larıyla bombardıman ederek film deposition.', en: 'Depositing metal or insulator films by bombarding the surface with ions.' } },
-        { name: 'Chemical Vapor Deposition (CVD)', step: 1, text: { tr: 'Gaz karışımından SiO₂, polysilicon ve silicon nitride deposition. Bu akışta oxide thermal oxidation ile büyütülüyor; CVD alternatif bir yöntemdir.', en: 'Depositing SiO₂, polysilicon and silicon nitride from a gas mixture. Here the oxide is grown thermally; CVD is an alternative.' } },
+        { name: 'Masks', step: 3, text: { tr: 'Etch edilecek bölgeleri belirleyen window pattern\'li koruyucu layer\'lar.', en: 'Protective layers with window patterns that locate the areas to be etched.' } },
+        { name: 'Photolithography', step: 4, text: { tr: 'Mask\'ları high-resolution optical yöntemlerle wafer yüzeyine aktarma.', en: 'Transferring masks onto the wafer surface with high-resolution optical techniques.' } },
+        { name: 'Etching', step: 5, text: { tr: 'Mask ile belirlenen window\'ları acid (wet) ya da plasma (dry) ile açma.', en: 'Cutting the mask-defined windows with acids (wet) or plasma (dry).' } },
         { name: 'Ion implantation', step: 6, text: { tr: 'Accelerator\'da 1 MeV\'ye kadar enerji kazanan donor/acceptor ion\'larını wafer\'a gömme.', en: 'Bombarding the wafer with donor/acceptor ions accelerated up to 1 MeV.' } },
         { name: 'Diffusion', step: 7, text: { tr: 'Wafer\'ı ≈1200 °C\'ye ısıtarak dopant atomlarını silicon\'ın içine yayma.', en: 'Heating the wafer to ≈1200 °C so dopant atoms spread into the silicon.' } },
-        { name: 'Epitaxial growth', step: 0, text: { tr: 'Wafer üzerinde yüksek kaliteli ince crystalline silicon layer\'lar oluşturma.', en: 'Forming thin, high-quality crystalline silicon layers on the wafer.' } },
-        { name: 'Masks', step: 3, text: { tr: 'Etch edilecek bölgeleri belirleyen window pattern\'li koruyucu layer\'lar.', en: 'Protective layers with window patterns that locate the areas to be etched.' } },
-        { name: 'Photolithography', step: 3, text: { tr: 'Mask\'ları high-resolution optical yöntemlerle wafer yüzeyine aktarma.', en: 'Transferring masks onto the wafer surface with high-resolution optical techniques.' } },
-        { name: 'Etching', step: 5, text: { tr: 'Mask ile belirlenen window\'ları acid (wet) ya da plasma (dry) ile açma.', en: 'Cutting the mask-defined windows with acids (wet) or plasma (dry).' } }
-    ];
-
-    // Sıralama testi
-    const QUIZ = [
-        { tr: 'Oxidation', en: 'Oxidation' },
-        { tr: 'Photoresist + p-region mask exposure', en: 'Photoresist + p-region mask exposure' },
-        { tr: 'SiO₂ etching', en: 'SiO₂ etching' },
-        { tr: 'Ion implantation / diffusion', en: 'Ion implantation / diffusion' },
-        { tr: 'Contact window\'ları açma', en: 'Open contact windows' },
-        { tr: 'Al deposition ve metal etching', en: 'Al deposition and metal etching' }
+        { name: 'Evaporation', step: 10, text: { tr: 'Metali vacuum içinde melting point\'ine kadar ısıtarak thin film deposition.', en: 'Depositing thin metal films by heating the metal to its melting point in vacuum.' } },
+        { name: 'Sputtering', step: 10, text: { tr: 'Yüzeyi metal ya da insulator ion\'larıyla bombardıman ederek film deposition.', en: 'Depositing metal or insulator films by bombarding the surface with ions.' } }
     ];
 
     // Arayüz metinleri
@@ -242,11 +231,7 @@
             ions: 'Acceptor (B⁺) ion\'ları · ≤ 1 MeV', atoms: 'Al atomları (vacuum)',
             wafer: 'n-type silicon wafer',
             step: 'Adım', fig: 'Ders notu figure', goTo: n => `Adım ${n}'e git →`,
-            play: 'Oynat', pause: 'Duraklat',
-            quizStart: 'Fabrication adımlarını doğru sırayla seçin.',
-            quizDone: 'Tebrikler! Sıralama doğru: pn diode üretildi.',
-            quizOk: 'Doğru! Sıradaki adımı seçin.',
-            quizWrong: (name, prev) => `"${name}" henüz yapılamaz. İpucu: ${prev ? '"' + prev + '" adımından sonra ne gerekir?' : 'önce wafer\'ı korumak için bir insulator layer gerekir.'}`
+            play: 'Oynat', pause: 'Duraklat'
         },
         en: {
             furnaceOx: 'Furnace · 1000–1200 °C · O₂ / H₂O',
@@ -257,11 +242,7 @@
             ions: 'Acceptor (B⁺) ions · ≤ 1 MeV', atoms: 'Al atoms (vacuum)',
             wafer: 'n-type silicon wafer',
             step: 'Step', fig: 'Lecture figure', goTo: n => `Go to step ${n} →`,
-            play: 'Play', pause: 'Pause',
-            quizStart: 'Select the fabrication steps in the correct order.',
-            quizDone: 'Well done! Correct order: the pn diode is complete.',
-            quizOk: 'Correct! Pick the next step.',
-            quizWrong: (name, prev) => `"${name}" can't be done yet. Hint: ${prev ? 'what is needed after "' + prev + '"?' : 'the wafer first needs a protective insulator layer.'}`
+            play: 'Play', pause: 'Pause'
         }
     };
 
@@ -585,70 +566,12 @@
         });
     }
 
-    // Sıralama testi (QUIZ indeksleriyle çalışır)
-    const quizPool = document.getElementById('fab-quiz-pool');
-    const quizOrder = document.getElementById('fab-quiz-order');
-    const quizMsg = document.getElementById('fab-quiz-msg');
-    let picked = [];
-    let pool = [];
-    let quizState = { cls: 'small text-body-secondary', msg: () => L('quizStart') };
-
-    function shuffle(a) {
-        const r = a.slice();
-        for (let i = r.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [r[i], r[j]] = [r[j], r[i]];
-        }
-        return r;
-    }
-
-    function renderQuiz() {
-        quizPool.innerHTML = '';
-        quizOrder.innerHTML = '';
-        quizMsg.className = quizState.cls;
-        quizMsg.textContent = quizState.msg();
-        picked.forEach(k => {
-            const li = document.createElement('li');
-            li.className = 'list-group-item';
-            li.textContent = tx2(QUIZ[k]);
-            quizOrder.appendChild(li);
-        });
-        pool.filter(k => !picked.includes(k)).forEach(k => {
-            const b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'btn btn-outline-secondary fab-quiz-btn';
-            b.textContent = tx2(QUIZ[k]);
-            b.addEventListener('click', () => {
-                if (k === picked.length) {
-                    picked.push(k);
-                    const done = picked.length === QUIZ.length;
-                    quizState = { cls: 'small text-success', msg: () => L(done ? 'quizDone' : 'quizOk') };
-                } else {
-                    const prev = picked.length ? picked[picked.length - 1] : null;
-                    quizState = { cls: 'small text-danger', msg: () => L('quizWrong')(tx2(QUIZ[k]), prev === null ? null : tx2(QUIZ[prev])) };
-                }
-                renderQuiz();
-            });
-            quizPool.appendChild(b);
-        });
-    }
-
-    function resetQuiz() {
-        picked = [];
-        pool = shuffle(QUIZ.map((_, k) => k));
-        quizState = { cls: 'small text-body-secondary', msg: () => L('quizStart') };
-        renderQuiz();
-    }
-
     function renderAll() {
         renderTerms();
-        renderQuiz();
         playBtn.textContent = L(timer ? 'pause' : 'play');
         go(current);
     }
 
-    document.getElementById('fab-quiz-reset').addEventListener('click', resetQuiz);
     if (window.i18next) i18next.on('languageChanged', () => setTimeout(renderAll, 0));
-    resetQuiz();
     renderAll();
 })();

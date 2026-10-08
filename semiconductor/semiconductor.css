@@ -147,10 +147,6 @@
     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
 
-.fab-quiz-btn {
-    min-width: 9rem;
-}
-
 @media (prefers-reduced-motion: reduce) {
     .fab-grow,
     .fab-grow-down,
