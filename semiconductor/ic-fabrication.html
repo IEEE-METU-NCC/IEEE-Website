@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="icFab.pageTitle">Integrated Circuit Fabrication Simülasyonu - IEEE ODTÜ KKK</title>
+    <meta name="description" content="Bir pn diyodunun silisyum pul üzerinde adım adım üretimini gösteren interaktif simülasyon.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../icons/favicon.ico">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="semiconductor.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar sticky-top navbar-expand-xl bg-light" data-bs-theme = "light">
+    <div class="container-lg px-lg-3">
+        <a class="navbar-brand" href="../index.html">
+        <img src="https://i.postimg.cc/DZfP24t6/metuieee.png" alt="IEEE Logo" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+            <li class="nav-item"><a class="nav-link" href="../team.html" data-i18n="nav.team">Ekibimiz</a></li>
+            <li class="nav-item"><a class="nav-link" href="../teknofest.html" data-i18n="nav.teknofest">Teknofest</a></li>
+            <li class="nav-item"><a class="nav-link" href="../contact.html" data-i18n="nav.contact">İletişim</a></li>
+            <li class="nav-item"><a class="nav-link" href="../about.html" data-i18n="nav.about">Hakkımızda</a></li>
+            <li class="nav-item"><a class="nav-link" href="../calender.html" data-i18n="nav.calendar">Takvim</a></li>
+            <li class="nav-item"><a class="nav-link" href="../calculators.html" data-i18n="nav.calculators">Hesap Makinesi</a></li>
+            <li class="nav-item"><a class="nav-link" href="../apex-racing.html">Apex Racing</a></li>
+        </ul>
+        <div class="d-flex ms-xl-3 mt-2 mt-xl-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-lang-toggle id="langToggle"></button>
+        </div>
+        </div>
+    </div>
+    </nav>
+    <hr class="border-dark border-2 my-0">
+
+    <header class="text-center px-3">
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mt-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html" data-i18n="semiNotes.title">Semiconductor Ders Notları</a></li>
+                <li class="breadcrumb-item"><a href="index.html#section-2" data-i18n="semiNotes.s2.short">Section 2</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Part 4</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mt-2 mb-2" data-i18n="icFab.title">Integrated Circuit Fabrication</h1>
+        <p class="lead mb-4" data-i18n="icFab.lead">İnteraktif simülasyon: silicon wafer üzerinde bir pn diode adım adım nasıl üretilir?</p>
+    </header>
+
+    <main class="container mb-5 flex-grow-1">
+        <div class="row g-4" id="fab-sim">
+            <!-- Kesit -->
+            <div class="col-12 col-xl-8">
+                <div class="card lecture-card shadow h-100">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h2 class="h5 mb-0" data-i18n="icFab.crossSection">Cross-Section Görünümü</h2>
+                        <span class="small" id="fab-counter">Adım 0</span>
+                    </div>
+                    <div class="card-body">
+                        <svg id="fab-svg" class="fab-svg" viewBox="0 0 760 310" role="img" aria-label="Wafer cross-section"></svg>
+
+                        <div class="fab-legend mt-3">
+                            <span><span class="fab-swatch" style="background:#f7d6ec"></span>n-type Si</span>
+                            <span><span class="fab-swatch" style="background:#eaf4ee"></span>p-type Si</span>
+                            <span><span class="fab-swatch" style="background:#fdfbe8"></span>SiO₂</span>
+                            <span><span class="fab-swatch" style="background:#c8c8c8"></span>Photoresist</span>
+                            <span><span class="fab-swatch" style="background:#f3b6ef"></span>Exposed resist</span>
+                            <span><span class="fab-swatch" style="background:#7d7d7d"></span>Aluminum (Al)</span>
+                            <span><span class="fab-swatch" style="background:#3d3d3d"></span>Mask</span>
+                        </div>
+
+                        <input type="range" class="form-range mt-3" id="fab-range" min="0" max="12" value="0" aria-label="Process step">
+                        <div class="fab-step-dots mb-3" id="fab-dots"></div>
+
+                        <div class="d-flex flex-wrap gap-2 justify-content-center align-items-center">
+                            <button type="button" class="btn btn-outline-secondary" id="fab-reset" data-i18n="icFab.reset">Başa Dön</button>
+                            <button type="button" class="btn btn-primary" id="fab-prev" data-i18n="icFab.prev">← Önceki</button>
+                            <button type="button" class="btn second-button text-white px-4" id="fab-play">Oynat</button>
+                            <button type="button" class="btn btn-primary" id="fab-next" data-i18n="icFab.next">Sonraki →</button>
+                            <div class="form-check form-switch ms-sm-3">
+                                <input class="form-check-input" type="checkbox" role="switch" id="fab-labels" checked>
+                                <label class="form-check-label" for="fab-labels" data-i18n="icFab.labels">Etiketler</label>
+                            </div>
+                        </div>
+                        <p class="text-center small text-body-secondary mt-2 mb-0" data-i18n="icFab.keyHint">İpucu: klavyedeki ← → tuşlarıyla da adımlar arasında geçebilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adım açıklaması -->
+            <div class="col-12 col-xl-4">
+                <div class="card lecture-card shadow h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="icFab.thisStep">Bu Adımda</h2>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div id="fab-tags" class="mb-2"></div>
+                        <h3 class="h5" id="fab-title"></h3>
+                        <span class="badge text-bg-warning align-self-start mb-2" id="fab-fig"></span>
+                        <p id="fab-text"></p>
+                        <h4 class="h6" data-i18n="icFab.params">Process parametreleri</h4>
+                        <ul class="list-group list-group-flush small mb-3" id="fab-params"></ul>
+                        <div class="alert alert-success d-none" id="fab-done">
+                            <span data-i18n="icFab.done"><strong>pn diode tamamlandı!</strong> 3 mask ve 3 photolithography adımı kullanıldı.</span>
+                        </div>
+                        <div class="mt-auto text-center">
+                            <h4 class="h6" data-i18n="icFab.topView">Top view</h4>
+                            <svg id="fab-top" class="fab-topview" viewBox="0 0 300 200" role="img" aria-label="Diode top view"></svg>
+                            <p class="small text-body-secondary mb-0" data-i18n="icFab.cutLine">Kesikli çizgi, cross-section'ın alındığı hattır.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sözlük -->
+        <h2 class="text-center mt-5 mb-1" data-i18n="icFab.glossary">Process Sözlüğü</h2>
+        <p class="text-center text-body-secondary mb-4" data-i18n="icFab.glossaryHint">Bir terime tıklayın, simülasyon ilgili adıma gitsin.</p>
+        <div class="row g-3" id="fab-terms"></div>
+
+        <!-- Sıralama testi -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-lg-10">
+                <div class="card lecture-card lecture-sim-card shadow">
+                    <div class="construction-stripe"></div>
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+                            <h2 class="h4 mb-0" data-i18n="icFab.quizTitle">Kendini Test Et: Process Sırası</h2>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="fab-quiz-reset" data-i18n="icFab.quizReset">Yeniden Başla</button>
+                        </div>
+                        <p id="fab-quiz-msg" class="small text-body-secondary"></p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-wrap gap-2" id="fab-quiz-pool"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <ol class="list-group list-group-numbered" id="fab-quiz-order"></ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="index.html#section-2" class="btn btn-primary btn-lg px-4" data-i18n="icFab.back">← Section 2'ye Dön</a>
+        </div>
+    </main>
+
+    <footer class = "bg-light text-center py-3 mt-auto" data-bs-theme = "light">
+        <div class="container">
+            <span class="lead me-3" data-i18n="footer.follow">Bizi takip edin:</span>
+            <a href="https://www.instagram.com/ieeemetuncc/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" height="40" class="me-1">
+            </a>
+            <a href="https://www.linkedin.com/company/ieee-metu-nothern-cyprus-student-branch/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" height="40" class="me-1">
+            </a>
+            <a href="https://github.com/IEEE-METU-NCC/" target="_blank" class="text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" height="40" class="me-1">
+            </a>
+        </div>
+
+    </footer>
+
+    <script src="https://unpkg.com/i18next@23.11.2/dist/umd/i18next.min.js"></script>
+    <script src="../i18n.js" data-extra-locales="locales/"></script>
+    <script src="ic-fabrication.js"></script>
+</body>
+</html>
