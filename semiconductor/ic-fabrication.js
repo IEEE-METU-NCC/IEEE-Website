@@ -207,17 +207,21 @@
         }
     ];
 
-    // Sözlük terimi -> ilgili adım
+    // Sözlük: her adım için bir terim (STEPS ile aynı sırada)
     const TERMS = [
-        { name: 'Epitaxial growth', step: 0, text: { tr: 'Wafer üzerinde yüksek kaliteli ince crystalline silicon layer\'lar oluşturma.', en: 'Forming thin, high-quality crystalline silicon layers on the wafer.' } },
-        { name: 'Oxidation', step: 1, text: { tr: '1000–1200 °C\'de O₂ veya water vapor ile ≈1 µm SiO₂ büyütme.', en: 'Growing ≈1 µm of SiO₂ at 1000–1200 °C in O₂ or water vapor.' } },
-        { name: 'Masks', step: 3, text: { tr: 'Etch edilecek bölgeleri belirleyen window pattern\'li koruyucu layer\'lar.', en: 'Protective layers with window patterns that locate the areas to be etched.' } },
-        { name: 'Photolithography', step: 4, text: { tr: 'Mask\'ları high-resolution optical yöntemlerle wafer yüzeyine aktarma.', en: 'Transferring masks onto the wafer surface with high-resolution optical techniques.' } },
-        { name: 'Etching', step: 5, text: { tr: 'Mask ile belirlenen window\'ları acid (wet) ya da plasma (dry) ile açma.', en: 'Cutting the mask-defined windows with acids (wet) or plasma (dry).' } },
-        { name: 'Ion implantation', step: 6, text: { tr: 'Accelerator\'da 1 MeV\'ye kadar enerji kazanan donor/acceptor ion\'larını wafer\'a gömme.', en: 'Bombarding the wafer with donor/acceptor ions accelerated up to 1 MeV.' } },
-        { name: 'Diffusion', step: 7, text: { tr: 'Wafer\'ı ≈1200 °C\'ye ısıtarak dopant atomlarını silicon\'ın içine yayma.', en: 'Heating the wafer to ≈1200 °C so dopant atoms spread into the silicon.' } },
-        { name: 'Evaporation', step: 10, text: { tr: 'Metali vacuum içinde melting point\'ine kadar ısıtarak thin film deposition.', en: 'Depositing thin metal films by heating the metal to its melting point in vacuum.' } },
-        { name: 'Sputtering', step: 10, text: { tr: 'Yüzeyi metal ya da insulator ion\'larıyla bombardıman ederek film deposition.', en: 'Depositing metal or insulator films by bombarding the surface with ions.' } }
+        { name: 'Silicon wafer', step: 0, text: { tr: 'Üretimin başladığı ≈500 µm kalınlığındaki single crystal n-type silicon taban.', en: 'The ≈500 µm thick single-crystal n-type silicon base that fabrication starts from.' } },
+        { name: 'Oxidation', step: 1, text: { tr: '1000–1200 °C\'de O₂ veya water vapor ile yüzeyde ≈1 µm SiO₂ insulating layer büyütme.', en: 'Growing a ≈1 µm SiO₂ insulating layer on the surface at 1000–1200 °C in O₂ or water vapor.' } },
+        { name: 'Photoresist', step: 2, text: { tr: 'Oxide\'ın üzerine kaplanan, mask pattern\'ini yüzeye aktarmaya yarayan light-sensitive polymer layer.', en: 'A light-sensitive polymer layer coated over the oxide, used to transfer the mask pattern onto the surface.' } },
+        { name: 'p-region mask', step: 3, text: { tr: '1. mask. Şeffaf window\'u p-region\'ın yerini belirler, exposure sırasında yalnızca buradaki resist ışık alır.', en: '1st mask. Its clear window defines where the p-region goes, so only the resist there is exposed.' } },
+        { name: 'Development', step: 4, text: { tr: 'Işık almış photoresist\'i developer solution ile çözerek oxide üzerinde window açma.', en: 'Dissolving the exposed photoresist in developer solution to open a window over the oxide.' } },
+        { name: 'SiO₂ etching', step: 5, text: { tr: 'Window\'dan görünen oxide\'ı acid (wet etching) ya da plasma (dry etching) ile kaldırma.', en: 'Removing the oxide visible through the window with acids (wet etching) or plasma (dry etching).' } },
+        { name: 'Ion implantation', step: 6, text: { tr: 'Accelerator\'da 1 MeV\'ye kadar hızlandırılan acceptor ion\'larını açık window\'dan silicon\'a gömme.', en: 'Driving acceptor ions, accelerated up to 1 MeV, into the silicon through the open window.' } },
+        { name: 'Diffusion', step: 7, text: { tr: 'Wafer\'ı ≈1200 °C\'ye ısıtarak dopant atomlarını derine yayma. p-region oluşur, window yeniden oxide ile kapanır.', en: 'Heating the wafer to ≈1200 °C so dopant atoms spread deeper. The p-region forms and oxide regrows over the window.' } },
+        { name: 'Contact opening mask', step: 8, text: { tr: '2. mask. n-region ve p-region üzerine denk gelen iki window\'u vardır, önceki pattern\'e align edilir.', en: '2nd mask. It has two windows, over the n-region and the p-region, and is aligned to the previous pattern.' } },
+        { name: 'Contact window', step: 9, text: { tr: 'Resist development ve SiO₂ etching sonrası oxide\'da açılan, silicon\'a ulaşan açıklık.', en: 'An opening in the oxide, made by resist development and SiO₂ etching, that reaches the silicon.' } },
+        { name: 'Evaporation / Sputtering', step: 10, text: { tr: 'Metal deposition. Evaporation\'da Al vacuum içinde ısıtılır, sputtering\'de yüzey ion\'larla bombardıman edilir.', en: 'Metal deposition. In evaporation the Al is heated in vacuum, in sputtering the surface is bombarded with ions.' } },
+        { name: 'Metallization mask', step: 11, text: { tr: '3. mask. Contact pad\'lerin olacağı yerlerde opaque\'tır, pad\'lerin üzerindeki resist\'i korur.', en: '3rd mask. It is opaque where the contact pads will be, protecting the resist over the pads.' } },
+        { name: 'Al contact', step: 12, text: { tr: 'Al etching sonrası kalan metal pad\'ler: p-region\'a bağlanan anode ve n-type wafer\'a bağlanan cathode.', en: 'The metal pads left after Al etching: the anode on the p-region and the cathode on the n-type wafer.' } }
     ];
 
     // Arayüz metinleri
