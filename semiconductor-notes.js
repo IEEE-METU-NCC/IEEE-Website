@@ -39,7 +39,7 @@
                 nextBtn.href = `#section-2/part-${n + 1}`;
                 nextBtn.textContent = t('semiNotes.nextPart', `Sonraki: Part ${n + 1} →`, { n: n + 1 });
             } else {
-                nextBtn.href = 'ic-fabrication.html';
+                nextBtn.href = 'semiconductor-ic-fabrication.html';
                 nextBtn.textContent = t('semiNotes.nextSim', 'Sonraki: Part 4 Simülasyonu →');
             }
         }

@@ -6,7 +6,7 @@
 // Alt klasördeki sayfalar da ana çeviri dosyalarını sitenin kökünden yüklesin
 const i18nScript = document.currentScript;
 const i18nBase = i18nScript ? new URL('.', i18nScript.src).href : './';
-// Sayfaya özel ek çeviriler: <script src="../i18n.js" data-extra-locales="locales/">
+// Sayfaya özel ek çeviriler: <script src="i18n.js" data-extra-locales="locales/semiconductor-"> -> locales/semiconductor-tr.json
 const i18nExtraLocales = i18nScript ? i18nScript.dataset.extraLocales : null;
 
 document.addEventListener("DOMContentLoaded", async function() {
