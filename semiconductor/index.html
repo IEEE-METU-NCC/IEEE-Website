@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="semiNotes.pageTitle">Semiconductor Ders Notları - IEEE ODTÜ KKK</title>
+    <meta name="description" content="Katı hal elektroniği ders notları: yarı iletken malzemeler, katkılama, enerji bant modeli ve entegre devre üretimi.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../icons/favicon.ico">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="semiconductor.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar sticky-top navbar-expand-xl bg-light" data-bs-theme = "light">
+    <div class="container-lg px-lg-3">
+        <a class="navbar-brand" href="../index.html">
+        <img src="https://i.postimg.cc/DZfP24t6/metuieee.png" alt="IEEE Logo" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+            <li class="nav-item"><a class="nav-link" href="../team.html" data-i18n="nav.team">Ekibimiz</a></li>
+            <li class="nav-item"><a class="nav-link" href="../teknofest.html" data-i18n="nav.teknofest">Teknofest</a></li>
+            <li class="nav-item"><a class="nav-link" href="../contact.html" data-i18n="nav.contact">İletişim</a></li>
+            <li class="nav-item"><a class="nav-link" href="../about.html" data-i18n="nav.about">Hakkımızda</a></li>
+            <li class="nav-item"><a class="nav-link" href="../calender.html" data-i18n="nav.calendar">Takvim</a></li>
+            <li class="nav-item"><a class="nav-link" href="../calculators.html" data-i18n="nav.calculators">Hesap Makinesi</a></li>
+            <li class="nav-item"><a class="nav-link" href="../apex-racing.html">Apex Racing</a></li>
+        </ul>
+        <div class="d-flex ms-xl-3 mt-2 mt-xl-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-lang-toggle id="langToggle"></button>
+        </div>
+        </div>
+    </div>
+    </nav>
+    <hr class="border-dark border-2 my-0">
+
+    <header class="text-center px-3">
+        <h1 class="display-5 mt-4 mb-2" data-i18n="semiNotes.title">Semiconductor Ders Notları</h1>
+        <p class="lead mb-4" data-i18n="semiNotes.lead">Bir section seçin, ardından part'lara tek tek girerek konuları inceleyin.</p>
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-3 d-none" id="notes-breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="#" data-i18n="semiNotes.crumbSections">Section'lar</a></li>
+                <li class="breadcrumb-item" id="crumb-section"><a href="#section-2" data-i18n="semiNotes.s2.short">Section 2</a></li>
+                <li class="breadcrumb-item active d-none" aria-current="page" id="crumb-part"></li>
+            </ol>
+        </nav>
+    </header>
+
+    <main class="container mb-5 flex-grow-1">
+
+        <!-- Section listesi -->
+        <div data-view="sections">
+            <div class="row justify-content-center g-3">
+                <div class="col-12 col-md-8 col-lg-6 d-flex">
+                    <a href="#section-2" class="card lecture-nav-card shadow w-100 text-decoration-none text-reset">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <span class="h5 mb-0" data-i18n="semiNotes.s2.short">Section 2</span>
+                            <span class="badge text-bg-light" data-i18n="semiNotes.s2.count">4 Part</span>
+                        </div>
+                        <div class="card-body p-4">
+                            <h2 class="h4" data-i18n="semiNotes.s2.title">Solid-State Electronics</h2>
+                            <p class="mb-2" data-i18n="semiNotes.s2.desc">Semiconductor materials, doping, energy band model ve integrated circuit fabrication.</p>
+                            <p class="small text-body-secondary mb-3" data-i18n="semiNotes.source">Kaynak: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em> · Özetleyen: Doç. Dr. Tayfun Nesimoğlu</p>
+                            <span class="btn btn-primary" data-i18n="semiNotes.open">Section'a Gir →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: part listesi -->
+        <div data-view="section-2" class="d-none">
+            <h2 class="text-center mb-1" data-i18n="semiNotes.s2.heading">Section 2 · Solid-State Electronics</h2>
+            <p class="text-center text-body-secondary small mb-4" data-i18n="semiNotes.source">Kaynak: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em> · Özetleyen: Doç. Dr. Tayfun Nesimoğlu</p>
+            <div class="row justify-content-center g-3">
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="#section-2/part-1" class="card lecture-nav-card shadow-sm w-100 p-4 text-decoration-none text-reset">
+                        <span class="badge text-bg-primary align-self-start mb-2">Part 1</span>
+                        <h3 class="h5" data-i18n="semiNotes.c1.title">Solid-State Materials ve Intrinsic Carriers</h3>
+                        <p class="small text-body-secondary mb-0" data-i18n="semiNotes.c1.desc">Resistivity, covalent bond model, bandgap, intrinsic carrier concentration, drift current ve mobility.</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="#section-2/part-2" class="card lecture-nav-card shadow-sm w-100 p-4 text-decoration-none text-reset">
+                        <span class="badge text-bg-primary align-self-start mb-2">Part 2</span>
+                        <h3 class="h5" data-i18n="semiNotes.c2.title">Doping, Drift ve Diffusion</h3>
+                        <p class="small text-body-secondary mb-0" data-i18n="semiNotes.c2.desc">Donor ve acceptor impurity'ler, carrier concentration, mobility, diffusion current ve Einstein relation.</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="#section-2/part-3" class="card lecture-nav-card shadow-sm w-100 p-4 text-decoration-none text-reset">
+                        <span class="badge text-bg-primary align-self-start mb-2">Part 3</span>
+                        <h3 class="h5" data-i18n="semiNotes.c3.title">Energy Band Model</h3>
+                        <p class="small text-body-secondary mb-0" data-i18n="semiNotes.c3.desc">Conduction band, valence band, donor/acceptor level'lar ve compensated semiconductor.</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="ic-fabrication.html" class="card lecture-nav-card lecture-sim-card shadow-sm w-100 text-decoration-none text-reset">
+                        <div class="construction-stripe"></div>
+                        <div class="p-4 d-flex flex-column">
+                            <div class="mb-2">
+                                <span class="badge text-bg-primary">Part 4</span>
+                                <span class="badge second-button text-white" data-i18n="semiNotes.simBadge">İnteraktif Simülasyon</span>
+                            </div>
+                            <h3 class="h5" data-i18n="semiNotes.c4.title">Integrated Circuit Fabrication</h3>
+                            <p class="small text-body-secondary mb-0" data-i18n="semiNotes.c4.desc">Oxidation, photolithography, etching, ion implantation, diffusion ve metallization adımlarıyla bir pn diode üretin.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-secondary" data-i18n="semiNotes.backSections">← Section'lara Dön</a>
+            </div>
+        </div>
+
+        <!-- Part içerikleri -->
+        <div class="row justify-content-center g-4 d-none" data-view="part">
+            <div class="col-12 col-lg-10">
+
+                <!-- Kısım 1 -->
+                <section id="part-1" class="lecture-part card lecture-card shadow mb-4" data-part="1">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="semiNotes.p1.title">Part 1 · Solid-State Materials ve Intrinsic Carriers</h2>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="semiNotes.p1.intro">Elektronik malzemeler <strong>resistivity (ρ)</strong> değerlerine göre üç sınıfa ayrılır. Bir semiconductor'ın resistivity değeri, kristale impurity atomları eklenerek kontrol edilebilir.</p>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered align-middle">
+                                <thead class="table-light">
+                                    <tr><th data-i18n="semiNotes.p1.thClass">Sınıf</th><th data-i18n="semiNotes.p1.thRange">Resistivity aralığı</th><th data-i18n="semiNotes.p1.thExample">Örnek</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Insulator</td><td>ρ &gt; 10<sup>5</sup> Ω·cm</td><td data-i18n="semiNotes.p1.exInsulator">Diamond ≈ 10<sup>16</sup> Ω·cm</td></tr>
+                                    <tr><td>Semiconductor</td><td>10<sup>-3</sup> &lt; ρ &lt; 10<sup>5</sup> Ω·cm</td><td>Silicon (Si)</td></tr>
+                                    <tr><td>Conductor</td><td>ρ &lt; 10<sup>-3</sup> Ω·cm</td><td data-i18n="semiNotes.p1.exConductor">Copper ≈ 3×10<sup>-6</sup> Ω·cm</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul>
+                            <li data-i18n="semiNotes.p1.li1"><strong>Elemental semiconductor</strong>'lar periyodik tablonun IV. sütunundaki tek tür atomdan, <strong>compound semiconductor</strong>'lar ise III-V veya II-VI sütunlarının birleşiminden oluşur.</li>
+                            <li data-i18n="semiNotes.p1.li2">İlk cihazlarda germanium kullanıldı. Silicon; daha yüksek bandgap, düşük maliyet ve kolayca SiO<sub>2</sub> insulating layer oluşturabilmesi sayesinde onun yerini aldı.</li>
+                            <li data-i18n="semiNotes.p1.li3">Si atomunun outer shell'inde 4 electron vardır. Her atom en yakın 4 komşusuyla <strong>covalent bond</strong> kurarak düzenli bir diamond lattice oluşturur. Elektronikte en kullanışlı yapı <strong>single crystal</strong>'dır.</li>
+                            <li data-i18n="semiNotes.p1.li4">0 K'de tüm bond'lar tamdır ve Si bir insulator gibi davranır. Sıcaklık arttıkça bazı bond'lar kırılır ve <strong>electron-hole pair</strong>'ler oluşur.</li>
+                        </ul>
+
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.p1.niTitle">Intrinsic carrier concentration</h3>
+                        <div class="lecture-formula">n<sub>i</sub><sup>2</sup> = B·T<sup>3</sup>·exp(−E<sub>G</sub> / kT) &nbsp; cm<sup>-6</sup></div>
+                        <p class="small" data-i18n="semiNotes.p1.niText">E<sub>G</sub>: bandgap energy (eV), k = 8.62×10<sup>-5</sup> eV/K, T: mutlak sıcaklık (K), B = 1.08×10<sup>31</sup> K<sup>-3</sup>cm<sup>-6</sup> (Si). Oda sıcaklığında silicon için n<sub>i</sub> ≈ 10<sup>10</sup> cm<sup>-3</sup>.</p>
+                        <ul>
+                            <li data-i18n="semiNotes.p1.li5">Bond'dan ayrılan electron arkasında +q yüklü bir boşluk, yani bir <strong>hole</strong> bırakır. Hole density p ile gösterilir.</li>
+                            <li data-i18n="semiNotes.p1.li6">Intrinsic silicon'da n = n<sub>i</sub> = p. <strong>Thermal equilibrium</strong>'da <strong>pn = n<sub>i</sub><sup>2</sup></strong> geçerlidir.</li>
+                        </ul>
+
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.p1.driftTitle">Drift current ve mobility</h3>
+                        <div class="lecture-formula">v<sub>n</sub> = −μ<sub>n</sub>E &nbsp;&nbsp; v<sub>p</sub> = μ<sub>p</sub>E &nbsp;&nbsp; σ = q(nμ<sub>n</sub> + pμ<sub>p</sub>) &nbsp;&nbsp; ρ = 1/σ</div>
+                        <p class="small mb-0" data-i18n="semiNotes.p1.driftText">Intrinsic Si için μ<sub>n</sub> = 1350, μ<sub>p</sub> = 500 cm<sup>2</sup>/V·s. Hole'lar birden çok covalent bond'un bozulmasıyla hareket ettiğinden mobility değerleri daha düşüktür. Örnek: oda sıcaklığında intrinsic Si için conductivity σ = 2.96×10<sup>-6</sup> (Ω·cm)<sup>-1</sup>, resistivity ρ = 3.38×10<sup>5</sup> Ω·cm. Yani intrinsic silicon zayıf bir insulator'dır.</p>
+                    </div>
+                </section>
+
+                <!-- Kısım 2 -->
+                <section id="part-2" class="lecture-part card lecture-card shadow mb-4" data-part="2">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="semiNotes.p2.title">Part 2 · Doping, Drift ve Diffusion</h2>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="semiNotes.p2.intro"><strong>Doping</strong>, bir semiconductor'a çok küçük ve iyi kontrol edilen miktarlarda impurity eklemektir. Silicon için impurity'ler III. ve V. sütunlardan seçilir.</p>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h3 class="h6" data-i18n="semiNotes.p2.donorTitle">Donor (n-type)</h3>
+                                    <p class="small mb-0" data-i18n="semiNotes.p2.donorText">Phosphorus, arsenic, antimony gibi V. sütun atomları. Beş outer electron'lu atom fazladan bir electron getirir. Bu electron'u serbest bırakmak çok az enerji ister. Ionize olan donor atomu +q yüklü ve hareketsiz kalır.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h3 class="h6" data-i18n="semiNotes.p2.acceptorTitle">Acceptor (p-type)</h3>
+                                    <p class="small mb-0" data-i18n="semiNotes.p2.acceptorText">Boron gibi III. sütun atomları. Eksik bir bond, yani bir hole oluşur. Komşu bir electron bu boşluğa kolayca geçer ve hole bir parçacık gibi ilerler. Ionize olan acceptor −q yüklü ve hareketsizdir.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lecture-formula" data-i18n="semiNotes.p2.f1">Charge neutrality: q(N<sub>D</sub> + p − N<sub>A</sub> − n) = 0 &nbsp;&nbsp; pn = n<sub>i</sub><sup>2</sup></div>
+                        <div class="lecture-formula">n-type (N<sub>D</sub> &gt; N<sub>A</sub>): n = [(N<sub>D</sub>−N<sub>A</sub>) + √((N<sub>D</sub>−N<sub>A</sub>)<sup>2</sup> + 4n<sub>i</sub><sup>2</sup>)] / 2 , &nbsp; p = n<sub>i</sub><sup>2</sup>/n</div>
+                        <div class="lecture-formula">p-type (N<sub>A</sub> &gt; N<sub>D</sub>): p = [(N<sub>A</sub>−N<sub>D</sub>) + √((N<sub>A</sub>−N<sub>D</sub>)<sup>2</sup> + 4n<sub>i</sub><sup>2</sup>)] / 2 , &nbsp; n = n<sub>i</sub><sup>2</sup>/p</div>
+                        <ul>
+                            <li data-i18n="semiNotes.p2.li1">Pratik doping seviyelerinde (10<sup>14</sup> ≤ |N<sub>A</sub>−N<sub>D</sub>| ≤ 10<sup>21</sup> cm<sup>-3</sup>) n ≈ N<sub>D</sub>−N<sub>A</sub> veya p ≈ N<sub>A</sub>−N<sub>D</sub> alınabilir.</li>
+                            <li data-i18n="semiNotes.p2.li2"><strong>Majority carrier</strong> concentration üretimde belirlenir ve sıcaklıktan bağımsızdır. <strong>Minority carrier</strong>'lar ise n<sub>i</sub><sup>2</sup> ile orantılı olduğundan sıcaklığa çok bağlıdır.</li>
+                            <li data-i18n="semiNotes.p2.li3">Doping, mobility'yi düşürür: impurity atomları carrier'ları scatter eder. Total doping N<sub>T</sub> = N<sub>A</sub> + N<sub>D</sub> arttıkça mobility hızla azalır.</li>
+                        </ul>
+
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.p2.diffTitle">Diffusion current ve total current</h3>
+                        <p class="small" data-i18n="semiNotes.p2.diffText">Carrier'lar yüksek concentration bölgesinden düşük concentration bölgesine doğru hareket eder, tıpkı odaya yayılan bir gaz gibi.</p>
+                        <div class="lecture-formula">j<sub>p</sub><sup>diff</sup> = −qD<sub>p</sub>(∂p/∂x) &nbsp;&nbsp; j<sub>n</sub><sup>diff</sup> = qD<sub>n</sub>(∂n/∂x)</div>
+                        <div class="lecture-formula" data-i18n="semiNotes.p2.f2">Einstein relation: D<sub>n</sub>/μ<sub>n</sub> = D<sub>p</sub>/μ<sub>p</sub> = kT/q = V<sub>T</sub> ≈ 25 mV (thermal voltage)</div>
+                        <div class="lecture-formula">j<sub>n</sub><sup>T</sup> = qμ<sub>n</sub>nE + qD<sub>n</sub>(∂n/∂x) &nbsp;&nbsp; j<sub>p</sub><sup>T</sup> = qμ<sub>p</sub>pE − qD<sub>p</sub>(∂p/∂x)</div>
+                    </div>
+                </section>
+
+                <!-- Kısım 3 -->
+                <section id="part-3" class="lecture-part card lecture-card shadow mb-4" data-part="3">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="semiNotes.p3.title">Part 3 · Energy Band Model</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-md-7">
+                                <ul>
+                                    <li data-i18n="semiNotes.p3.li1"><strong>Conduction band</strong> ve <strong>valence band</strong>, electron'lar için izin verilen enerji durumlarıdır.</li>
+                                    <li data-i18n="semiNotes.p3.li2"><strong>E<sub>V</sub></strong>: valence band'in üst kenarı. <strong>E<sub>C</sub></strong>: conduction band'in alt kenarı. Aradaki fark <strong>bandgap E<sub>G</sub></strong>'dir.</li>
+                                    <li data-i18n="semiNotes.p3.li3">0 K'de tüm electron'lar valence band'dedir ve conduction olmaz. T &gt; 0 K'de thermal energy bond'ları kırar, electron'lar conduction band'e çıkar ve valence band'de hole'lar oluşur.</li>
+                                    <li data-i18n="semiNotes.p3.li4"><strong>Donor level E<sub>D</sub></strong>, E<sub>C</sub>'ye çok yakındır (phosphorus için yaklaşık 0.045 eV).</li>
+                                    <li data-i18n="semiNotes.p3.li5"><strong>Acceptor level E<sub>A</sub></strong>, E<sub>V</sub>'ye çok yakındır (boron için yaklaşık 0.044 eV).</li>
+                                    <li data-i18n="semiNotes.p3.li6"><strong>Compensated semiconductor</strong> hem n-type hem p-type dopant içerir. N<sub>D</sub> &gt; N<sub>A</sub> ise donor electron'ları acceptor site'larını doldurur ve kalan N<sub>D</sub>−N<sub>A</sub> electron conduction band'e çıkabilir.</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-5">
+                                <table class="table table-sm table-bordered align-middle small mb-0">
+                                    <thead class="table-light"><tr><th>Semiconductor</th><th>E<sub>G</sub> (eV)</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Carbon (diamond)</td><td>5.47</td></tr>
+                                        <tr class="table-primary"><td>Silicon (Si)</td><td>1.12</td></tr>
+                                        <tr><td>Germanium (Ge)</td><td>0.66</td></tr>
+                                        <tr><td>Tin (Sn)</td><td>0.082</td></tr>
+                                        <tr><td>Gallium arsenide (GaAs)</td><td>1.42</td></tr>
+                                        <tr><td>Gallium nitride (GaN)</td><td>3.49</td></tr>
+                                        <tr><td>Indium phosphide (InP)</td><td>1.35</td></tr>
+                                        <tr><td>Boron nitride (BN)</td><td>7.50</td></tr>
+                                        <tr><td>Silicon carbide (SiC)</td><td>3.26</td></tr>
+                                        <tr><td>Cadmium selenide (CdSe)</td><td>1.70</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="d-flex flex-wrap justify-content-between gap-2">
+                    <a href="#section-2" class="btn btn-outline-secondary" data-i18n="semiNotes.backParts">← Part Listesine Dön</a>
+                    <a href="#" class="btn btn-primary" id="part-next"></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class = "bg-light text-center py-3 mt-auto" data-bs-theme = "light">
+        <div class="container">
+            <span class="lead me-3" data-i18n="footer.follow">Bizi takip edin:</span>
+            <a href="https://www.instagram.com/ieeemetuncc/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" height="40" class="me-1">
+            </a>
+            <a href="https://www.linkedin.com/company/ieee-metu-nothern-cyprus-student-branch/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" height="40" class="me-1">
+            </a>
+            <a href="https://github.com/IEEE-METU-NCC/" target="_blank" class="text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" height="40" class="me-1">
+            </a>
+        </div>
+
+    </footer>
+
+    <script src="https://unpkg.com/i18next@23.11.2/dist/umd/i18next.min.js"></script>
+    <script src="../i18n.js" data-extra-locales="locales/"></script>
+    <script src="semiconductor-notes.js"></script>
+</body>
+</html>

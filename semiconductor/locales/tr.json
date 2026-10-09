@@ -1,0 +1,102 @@
+{
+    "translation": {
+        "semiNotes": {
+            "pageTitle": "Semiconductor Ders Notları - IEEE ODTÜ KKK",
+            "title": "Semiconductor Recitation Notları",
+            "lead": "Bir section seçin, ardından bölümlere tek tek tıklayarak konuları inceleyin.",
+            "crumbSections": "Section'lar",
+            "s2": {
+                "short": "Section 2",
+                "count": "4 Part",
+                "title": "Solid-State Electronics",
+                "desc": "Semiconductor materials, doping, energy band model ve integrated circuit fabrication.",
+                "heading": "Section 2 · Solid-State Electronics"
+            },
+            "source": "Kaynak: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em>  & Ders notları: Mert Kalkancı tarafından Assoc. Prof. Dr. Tayfun Nesimoğlu'nun ders notları sadeleştirilerek yapılmıştır",
+            "open": "Section'a Gir →",
+            "c1": {
+                "title": "Solid-State Materials ve Intrinsic Carriers",
+                "desc": "Resistivity, covalent bond model, bandgap, intrinsic carrier concentration, drift current ve mobility."
+            },
+            "c2": {
+                "title": "Doping, Drift ve Diffusion",
+                "desc": "Donor ve acceptor impurity'ler, carrier concentration, mobility, diffusion current ve Einstein relation."
+            },
+            "c3": {
+                "title": "Energy Band Model",
+                "desc": "Conduction band, valence band, donor/acceptor level'lar ve compensated semiconductor."
+            },
+            "simBadge": "İnteraktif Simülasyon",
+            "c4": {
+                "title": "Integrated Circuit Fabrication",
+                "desc": "Oxidation, photolithography, etching, ion implantation, diffusion ve metallization adımlarıyla bir pn diode üretin."
+            },
+            "backSections": "← Section'lara Dön",
+            "p1": {
+                "title": "Part 1 · Solid-State Materials ve Intrinsic Carriers",
+                "intro": "Elektronik malzemeler <strong>resistivity (ρ)</strong> (direnç :&gt) değerlerine göre üç sınıfa ayrılır. Bir yarı iletkenin direnç değeri 'impurity' atomları eklenerek kontrol edilebilir.",
+                "thClass": "Sınıf",
+                "thRange": "Direnç aralığı",
+                "thExample": "Örnek",
+                "exInsulator": "Diamond ≈ 10<sup>16</sup> Ω·cm",
+                "exConductor": "Copper ≈ 3×10<sup>-6</sup> Ω·cm",
+                "li1": "<strong>Elemental semiconductor</strong>'lar periyodik tablonun 4A grubundaki tek tür atomdan, <strong>compound semiconductor</strong>'lar ise 3A-5A veya 2B-7A gruplarındaki atomların birleşimiyle sağlanan kristallerden oluşur.",
+                "li2": "İlk başlarda yarı iletken olarak germanium kullanıldı. Silikon daha yüksek bandgap (önemini açıklayacağız), düşük maliyet ve kolayca oksidasyon işlemiyle (SiO<sub>2</sub>) <strong>insulating layer</strong> oluşturabilmesi sebebiyle germanyumun yerini aldı.",
+                "li3": "Si atomunun <strong>outer shell</strong>'inde 4 elektron vardır. Her atom en yakın 4 komşusuyla <strong>covalent bond</strong> kurarak düzenli bir <strong>diamond lattice</strong> oluşturur. Elektronikte en kullanışlı yapı <strong>single crystal</strong>'dıir.",
+                "li4": "0 K'de tüm <strong>bond</strong>'lar tamdır ve Si bir yalıtkan gibi davranır. Sıcaklık arttıkça bazı bağlar kırılır ve <strong>electron-hole pair</strong>'ler oluşur.",
+                "niTitle": "Intrinsic carrier konsantrasyon formülü",
+                "niText": "E<sub>G</sub>: bandgap energy (eV), k = 8.62×10<sup>-5</sup> eV/K, T: mutlak sıcaklık (K), B = 1.08×10<sup>31</sup> K<sup>-3</sup>cm<sup>-6</sup> (Si). Oda sıcaklığında silicon için n<sub>i</sub> ≈ 10<sup>10</sup> cm<sup>-3</sup>. BU SAYIYI UNUTMA GÜLÜM",
+                "li5": "Kurduğu bağdan ayrılan elektron(agab) arkasında +q yüklü bir boşluk, yani bir <strong>hole</strong> bırakır. Hole density p ile gösterilir.",
+                "li6": "Intrinsic silicon'un <strong>Thermal equilibrium</strong>'unda n = n<sub>i</sub> = p. ve bu nedenle  <strong>pn = n<sub>i</sub><sup>2</sup></strong> dir.",
+                "driftTitle": "Drift current ve mobility",
+                "driftText": "Intrinsic Si için μ<sub>n</sub> = 1350, μ<sub>p</sub> = 500 cm<sup>2</sup>/V·s. Hole'lar birden çok kovolent bağın(ingilizcesini biliyosun) bozulmasıyla hareket ettiğinden hareket hızı daha düşüktür (less mobility gülüm). Örnek: oda sıcaklığında intrinsic Si için σ = 2.96×10<sup>-6</sup> (Ω·cm)<sup>-1</sup>, direnç ρ = 3.38×10<sup>5</sup> Ω·cm. Yani intrinsic silicon zayıf bir insulator'dur."
+            },
+            "p2": {
+                "title": "Part 2 · Doping, Drift ve Diffusion",
+                "intro": "<strong>Doping</strong>, bir yarı iletkene impurty atomlarını ekleyerek p type veya n type özellik kazandırmaktır. Silicon için impurity atomları 3A (B, Ga) ve 5A(P, As, Sb) grubundan seçilir.",
+                "donorTitle": "Donor (n-type)",
+                "donorText": "Beş outer band electron'lu atom ortama bir fazladan elektron getirir (damsız girmek yasak). Bu electron'u serbest bırakmak çok az enerji ister. İyonize olan donor atomu +q yüklü ve hareketsiz kalır.",
+                "acceptorTitle": "Acceptor (p-type)",
+                "acceptorText": "Boron gibi 3A sütun atomları. Eksik bir electron bond, yani bir hole oluşur. Komşu bir elektron bu boşluğa kolayca geçer ve hole bir parçacık gibi ilerler. İyonize olan acceptor −q yüklü ve hareketsizdir.",
+                "f1": "Charge neutrality: q(N<sub>D</sub> + p − N<sub>A</sub> − n) = 0 &nbsp;&nbsp; pn = n<sub>i</sub><sup>2</sup>",
+                "li1": "Pratik doping seviyelerinde n ve p değerleri N<sub>D</sub>−N<sub>A</sub> &gt&gt 2ni => n ≈ N<sub>D</sub>−N<sub>A</sub> değerini veya N<sub>A</sub>−N<sub>D</sub> &gt&gt 2ni => p ≈ N<sub>A</sub>−N<sub>D</sub> değerini alıyor şeklinde bir yakınsama yapılabilir.",
+                "li2": "<strong>Majority carrier</strong> konsantrasyonu üretimde malzemenin p veya n type olmasına göre belirlenir ve sıcaklıktan bağımsızdır. <strong>Minority carrier</strong>'lar ise n<sub>i</sub><sup>2</sup> ile orantılı olduğundan dolayı sıcaklığa bağlıdır.",
+                "li3": "Doping, mobility'yi düşürür: impurity atomları carrier'ları scatter eder. Total doping N<sub>T</sub> = N<sub>A</sub> + N<sub>D</sub> arttıkça mobility hızla azalır ve direnç artar (doping almayın).",
+                "diffTitle": "Diffusion current ve Total current",
+                "diffText": "Carrier'lar yüksek konsatrasyonlu bölgeden düşük konsatrasyonlu bölgeye doğru hareket eder, tıpkı odaya yayılan bir gaz gibi.",
+                "f2": "Einstein relation: D<sub>n</sub>/μ<sub>n</sub> = D<sub>p</sub>/μ<sub>p</sub> = kT/q = V<sub>T</sub> ≈ 25 mV (thermal voltage)"
+            },
+            "p3": {
+                "title": "Part 3 · Energy Band Model",
+                "li1": "<strong>Valence band</strong>, elektronların normalde bulunduğu, atomlara bağlı oldukları en yüksek dolu enerji bandıdır. Buradaki elektronlar serbestçe hareket edemez. <strong>Conduction band</strong> bunun üstündeki enerji bandıdır. Bu banda çıkan elektronlar serbestçe hareket eder ve elektrik akımını iletir.",
+                "li2": "<strong>E<sub>V</sub></strong>: valence band'in üst kenarı. <strong>E<sub>C</sub></strong>: conduction band'in alt kenarıdır. Aradaki farka <strong>bandgap E<sub>G</sub></strong> denir.",
+                "li3": "0 K'de tüm electron'lar valence band'dedir ve conduction olmaz. T &gt; 0 K'de thermal energy bond'ları kırar, electron'lar conduction band'e çıkar ve valence band'de hole'lar oluşur.",
+                "li4": "<strong>Donor level E<sub>D</sub></strong>, E<sub>C</sub>'ye çok yakındır (phosphorus için yaklaşık 0.045 eV).",
+                "li5": "<strong>Acceptor level E<sub>A</sub></strong>, E<sub>V</sub>'ye çok yakındır (boron için yaklaşık 0.044 eV).",
+                "li6": "<strong>Compensated semiconductor</strong> hem n-type hem p-type doping içerir. N<sub>D</sub> &gt; N<sub>A</sub> ise donor electron'ları acceptor site'larını doldurur ve kalan Donor electron'lar conduction band'e çıkabilir."
+            },
+            "backParts": "← Part Listesine Dön",
+            "nextPart": "Sonraki: Part {{n}} →",
+            "nextSim": "Sonraki: Part 4 Simülasyonu →"
+        },
+        "icFab": {
+            "pageTitle": "Integrated Circuit Fabrication Simülasyonu - IEEE ODTÜ KKK",
+            "title": "Integrated Circuit Fabrication",
+            "lead": "İnteraktif simülasyon: silicon wafer üzerinde bir pn diode adım adım nasıl üretilir?",
+            "crossSection": "Cross-Section Görünümü",
+            "reset": "Başa Dön",
+            "prev": "← Önceki",
+            "next": "Sonraki →",
+            "labels": "Etiketler",
+            "keyHint": "İpucu: klavyedeki ← → tuşlarıyla da adımlar arasında geçebilirsiniz.",
+            "thisStep": "Bu Adımda",
+            "params": "Process parametreleri",
+            "done": "<strong>pn diode tamamlandı!</strong> 3 mask ve 3 photolithography adımı kullanıldı.",
+            "topView": "Top view",
+            "cutLine": "Kesikli çizgi, cross-section'ın alındığı hattır.",
+            "glossary": "Process Sözlüğü",
+            "glossaryHint": "Bir terime tıklayın, simülasyon ilgili adıma gitsin.",
+            "back": "← Section 2'ye Dön"
+        }
+    }
+}

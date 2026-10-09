@@ -1,0 +1,169 @@
+/* Ders notları ve IC üretim simülasyonu */
+
+/* Büyük içerik kartları hover'da büyümesin */
+.lecture-card:hover {
+    transform: none;
+}
+
+.lecture-part {
+    scroll-margin-top: 90px;
+}
+
+.lecture-formula {
+    font-family: var(--bs-font-monospace);
+    background: var(--bs-light);
+    border-left: 4px solid var(--bs-primary);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.lecture-sim-card {
+    border: 2px solid rgb(204, 0, 0);
+}
+
+.lecture-sim-card .construction-stripe {
+    background: repeating-linear-gradient(-45deg, rgb(204, 0, 0) 0 20px, #212529 20px 40px);
+}
+
+/* Simülasyon */
+.fab-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+}
+
+.fab-topview {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+}
+
+.fab-svg text,
+.fab-topview text {
+    font-family: var(--bs-body-font-family);
+    font-size: 13px;
+}
+
+.fab-layer {
+    transition: opacity 0.5s ease;
+}
+
+.fab-grow {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    animation: fab-grow 0.9s ease-out both;
+}
+
+.fab-grow-down {
+    transform-box: fill-box;
+    transform-origin: top;
+    animation: fab-grow 1.2s ease-out both;
+}
+
+.fab-fade-in {
+    animation: fab-fade 0.6s ease-out both;
+}
+
+.fab-fade-out {
+    animation: fab-fade 0.6s ease-in reverse both;
+}
+
+@keyframes fab-grow {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+@keyframes fab-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Işık, iyon ve atom parçacıkları */
+.fab-particle {
+    animation: fab-fall 1.4s linear infinite;
+}
+
+@keyframes fab-fall {
+    from { transform: translateY(-30px); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    to { transform: translateY(30px); opacity: 0; }
+}
+
+.fab-heat {
+    animation: fab-heat 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes fab-heat {
+    from { opacity: 0.25; }
+    to { opacity: 0.85; }
+}
+
+.fab-step-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: center;
+}
+
+.fab-step-dot {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.fab-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.fab-swatch {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #555;
+    vertical-align: -0.15rem;
+    margin-right: 0.35rem;
+}
+
+.fab-term {
+    cursor: pointer;
+    text-align: left;
+}
+
+.fab-term:focus-visible,
+.fab-term.active {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fab-grow,
+    .fab-grow-down,
+    .fab-fade-in,
+    .fab-fade-out,
+    .fab-particle,
+    .fab-heat {
+        animation: none;
+    }
+}
+
+/* Tıklanabilir section / part kartları */
+.lecture-nav-card {
+    cursor: pointer;
+}
+
+.lecture-nav-card:hover,
+.lecture-nav-card:focus-visible {
+    border-color: var(--bs-primary);
+}
