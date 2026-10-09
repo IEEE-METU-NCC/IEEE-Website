@@ -930,7 +930,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Values the round switch snaps to: 0 Ω, 1 Ω, 820 Ω and 10, 22, 33, 47, 55 times 1 ... 100k (10 Ω ... 5.5 MΩ)
+    const CC_COMMON = [0, 1, 820, ...[10, 22, 33, 47, 55].flatMap(base => [1, 10, 100, 1e3, 1e4, 1e5].map(mult => base * mult))];
+
+    // Closest value that 4 or 5 bands can show, as its digits and multiplier exponent (null: out of range)
+    function ccEncode(value, bands) {
+        const count = bands - 2;
+        if (value === 0) return { bands, number: 0, exp: 0 };
+        let exp = Math.min(Math.max(Math.floor(Math.log10(value)) - count + 1, -2), 9);
+        let number = Math.round(value / 10 ** exp);
+        // 999.6 Ω rounds up to four digits, so it moves to the next multiplier
+        if (number >= 10 ** count && exp < 9) number = Math.round(value / 10 ** ++exp);
+        return number > 0 && number < 10 ** count ? { bands, number, exp } : null;
+    }
+
+    // Writes the color code of the entered resistance into the band selects. Returns false if there is none.
+    function ccFromValue() {
+        let value = readValue('cc-value', 'nonNegative');
+        if (Number.isNaN(value)) return false;
+        if ($('cc-round').checked) {
+            value = CC_COMMON.reduce((best, common) => Math.abs(common - value) < Math.abs(best - value) ? common : best);
+        }
+        // 4 bands when two digits are enough, otherwise 5 bands (rounded to three digits)
+        const long = ccEncode(value, 5);
+        const short = ccEncode(value, 4);
+        if (!long) {
+            $('cc-value').classList.add('is-invalid');
+            return false;
+        }
+        const code = short && short.number * 10 ** (short.exp - long.exp) === long.number ? short : long;
+        $(`cc-bands-${code.bands}`).checked = true;
+        [...String(code.number).padStart(code.bands - 2, '0')].forEach((digit, i) => { $(`cc-d${i + 1}`).value = digit; });
+        $('cc-mult').value = code.exp < 0 ? 9 - code.exp : code.exp;
+        $('cc-tol').value = CC_COLORS.findIndex(color => color.id === 'gold');
+        return true;
+    }
+
     function calcColorCode() {
+        // In value mode the selects only display the code that was found
+        const byValue = $('cc-mode-value').checked;
+        showVariant('data-cc-mode', byValue ? 'value' : 'color');
+        CC_SELECTS.forEach(([id]) => { $(id).disabled = byValue; });
+        if (byValue && !ccFromValue()) {
+            $('cc-band-marks').replaceChildren();
+            clearResults(['cc-r', 'cc-tolerance', 'cc-min', 'cc-max']);
+            return;
+        }
+
         const bands = Number(document.querySelector('input[name="cc-bands"]:checked').value);
         $('cc-d3-group').classList.toggle('d-none', bands < 5);
         $('cc-tcr-group').classList.toggle('d-none', bands < 6);

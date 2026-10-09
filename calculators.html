@@ -1207,11 +1207,38 @@
                         <h5 class="mb-0" data-i18n="calculators.colorcode.title">Direnç Renk Kodu Hesaplayıcı</h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text mb-4" data-i18n="calculators.colorcode.desc">4, 5 veya 6 bantlı bir direncin renk bantlarından direnç değerini, toleransını ve tolerans aralığını hesaplar.</p>
+                        <p class="card-text mb-4" data-i18n="calculators.colorcode.desc">4, 5 veya 6 bantlı bir direncin renk bantlarından direnç değerini, toleransını ve tolerans aralığını hesaplar; ya da girdiğiniz direnç değerinin renk kodunu bulur.</p>
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <h6 class="text-primary mb-3" data-i18n="calculators.inputs">Girdiler</h6>
                                 <div class="mb-3">
+                                    <div class="form-label" id="cc-mode-label" data-i18n="calculators.colorcode.mode">Hesaplama yönü</div>
+                                    <div class="btn-group" role="group" aria-labelledby="cc-mode-label">
+                                        <input type="radio" class="btn-check" name="cc-mode" id="cc-mode-color" value="color" autocomplete="off" checked>
+                                        <label class="btn btn-outline-primary" for="cc-mode-color" data-i18n="calculators.colorcode.fromColors">Renkten değere</label>
+                                        <input type="radio" class="btn-check" name="cc-mode" id="cc-mode-value" value="value" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="cc-mode-value" data-i18n="calculators.colorcode.fromValue">Değerden renge</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-cc-mode="value">
+                                    <label for="cc-value" class="form-label" data-i18n="calculators.colorcode.value">Direnç değeri</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="cc-value" value="5" min="0" step="any" inputmode="decimal">
+                                        <select class="form-select calc-unit" id="cc-value-unit" aria-label="Resistance unit">
+                                            <option value="1">Ω</option>
+                                            <option value="1e3" selected>kΩ</option>
+                                            <option value="1e6">MΩ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3" data-cc-mode="value">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="cc-round" autocomplete="off" checked>
+                                        <label class="form-check-label" for="cc-round" data-i18n="calculators.colorcode.round">Sık kullanılan değere yuvarla</label>
+                                    </div>
+                                    <div class="form-text" data-i18n="calculators.colorcode.roundHint">Açıkken en yakın sık kullanılan değere (0 Ω, 1 Ω, 820 Ω ve 10, 22, 33, 47, 55 × 1 – 100k) yuvarlar. Kapalıyken girilen değeri 4 veya 5 bantla tam olarak gösterir; sığmıyorsa en yakın 5 bantlı değere yuvarlar. Tolerans bandı her zaman altındır.</div>
+                                </div>
+                                <div class="mb-3" data-cc-mode="color">
                                     <div class="form-label" id="cc-bands-label" data-i18n="calculators.colorcode.bands">Bant sayısı</div>
                                     <div class="btn-group" role="group" aria-labelledby="cc-bands-label">
                                         <input type="radio" class="btn-check" name="cc-bands" id="cc-bands-4" value="4" autocomplete="off" checked>
