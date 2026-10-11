@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="semiNotes.pageTitle">Semiconductor Ders Notları - IEEE ODTÜ KKK</title>
-    <meta name="description" content="Katı hal elektroniği ders notları: yarı iletken malzemeler, katkılama, enerji bant modeli ve entegre devre üretimi.">
+    <meta name="description" content="Katı hal elektroniği ders notları: yarı iletken malzemeler, katkılama, enerji bant modeli, entegre devre üretimi, pn junction, diyotlar ve diyot devreleri.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
     <link rel="stylesheet" href="main.css">
@@ -70,6 +70,20 @@
                         </div>
                     </a>
                 </div>
+                <div class="col-12 col-md-8 col-lg-6 d-flex">
+                    <a href="#section-3" class="card lecture-nav-card shadow w-100 text-decoration-none text-reset">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <span class="h5 mb-0" data-i18n="semiNotes.s3.short">Section 3</span>
+                            <span class="badge text-bg-light" data-i18n="semiNotes.s3.count">5 Part</span>
+                        </div>
+                        <div class="card-body p-4">
+                            <h2 class="h4" data-i18n="semiNotes.s3.title">Solid-State Diodes and Diode Circuits</h2>
+                            <p class="mb-2" data-i18n="semiNotes.s3.desc">pn junction, depletion region, diode equation, breakdown, diode circuit analysis ve rectifier circuit'ler.</p>
+                            <p class="small text-body-secondary mb-3" data-i18n="semiNotes.source">Kaynak: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em> · Özetleyen: Doç. Dr. Tayfun Nesimoğlu</p>
+                            <span class="btn btn-primary" data-i18n="semiNotes.open">Section'a Gir →</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -118,12 +132,64 @@
             </div>
         </div>
 
+        <!-- Section 3: part listesi -->
+        <div data-view="section-3" class="d-none">
+            <h2 class="text-center mb-1" data-i18n="semiNotes.s3.heading">Section 3 · Solid-State Diodes and Diode Circuits</h2>
+            <p class="text-center text-body-secondary small mb-4" data-i18n="semiNotes.source">Kaynak: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em> · Özetleyen: Doç. Dr. Tayfun Nesimoğlu</p>
+            <div class="row justify-content-center g-3">
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="#section-3/part-1" class="card lecture-nav-card shadow-sm w-100 p-4 text-decoration-none text-reset">
+                        <span class="badge text-bg-primary align-self-start mb-2">Part 1</span>
+                        <h3 class="h5" data-i18n="semiNotes.s3c1.title">pn Junction ve Diode Equation</h3>
+                        <p class="small text-body-secondary mb-0" data-i18n="semiNotes.s3c1.desc">Diode yapısı, depletion region, built-in potential, depletion width, diode equation ve sıcaklık etkisi.</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="#section-3/part-2" class="card lecture-nav-card shadow-sm w-100 p-4 text-decoration-none text-reset">
+                        <span class="badge text-bg-primary align-self-start mb-2">Part 2</span>
+                        <h3 class="h5" data-i18n="semiNotes.s3c2.title">Reverse Bias, Breakdown ve Capacitance</h3>
+                        <p class="small text-body-secondary mb-0" data-i18n="semiNotes.s3c2.desc">Reverse bias'ta depletion region, avalanche ve Zener breakdown, junction/diffusion capacitance ve Schottky diode.</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="#section-3/part-3" class="card lecture-nav-card shadow-sm w-100 p-4 text-decoration-none text-reset">
+                        <span class="badge text-bg-primary align-self-start mb-2">Part 3</span>
+                        <h3 class="h5" data-i18n="semiNotes.s3c3.title">Diode Circuit Analysis</h3>
+                        <p class="small text-body-secondary mb-0" data-i18n="semiNotes.s3c3.desc">Load line, mathematical model, ideal diode model, constant voltage drop model ve Zener voltage regulator.</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="#section-3/part-4" class="card lecture-nav-card shadow-sm w-100 p-4 text-decoration-none text-reset">
+                        <span class="badge text-bg-primary align-self-start mb-2">Part 4</span>
+                        <h3 class="h5" data-i18n="semiNotes.s3c4.title">Rectifier Circuits</h3>
+                        <p class="small text-body-secondary mb-0" data-i18n="semiNotes.s3c4.desc">Half-wave, full-wave ve bridge rectifier, ripple voltage, peak diode current, surge current ve PIV.</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 d-flex">
+                    <a href="semiconductor-pn-junction.html" class="card lecture-nav-card lecture-sim-card shadow-sm w-100 text-decoration-none text-reset">
+                        <div class="construction-stripe"></div>
+                        <div class="p-4 d-flex flex-column">
+                            <div class="mb-2">
+                                <span class="badge text-bg-primary">Part 5</span>
+                                <span class="badge second-button text-white" data-i18n="semiNotes.simBadge">İnteraktif Simülasyon</span>
+                            </div>
+                            <h3 class="h5" data-i18n="semiNotes.s3c5.title">pn Junction ve Depletion Region</h3>
+                            <p class="small text-body-secondary mb-0" data-i18n="semiNotes.s3c5.desc">Voltajı kaydırın: depletion region reverse bias'ta nasıl genişleyip karşı koyuyor, forward bias'ta nasıl daralıp akımı geçiriyor, görün.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-secondary" data-i18n="semiNotes.backSections">← Section'lara Dön</a>
+            </div>
+        </div>
+
         <!-- Part içerikleri -->
         <div class="row justify-content-center g-4 d-none" data-view="part">
             <div class="col-12 col-lg-10">
 
                 <!-- Kısım 1 -->
-                <section id="part-1" class="lecture-part card lecture-card shadow mb-4" data-part="1">
+                <section id="part-1" class="lecture-part card lecture-card shadow mb-4" data-section="2" data-part="1">
                     <div class="card-header bg-primary text-white">
                         <h2 class="h5 mb-0" data-i18n="semiNotes.p1.title">Part 1 · Solid-State Materials ve Intrinsic Carriers</h2>
                     </div>
@@ -163,7 +229,7 @@
                 </section>
 
                 <!-- Kısım 2 -->
-                <section id="part-2" class="lecture-part card lecture-card shadow mb-4" data-part="2">
+                <section id="part-2" class="lecture-part card lecture-card shadow mb-4" data-section="2" data-part="2">
                     <div class="card-header bg-primary text-white">
                         <h2 class="h5 mb-0" data-i18n="semiNotes.p2.title">Part 2 · Doping, Drift ve Diffusion</h2>
                     </div>
@@ -201,7 +267,7 @@
                 </section>
 
                 <!-- Kısım 3 -->
-                <section id="part-3" class="lecture-part card lecture-card shadow mb-4" data-part="3">
+                <section id="part-3" class="lecture-part card lecture-card shadow mb-4" data-section="2" data-part="3">
                     <div class="card-header bg-primary text-white">
                         <h2 class="h5 mb-0" data-i18n="semiNotes.p3.title">Part 3 · Energy Band Model</h2>
                     </div>
@@ -238,8 +304,198 @@
                     </div>
                 </section>
 
+                <!-- Section 3 · Kısım 1 -->
+                <section id="s3-part-1" class="lecture-part card lecture-card shadow mb-4" data-section="3" data-part="1">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="semiNotes.s3p1.title">Part 1 · pn Junction ve Diode Equation</h2>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="semiNotes.s3p1.intro"><strong>Diode</strong>, bir n-type yarı iletken ile bir p-type yarı iletkenin birleştirilmesiyle oluşur. İkisinin birleştiği yüzeye <strong>pn junction</strong> (metallurgical junction) denir. p tarafındaki uca <strong>anode</strong>, n tarafındaki uca <strong>cathode</strong> denir (semboldeki ok akımın geçebildiği yönü gösterir, p'den n'ye gülüm).</p>
+                        <div class="lecture-formula" data-i18n="semiNotes.s3p1.f1">p tarafı: p<sub>p</sub> = N<sub>A</sub> , n<sub>p</sub> = n<sub>i</sub><sup>2</sup>/N<sub>A</sub> &nbsp;&nbsp;&nbsp; n tarafı: n<sub>n</sub> = N<sub>D</sub> , p<sub>n</sub> = n<sub>i</sub><sup>2</sup>/N<sub>D</sub></div>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p1.h1">Depletion region nasıl oluşur?</h3>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p1.li1">Junction'ın iki yanında konsantrasyon farkı çok büyüktür (örnek: p tarafında 10<sup>17</sup> cm<sup>-3</sup> hole varken n tarafında sadece 10<sup>4</sup> cm<sup>-3</sup>). Bu yüzden hole'lar p'den n'ye, elektronlar n'den p'ye <strong>diffusion</strong> ile geçmek ister (Section 2'deki odaya yayılan gaz olayı).</li>
+                            <li data-i18n="semiNotes.s3p1.li2">p tarafından ayrılan her hole arkasında hareketsiz ve −q yüklü bir <strong>ionized acceptor</strong>, n tarafından ayrılan her elektron da +q yüklü bir <strong>ionized donor</strong> bırakır. Junction'ın çevresinde carrier kalmayan bu bölgeye <strong>depletion region</strong> ya da <strong>space charge region (SCR)</strong> denir (içerisi boş, sadece yerinden kıpırdayamayan iyonlar var).</li>
+                            <li data-i18n="semiNotes.s3p1.li3">Bu sabit yükler n'den p'ye doğru bir <strong>electric field</strong> oluşturur. Field de carrier'ları geldikleri yere geri iten bir <strong>drift current</strong> yaratır, yani diffusion'a karşı koyar.</li>
+                            <li data-i18n="semiNotes.s3p1.li4">Uçları boşta duran bir diode'da drift ve diffusion birbirini tam götürür, net akım sıfırdır. Aslında akan bir akım yoktur (olsaydı diode durduk yere ısınırdı, bedava enerji yok gülüm); field sadece diffusion 'isteğini' dengeler.</li>
+                        </ul>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p1.h2">Charge, electric field ve potential</h3>
+                        <div class="lecture-formula">Charge neutrality: qN<sub>A</sub>x<sub>p</sub> = qN<sub>D</sub>x<sub>n</sub> &nbsp;&nbsp;&nbsp; Gauss: E(x) = (1/ε<sub>s</sub>)·∫ρ(x)dx</div>
+                        <p class="small" data-i18n="semiNotes.s3p1.elec"><strong>Space charge density</strong> p tarafında −qN<sub>A</sub> (−x<sub>p</sub> ile 0 arası), n tarafında +qN<sub>D</sub>'dir (0 ile x<sub>n</sub> arası). İki taraftaki toplam yük eşit olmak zorunda, bu yüzden depletion region <strong>az doplu tarafa doğru daha çok</strong> uzanır. Electric field, charge density'nin integralidir: depletion region'un dışında sıfır, tam junction'da maksimumdur (E<sub>MAX</sub>).</p>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p1.h3">Built-in potential ve depletion region genişliği</h3>
+                        <div class="lecture-formula">φ<sub>j</sub> = V<sub>T</sub>·ln(N<sub>A</sub>N<sub>D</sub> / n<sub>i</sub><sup>2</sup>) &nbsp;&nbsp;&nbsp; V<sub>T</sub> = kT/q &nbsp;&nbsp;&nbsp; φ<sub>j</sub> = ½·E<sub>MAX</sub>·w<sub>d0</sub></div>
+                        <div class="lecture-formula">w<sub>d0</sub> = x<sub>n</sub> + x<sub>p</sub> = √[ (2ε<sub>s</sub>/q)·(1/N<sub>A</sub> + 1/N<sub>D</sub>)·φ<sub>j</sub> ]</div>
+                        <div class="lecture-formula">x<sub>n</sub> = w<sub>d0</sub> / (1 + N<sub>D</sub>/N<sub>A</sub>) &nbsp;&nbsp;&nbsp; x<sub>p</sub> = w<sub>d0</sub> / (1 + N<sub>A</sub>/N<sub>D</sub>)</div>
+                        <p class="small" data-i18n="semiNotes.s3p1.builtin"><strong>Built-in potential φ<sub>j</sub></strong>, field'in junction boyunca oluşturduğu voltaj farkıdır. Elektron ve hole'ların karşıya geçmesini engelleyen bir bariyer (duvar) gibi düşün. E(x) üçgeninin altındaki alan φ<sub>j</sub>'yi verir. ε<sub>s</sub> = 11.7ε<sub>0</sub>, ε<sub>0</sub> = 8.85×10<sup>-14</sup> F/cm.</p>
+                        <div class="lecture-example" data-i18n="semiNotes.s3p1.ex1"><strong>Örnek:</strong> N<sub>A</sub> = 10<sup>17</sup> cm<sup>-3</sup>, N<sub>D</sub> = 10<sup>20</sup> cm<sup>-3</sup> ve V<sub>T</sub> = 0.025 V için φ<sub>j</sub> = 0.979 V, w<sub>d0</sub> = 0.113 µm, x<sub>p</sub> = 0.113 µm, x<sub>n</sub> = 1.13×10<sup>-4</sup> µm ve E<sub>MAX</sub> = 2φ<sub>j</sub>/w<sub>d0</sub> = 173 kV/cm çıkar. Depletion region'un neredeyse tamamı az doplu p tarafında kalıyor. Sağlama: φ<sub>j</sub>, silicon'un bandgap'inden (1.12 V) küçük çıkmalı; çıkmıyorsa bir yerde işlem hatası var gülüm.</div>
+                        <p class="text-center my-3"><a href="semiconductor-pn-junction.html" class="btn second-button text-white" data-i18n="semiNotes.s3.simLink">Depletion region'u simülasyonda dene →</a></p>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p1.h4">Diode equation (Shockley)</h3>
+                        <div class="lecture-formula">i<sub>D</sub> = I<sub>S</sub>·[ exp(v<sub>D</sub> / nV<sub>T</sub>) − 1 ]</div>
+                        <p class="small" data-i18n="semiNotes.s3p1.eq">I<sub>S</sub>: <strong>reverse saturation current</strong> (10<sup>-18</sup> ile 10<sup>-9</sup> A arası; n<sub>i</sub><sup>2</sup>'ye bağlı olduğu için sıcaklıkla çok değişir), v<sub>D</sub>: diode'a uygulanan voltaj, n: <strong>nonideality factor</strong> (bu derste 1 alıyoruz), V<sub>T</sub> = kT/q: thermal voltage (oda sıcaklığında ≈ 25 mV). BU FORMÜLÜ UNUTMA GÜLÜM</p>
+                        <p data-i18n="semiNotes.s3p1.bias"><strong>Biasing</strong>, bir devre elemanına dc voltaj uygulamak demektir. Diode'un üç durumu var:</p>
+                        <div class="lecture-formula">Reverse bias (v<sub>D</sub> &lt; 0): &nbsp; i<sub>D</sub> ≈ I<sub>S</sub>[0 − 1] = −I<sub>S</sub></div>
+                        <div class="lecture-formula">Zero bias (v<sub>D</sub> = 0): &nbsp; i<sub>D</sub> = I<sub>S</sub>[1 − 1] = 0</div>
+                        <div class="lecture-formula">Forward bias (v<sub>D</sub> &gt; 0): &nbsp; i<sub>D</sub> ≈ I<sub>S</sub>·exp(v<sub>D</sub> / nV<sub>T</sub>)</div>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p1.li5">Akımın gözle görülür şekilde akmaya başladığı voltaja <strong>turn-on voltage</strong> denir (silicon için 0.6–0.7 V civarı).</li>
+                            <li data-i18n="semiNotes.s3p1.li6">Forward bias'ta voltajı yaklaşık 60 mV artırmak akımı <strong>10 katına</strong> çıkarır: Δv<sub>D</sub> = V<sub>T</sub>·ln10 ≈ 57.6 mV. Yani akım voltaja karşı çok hassas, voltaj ise akımdaki değişimi pek umursamaz.</li>
+                            <li data-i18n="semiNotes.s3p1.li7">Gerçek diode'larda reverse akım I<sub>S</sub>'den büyüktür ve reverse voltajla yavaş yavaş artar, yani bu denklemler birer yaklaşımdır.</li>
+                        </ul>
+                        <div class="lecture-example" data-i18n="semiNotes.s3p1.ex2"><strong>Örnek:</strong> I<sub>S</sub> = 0.1 fA ve I<sub>D</sub> = 300 µA için V<sub>D</sub> = nV<sub>T</sub>·ln(1 + I<sub>D</sub>/I<sub>S</sub>) = 0.718 V. I<sub>S</sub> = 10 fA olsaydı 0.603 V, I<sub>D</sub> = 1 mA olsaydı 0.748 V çıkardı. Akım üç katından fazla arttı, voltaj sadece 30 mV oynadı.</div>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p1.h5">Sıcaklık etkisi (temperature coefficient)</h3>
+                        <div class="lecture-formula">dv<sub>D</sub>/dT = (v<sub>D</sub> − V<sub>GO</sub> − 3V<sub>T</sub>) / T ≈ −1.8 mV/°C</div>
+                        <p class="small mb-0" data-i18n="semiNotes.s3p1.temp">V<sub>GO</sub>: silicon'un 0 K'deki bandgap voltajı (1.12 V). Sabit akımda diode'un forward voltajı her 1 °C artışta yaklaşık 1.8 mV <strong>düşer</strong> (ısınan diode daha kolay iletir).</p>
+                    </div>
+                </section>
+
+                <!-- Section 3 · Kısım 2 -->
+                <section id="s3-part-2" class="lecture-part card lecture-card shadow mb-4" data-section="3" data-part="2">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="semiNotes.s3p2.title">Part 2 · Reverse Bias, Breakdown ve Capacitance</h2>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="semiNotes.s3p2.intro">Diode'a dışarıdan voltaj uygulayınca bu voltajın neredeyse tamamı <strong>space charge region</strong>'un üzerine düşer (nötr bölgeler iyi iletken olduğundan oralarda v ≈ 0). Junction'daki bariyer artık φ<sub>j</sub> − v<sub>D</sub> olur ve drift ile diffusion arasındaki denge bozulur.</p>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p2.h1">Reverse bias</h3>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p2.li1">Reverse voltaj v<sub>R</sub> (yani v<sub>D</sub> = −v<sub>R</sub>) built-in potential'in <strong>üstüne eklenir</strong>: bariyer φ<sub>j</sub> + v<sub>R</sub> olur. Majority carrier'lar bu bariyeri aşamaz ve diode akım geçirmez (ters yönde zorladıkça duvarı yükseltiyor).</li>
+                            <li data-i18n="semiNotes.s3p2.li2">Daha büyük field'i taşımak için daha fazla yük gerekir, bu yüzden depletion region <strong>genişler</strong>. Genişlik, uygulanan reverse voltajın karekökü ile artar.</li>
+                        </ul>
+                        <div class="lecture-formula">w<sub>d</sub> = √[ (2ε<sub>s</sub>/q)·(1/N<sub>A</sub> + 1/N<sub>D</sub>)·(φ<sub>j</sub> + v<sub>R</sub>) ] = w<sub>d0</sub>·√(1 + v<sub>R</sub>/φ<sub>j</sub>)</div>
+                        <div class="lecture-formula">I<sub>S</sub> = I<sub>S0</sub>·√(1 + v<sub>R</sub>/φ<sub>j</sub>)</div>
+                        <p class="small" data-i18n="semiNotes.s3p2.is">Reverse akım, depletion region'un içinde ısıl olarak oluşan <strong>electron-hole pair</strong>'lerden gelir. Bölge genişledikçe hacmi de büyüdüğünden I<sub>S</sub> reverse voltajla yavaşça artar. Forward bias'ta ise genişlik çok az değiştiği için I<sub>S</sub> ≈ I<sub>S0</sub> alınır.</p>
+                        <div class="lecture-example" data-i18n="semiNotes.s3p2.ex1"><strong>Örnek:</strong> w<sub>d0</sub> = 0.4 µm ve φ<sub>j</sub> = 0.85 V olan bir diode'da genişliği iki katına çıkarmak için 1 + v<sub>R</sub>/φ<sub>j</sub> = 4, yani v<sub>R</sub> = 3φ<sub>j</sub> = 2.55 V gerekir. 5 V reverse bias'ta ise w<sub>d</sub> = 0.4·√(1 + 5/0.85) = 1.05 µm olur.</div>
+                        <p class="text-center my-3"><a href="semiconductor-pn-junction.html" class="btn second-button text-white" data-i18n="semiNotes.s3.simLink">Depletion region'u simülasyonda dene →</a></p>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p2.h2">Reverse breakdown</h3>
+                        <p data-i18n="semiNotes.s3p2.bd">Reverse voltajı artırmaya devam edersen diode bir noktada dayanamaz ve akım birden fırlar. Bu bölgeye <strong>breakdown region</strong>, olayın başladığı voltaja da <strong>breakdown voltage V<sub>Z</sub></strong> denir (2 V ≤ V<sub>Z</sub> ≤ 2000 V). İki farklı mekanizması var:</p>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h3 class="h6" data-i18n="semiNotes.s3p2.avTitle">Avalanche breakdown (V<sub>Z</sub> &gt; 5.6 V)</h3>
+                                    <p class="small mb-0" data-i18n="semiNotes.s3p2.avText">Field büyüdükçe hızlanan carrier'lar sabit atomlara çarpar ve onlardan yeni electron-hole pair'ler koparır (<strong>impact ionization</strong>). Yeni carrier'lar da hızlanıp başkalarını koparır ve olay çığ gibi büyür (adı üstünde). V<sub>Z</sub> sıcaklıkla <strong>artar</strong>.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h3 class="h6" data-i18n="semiNotes.s3p2.zTitle">Zener breakdown (V<sub>Z</sub> &lt; 5.6 V)</h3>
+                                    <p class="small mb-0" data-i18n="semiNotes.s3p2.zText">Çok yoğun doplu diode'larda depletion region çok dardır. Elektronlar valence band'den conduction band'e doğrudan <strong>tunneling</strong> ile geçer (duvarın üstünden atlamıyor, içinden geçiyor). V<sub>Z</sub> sıcaklıkla <strong>azalır</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small" data-i18n="semiNotes.s3p2.zmodel">Breakdown'daki diode, bir voltaj kaynağı V<sub>Z</sub> ve ona seri küçük bir direnç R<sub>Z</sub> (&lt; 100 Ω) ile modellenir. Bilerek breakdown'da çalıştırılmak üzere üretilen diode'lara <strong>Zener diode</strong> denir. Sıcaklık katsayısının işaretine bakarak hangi mekanizmanın çalıştığını anlayabilirsin.</p>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p2.h3">Diode capacitance</h3>
+                        <div class="lecture-formula">C<sub>j</sub> = C<sub>j0</sub>·A / √(1 + v<sub>R</sub>/φ<sub>j</sub>) &nbsp;&nbsp;&nbsp; C<sub>j0</sub> = ε<sub>s</sub> / w<sub>d0</sub> &nbsp; (F/cm<sup>2</sup>)</div>
+                        <div class="lecture-formula">Q<sub>D</sub> = i<sub>D</sub>·τ<sub>T</sub> &nbsp;&nbsp;&nbsp; C<sub>D</sub> = (i<sub>D</sub> + I<sub>S</sub>)·τ<sub>T</sub> / V<sub>T</sub> ≈ i<sub>D</sub>·τ<sub>T</sub> / V<sub>T</sub></div>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p2.li3"><strong>Reverse bias (junction capacitance C<sub>j</sub>):</strong> voltaj değişince depletion region'daki yük de değişir, yani diode bir kapasitör gibi davranır (iki yanda yük, ortası boş). Reverse voltaj arttıkça bölge genişler ve kapasite <strong>azalır</strong>. Bu özelliği kullanan, voltajla ayarlanan kapasitöre <strong>varactor</strong> denir.</li>
+                            <li data-i18n="semiNotes.s3p2.li4"><strong>Forward bias (diffusion capacitance C<sub>D</sub>):</strong> depletion region'un kenarlarındaki nötr bölgelerde fazladan yük birikir. Bu yük akımla orantılıdır; τ<sub>T</sub>'ye <strong>transit time</strong> denir. Yüksek akımlarda C<sub>D</sub> epey büyür.</li>
+                        </ul>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p2.h4">Schottky barrier diode</h3>
+                        <p class="small mb-0" data-i18n="semiNotes.s3p2.schottky">pn junction'ın p tarafı yerine doğrudan metal koyarsan (n-type silicon üzerine <strong>rectifying contact</strong>) <strong>Schottky diode</strong> elde edersin; metal taraf anode olur. pn diode'a göre daha düşük voltajda iletime geçer ve forward bias'ta çok daha az yük biriktirir, yani hızlıdır.</p>
+                    </div>
+                </section>
+
+                <!-- Section 3 · Kısım 3 -->
+                <section id="s3-part-3" class="lecture-part card lecture-card shadow mb-4" data-section="3" data-part="3">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="semiNotes.s3p3.title">Part 3 · Diode Circuit Analysis</h2>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="semiNotes.s3p3.intro">Diode'lu devre analizinde amaç diode'un <strong>quiescent operating point</strong>'ini, kısaca <strong>Q-point</strong> = (I<sub>D</sub>, V<sub>D</sub>) değerini bulmaktır. Aşağıdaki V ve R, daha karmaşık bir devrenin Thévenin eşdeğeri de olabilir.</p>
+                        <div class="lecture-formula">Loop equation (load line): &nbsp; V = I<sub>D</sub>R + V<sub>D</sub></div>
+                        <p data-i18n="semiNotes.s3p3.methods">I<sub>D</sub> ile V<sub>D</sub> arasındaki ilişki lineer olmadığı için bu denklem tek başına çözülmez. Dört yolumuz var (aşağı indikçe iş kolaylaşır). V = 10 V ve R = 10 kΩ için sonuçlar:</p>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered align-middle small">
+                                <thead class="table-light"><tr><th data-i18n="semiNotes.s3p3.thMethod">Yöntem</th><th data-i18n="semiNotes.s3p3.thIdea">Ne yapılır?</th><th>Q-point</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Load-line analysis</td><td data-i18n="semiNotes.s3p3.m1">i-v grafiğinin üstüne load line çizilir, kesişim noktası Q-point'tir.</td><td class="text-nowrap">(0.95 mA, 0.6 V)</td></tr>
+                                    <tr><td>Mathematical model</td><td data-i18n="semiNotes.s3p3.m2">Diode equation loop equation'da yerine konur ve sayısal olarak çözülür.</td><td class="text-nowrap">(0.9426 mA, 0.5742 V)</td></tr>
+                                    <tr><td>Ideal diode model</td><td data-i18n="semiNotes.s3p3.m3">On: kısa devre (v<sub>D</sub> = 0). Off: açık devre (i<sub>D</sub> = 0).</td><td class="text-nowrap">(1 mA, 0 V)</td></tr>
+                                    <tr><td>Constant voltage drop (CVD) model</td><td data-i18n="semiNotes.s3p3.m4">On: V<sub>on</sub> = 0.6 V'luk voltaj kaynağı. Off: açık devre.</td><td class="text-nowrap">(0.94 mA, 0.6 V)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="small" data-i18n="semiNotes.s3p3.digits">Dört yöntem de neredeyse aynı akımı veriyor. Zaten I<sub>S</sub> değerini tam bilmiyoruz, kaynakların ve dirençlerin de toleransı var; o yüzden 2-3 anlamlı basamak yeter (virgülden sonra 8 hane yazıp kendini yorma gülüm).</p>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p3.h1">Load line ve mathematical model</h3>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p3.li1"><strong>Load line</strong> için iki nokta yeter: V<sub>D</sub> = 0 iken I<sub>D</sub> = V/R = 1 mA, V<sub>D</sub> = 5 V iken I<sub>D</sub> = 0.5 mA. Eğimi −1/R'dir. Bu doğrunun diode'un i-v eğrisini kestiği yer Q-point'tir.</li>
+                            <li data-i18n="semiNotes.s3p3.li2"><strong>Mathematical model:</strong> I<sub>S</sub> = 10<sup>-15</sup> A, n = 1, V<sub>T</sub> = 0.025 V için loop equation 10 = 10<sup>4</sup>·10<sup>-15</sup>[exp(40V<sub>D</sub>) − 1] + V<sub>D</sub> olur. Bu bir <strong>transcendental equation</strong>'dır, kağıt üstünde doğrudan çözülmez; deneme-yanılma ya da Newton iterasyonu ile sayısal çözülür.</li>
+                        </ul>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p3.h2">Ideal ve CVD model ile analiz adımları</h3>
+                        <ol>
+                            <li data-i18n="semiNotes.s3p3.st1">Bir diode modeli seç.</li>
+                            <li data-i18n="semiNotes.s3p3.st2">Anode ve cathode'u bul, v<sub>D</sub> ve i<sub>D</sub>'yi işaretle.</li>
+                            <li data-i18n="semiNotes.s3p3.st3">Devreye bakarak diode'un on mu off mu olduğunu <strong>tahmin et</strong>.</li>
+                            <li data-i18n="semiNotes.s3p3.st4">Bu tahmine uygun modelle devreyi çöz.</li>
+                            <li data-i18n="semiNotes.s3p3.st5">Sonucu <strong>kontrol et</strong>: on dediysen i<sub>D</sub> &gt; 0, off dediysen v<sub>D</sub> &lt; 0 (CVD modelde v<sub>D</sub> &lt; V<sub>on</sub>) çıkmalı. Tutmadıysa tahmini değiştir ve baştan çöz (üzülme, herkesin başına geliyor).</li>
+                        </ol>
+                        <div class="lecture-example" data-i18n="semiNotes.s3p3.ex1"><strong>Örnek (iki diode, ideal model):</strong> +15 V kaynağı 10 kΩ üzerinden D düğümüne bağlı. D<sub>1</sub>, D düğümünden toprağa; D<sub>2</sub> ise D düğümünden 5 kΩ üzerinden −10 V'a gidiyor. İkisi de on dersek D düğümü 0 V olur: I<sub>1</sub> = 15/10k = 1.5 mA, I<sub>D2</sub> = 10/5k = 2 mA ve I<sub>D1</sub> = 1.5 − 2 = −0.5 mA. Diode'dan negatif akım geçemez, tahmin yanlış. D<sub>1</sub> off, D<sub>2</sub> on dersek I<sub>D2</sub> = 25 V / 15 kΩ = 1.67 mA ve V<sub>D1</sub> = 15 − 10k·1.67 mA = −1.67 V. Şimdi tuttu: D<sub>1</sub> = (0 mA, −1.67 V) off, D<sub>2</sub> = (1.67 mA, 0 V) on.</div>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p3.h3">Zener diode ve voltage regulator</h3>
+                        <p class="small" data-i18n="semiNotes.s3p3.pwl">Breakdown'daki diode <strong>piecewise linear model</strong> ile çözülür: V<sub>Z</sub> kaynağı + seri R<sub>Z</sub>. Örnek: 20 V kaynak, 5 kΩ direnç, V<sub>Z</sub> = 5 V ve R<sub>Z</sub> = 100 Ω için I<sub>Z</sub> = (20 − 5)/5100 = 2.94 mA, diode üzerindeki voltaj ise 5 + 2.94 mA·100 Ω = 5.29 V olur. I<sub>Z</sub> &gt; 0 çıktığı için breakdown varsayımı doğrudur.</p>
+                        <p class="small" data-i18n="semiNotes.s3p3.reg">Zener diode'u yüke paralel bağlarsan yük üzerindeki voltajı sabit tutar. Bu devreye <strong>voltage regulator</strong> denir:</p>
+                        <div class="lecture-formula">I<sub>S</sub> = (V<sub>S</sub> − V<sub>Z</sub>)/R &nbsp;&nbsp;&nbsp; I<sub>L</sub> = V<sub>Z</sub>/R<sub>L</sub> &nbsp;&nbsp;&nbsp; I<sub>Z</sub> = I<sub>S</sub> − I<sub>L</sub> &gt; 0 &nbsp;&nbsp;&nbsp; R<sub>L</sub> &gt; R / (V<sub>S</sub>/V<sub>Z</sub> − 1) = R<sub>min</sub></div>
+                        <div class="lecture-formula">Line regulation = dV<sub>L</sub>/dV<sub>S</sub> = R<sub>Z</sub>/(R + R<sub>Z</sub>) &nbsp;&nbsp;&nbsp; Load regulation = dV<sub>L</sub>/dI<sub>L</sub> = −(R<sub>Z</sub> ∥ R)</div>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p3.li3">Örnek: V<sub>S</sub> = 20 V, R = 5 kΩ, V<sub>Z</sub> = 5 V, R<sub>L</sub> = 5 kΩ için I<sub>S</sub> = 3 mA, I<sub>L</sub> = 1 mA ve I<sub>Z</sub> = 2 mA.</li>
+                            <li data-i18n="semiNotes.s3p3.li4">Regülasyon için Zener akımı pozitif olmalı. Yük çok akım çekerse (R<sub>L</sub> &lt; R<sub>min</sub>) Zener'e akım kalmaz ve regulator <strong>dropped out of regulation</strong> olur, yani artık voltajı tutamaz.</li>
+                            <li data-i18n="semiNotes.s3p3.li5"><strong>Line regulation</strong>, çıkışın giriş voltajındaki değişime ne kadar duyarlı olduğunu (mV/V); <strong>load regulation</strong> ise yük akımındaki değişime ne kadar duyarlı olduğunu (Ω) gösterir. Load regulation, yük uçlarından regulator'a bakınca görülen Thévenin direncidir. İkisi de ne kadar küçükse o kadar iyi.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Section 3 · Kısım 4 -->
+                <section id="s3-part-4" class="lecture-part card lecture-card shadow mb-4" data-section="3" data-part="4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="semiNotes.s3p4.title">Part 4 · Rectifier Circuits</h2>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="semiNotes.s3p4.intro"><strong>Rectifier</strong>, ac voltajı tek yönlü (pulsating) dc voltaja çevirir. Ardından bir <strong>filter capacitor</strong> dalgalanmayı azaltıp neredeyse sabit bir dc voltaj üretir. Prizdeki ac'yi (Kıbrıs'ta 240 V, 50 Hz) elektronik cihazların istediği dc'ye çevirdiği için hemen her cihazın içinde bir tane vardır (telefonunun şarj aleti dahil).</p>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p4.li1">Bu devrelerde diode'un durumu zamanla değişir; seçtiğin model (on ya da off) sadece belli bir zaman aralığında geçerlidir.</li>
+                            <li data-i18n="semiNotes.s3p4.li2">Çoğu zaman şebeke voltajını istenen seviyeye indirmek ya da çıkarmak için rectifier'dan önce bir <strong>transformer</strong> kullanılır.</li>
+                        </ul>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p4.h1">Half-wave rectifier</h3>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p4.li3">Girişin pozitif yarısında (v<sub>S</sub> = V<sub>P</sub>·sinωt &gt; 0) diode on'dur: ideal modelde v<sub>O</sub> = v<sub>S</sub>, CVD modelde v<sub>O</sub> = v<sub>S</sub> − V<sub>on</sub>.</li>
+                            <li data-i18n="semiNotes.s3p4.li4">Negatif yarıda diode ters akım geçiremez, off'tur. Dirençten akım geçmez ve v<sub>O</sub> = 0 olur.</li>
+                            <li data-i18n="semiNotes.s3p4.li5"><strong>Peak detector:</strong> yük yerine sadece bir kapasitör koyarsan kapasitör tepe değere kadar dolar, sonra diode kapanır ve boşalacak yol kalmadığı için voltaj sabit kalır: V<sub>dc</sub> = V<sub>P</sub> − V<sub>on</sub>.</li>
+                            <li data-i18n="semiNotes.s3p4.li6"><strong>RC yük:</strong> gerçek devrede yük direnci kapasitörü yavaşça boşaltır. Giriş tekrar çıkışı geçince (bir sonraki tepeye yakın) diode kısa bir süre açılıp kapasitörü yeniden doldurur. Çıkıştaki bu küçük dalgalanmaya <strong>ripple voltage V<sub>r</sub></strong>, diode'un iletimde kaldığı kısa süreye <strong>conduction interval ΔT</strong>, bunun açı karşılığına da <strong>conduction angle θ<sub>c</sub></strong> denir.</li>
+                        </ul>
+                        <div class="lecture-formula">V<sub>r</sub> ≈ (V<sub>P</sub> − V<sub>on</sub>)/R · T/C &nbsp;&nbsp; (ΔT ≪ T)</div>
+                        <div class="lecture-formula">ΔT ≈ (1/ω)·√(2V<sub>r</sub>/V<sub>P</sub>) &nbsp;&nbsp;&nbsp; θ<sub>c</sub> = ωΔT = √(2V<sub>r</sub>/V<sub>P</sub>)</div>
+                        <div class="lecture-example" data-i18n="semiNotes.s3p4.ex1"><strong>Örnek:</strong> V<sub>rms</sub> = 12.6 V (60 Hz), R = 15 Ω, C = 25,000 µF, V<sub>on</sub> = 1 V. V<sub>dc</sub> = 12.6√2 − 1 = 16.8 V, I<sub>dc</sub> = 16.8/15 = 1.12 A, V<sub>r</sub> = 0.747 V, θ<sub>c</sub> = 0.290 rad = 16.6° ve ΔT = θ<sub>c</sub>/ω = 0.769 ms. Yani diode 16.7 ms'lik periyodun sadece 0.77 ms'sinde çalışıyor (mesaisi kısa ama yoğun).</div>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p4.h2">Diode'un dayanması gerekenler</h3>
+                        <div class="lecture-formula">I<sub>P</sub> = I<sub>dc</sub>·2T/ΔT &nbsp;&nbsp;&nbsp; I<sub>SC</sub> = ωCV<sub>P</sub> &nbsp;&nbsp;&nbsp; PIV ≥ V<sub>dc</sub> − v<sub>S</sub><sup>min</sup> ≈ 2V<sub>P</sub></div>
+                        <div class="lecture-formula">P<sub>D</sub> ≈ V<sub>on</sub>·I<sub>dc</sub> + (4/3)·(T/ΔT)·I<sub>dc</sub><sup>2</sup>·R<sub>S</sub></div>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p4.li7"><strong>Peak diode current I<sub>P</sub>:</strong> kapasitörün bir periyotta yüke verdiği yükün tamamı (Q = I<sub>dc</sub>T) o kısacık ΔT içinde geri doldurulur. Akım darbesini üçgen sayarsak Q = I<sub>P</sub>ΔT/2 olur. Üstteki örnekte I<sub>P</sub> = 48.6 A; ortalaması 1.12 A olan bir akım için az buz değil.</li>
+                            <li data-i18n="semiNotes.s3p4.li8"><strong>Surge current I<sub>SC</sub>:</strong> devreye ilk enerji verildiğinde kapasitör boştur ve daha da büyük bir akım çeker; aynı örnekte 168 A. Gerçekte diode'un ve transformer'ın seri dirençleri yüzünden bu kadar büyük olmaz.</li>
+                            <li data-i18n="semiNotes.s3p4.li9"><strong>Peak inverse voltage (PIV):</strong> diode off iken üzerindeki reverse voltaj V<sub>dc</sub> − v<sub>S</sub>'dir ve giriş negatif tepeye indiğinde yaklaşık 2V<sub>P</sub> olur. Diode'un breakdown voltajı bundan büyük seçilmelidir (yoksa Part 2'deki breakdown'a girersin).</li>
+                            <li data-i18n="semiNotes.s3p4.li10"><strong>Power dissipation:</strong> ilk terim diode'un kendi voltaj düşümünden (örnekte 1 V × 1.12 A = 1.12 W), ikinci terim seri direnci R<sub>S</sub>'den gelir (R<sub>S</sub> = 0.2 Ω için 7.3 W). Tepe akımını küçültmek için gereğinden büyük kapasitör kullanma ya da full-wave rectifier seç.</li>
+                        </ul>
+                        <h3 class="h6 mt-4" data-i18n="semiNotes.s3p4.h3">Full-wave ve bridge rectifier</h3>
+                        <ul>
+                            <li data-i18n="semiNotes.s3p4.li11"><strong>Full-wave rectifier</strong>, center-tapped transformer ve iki diode ile girişin iki yarısını da kullanır. Kapasitörün boşalma süresi yarıya iner; formüllerin hepsi half-wave ile aynıdır, sadece T yerine T/2 yazılır. Aynı ripple için yarı kapasite yeter.</li>
+                            <li data-i18n="semiNotes.s3p4.li12"><strong>Full-wave bridge rectifier</strong>, 4 diode kullanarak center-tapped transformer ihtiyacını ortadan kaldırır. Akım her yarıda iki diode'dan geçtiği için V<sub>dc</sub> = V<sub>P</sub> − 2V<sub>on</sub> olur, PIV ise V<sub>P</sub>'ye düşer.</li>
+                            <li data-i18n="semiNotes.s3p4.li13">Diode'ların yönünü ters çevirirsen aynı devreler negatif çıkış voltajı verir.</li>
+                            <li data-i18n="semiNotes.s3p4.li14">Filter capacitor, rectifier'ın maliyetini, boyutunu ve ağırlığını belirleyen ana elemandır. Fazladan diode'ların maliyeti yok denecek kadar azdır, bu yüzden çoğu zaman bridge kazanır.</li>
+                        </ul>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered align-middle small">
+                                <thead class="table-light"><tr><th data-i18n="semiNotes.s3p4.thParam">Parametre</th><th>Half-wave</th><th>Full-wave</th><th>Full-wave bridge</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Filter capacitor C</td><td class="text-nowrap">(V<sub>P</sub> − V<sub>on</sub>)/V<sub>r</sub> · T/R</td><td class="text-nowrap">(V<sub>P</sub> − V<sub>on</sub>)/V<sub>r</sub> · T/2R</td><td class="text-nowrap">(V<sub>P</sub> − 2V<sub>on</sub>)/V<sub>r</sub> · T/2R</td></tr>
+                                    <tr><td>PIV rating</td><td class="text-nowrap">2V<sub>P</sub></td><td class="text-nowrap">2V<sub>P</sub></td><td class="text-nowrap">V<sub>P</sub></td></tr>
+                                    <tr><td>Peak diode current</td><td class="text-nowrap">I<sub>P</sub></td><td class="text-nowrap">I<sub>P</sub>/2</td><td class="text-nowrap">I<sub>P</sub>/2</td></tr>
+                                    <tr><td data-i18n="semiNotes.s3p4.thComment">Yorum</td><td data-i18n="semiNotes.s3p4.cm1">Devrenin en basiti</td><td data-i18n="semiNotes.s3p4.cm2">Küçük kapasitör, center-tapped transformer, 2 diode</td><td data-i18n="semiNotes.s3p4.cm3">Küçük kapasitör, 4 diode</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="lecture-example mb-0" data-i18n="semiNotes.s3p4.ex2"><strong>Tasarım örneği:</strong> V<sub>dc</sub> = 15 V, V<sub>r</sub> &lt; 0.15 V (%1 ripple), I<sub>dc</sub> = 2 A, f = 60 Hz, V<sub>on</sub> = 1 V. Bridge seçilir: V<sub>P</sub> = V<sub>dc</sub> + 2V<sub>on</sub> = 17 V (12 V<sub>rms</sub>), C = I<sub>dc</sub>·(T/2)/V<sub>r</sub> = 0.111 F, ΔT = 0.352 ms, I<sub>P</sub> = I<sub>dc</sub>·(2/ΔT)·(T/2) = 94.7 A, I<sub>surge</sub> = ωCV<sub>P</sub> = 711 A ve PIV = V<sub>P</sub> = 17 V.</div>
+                    </div>
+                </section>
+
                 <div class="d-flex flex-wrap justify-content-between gap-2">
-                    <a href="#section-2" class="btn btn-outline-secondary" data-i18n="semiNotes.backParts">← Part Listesine Dön</a>
+                    <a href="#section-2" class="btn btn-outline-secondary" id="part-back" data-i18n="semiNotes.backParts">← Part Listesine Dön</a>
                     <a href="#" class="btn btn-primary" id="part-next"></a>
                 </div>
             </div>

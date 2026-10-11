@@ -11,7 +11,7 @@ const i18nExtraLocales = i18nScript ? i18nScript.dataset.extraLocales : null;
 
 document.addEventListener("DOMContentLoaded", async function() {
   // Changes once per hour, so cached locale files are reused within the hour
-  const cacheKey = 234523423232325234;
+  const cacheKey = 234523423232325300;
   const loadLocale = (dir, lng) => fetch(`${dir}${lng}.json?v=${cacheKey}`).then(res => res.json());
   const [enRes, trRes] = await Promise.all([
       loadLocale(`${i18nBase}locales/`, 'en'),
