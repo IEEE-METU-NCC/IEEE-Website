@@ -1,11 +1,31 @@
 // i18n initialization for index.html
 // Simple key-based replacement using data-i18n attributes
 
+// update cacheKey const to prevent translation keys not being updated
+
+// Alt klasördeki sayfalar da ana çeviri dosyalarını sitenin kökünden yüklesin
+const i18nScript = document.currentScript;
+const i18nBase = i18nScript ? new URL('.', i18nScript.src).href : './';
+// Sayfaya özel ek çeviriler: <script src="i18n.js" data-extra-locales="locales/semiconductor-"> -> locales/semiconductor-tr.json
+const i18nExtraLocales = i18nScript ? i18nScript.dataset.extraLocales : null;
+
 document.addEventListener("DOMContentLoaded", async function() {
+  // Changes once per hour, so cached locale files are reused within the hour
+  const cacheKey = 234523423232325234;
+  const loadLocale = (dir, lng) => fetch(`${dir}${lng}.json?v=${cacheKey}`).then(res => res.json());
   const [enRes, trRes] = await Promise.all([
-      fetch('./locales/en.json').then(res => res.json()),
-      fetch('./locales/tr.json').then(res => res.json())
+      loadLocale(`${i18nBase}locales/`, 'en'),
+      loadLocale(`${i18nBase}locales/`, 'tr')
     ]);
+
+    if (i18nExtraLocales) {
+      const [enExtra, trExtra] = await Promise.all([
+        loadLocale(i18nExtraLocales, 'en'),
+        loadLocale(i18nExtraLocales, 'tr')
+      ]);
+      Object.assign(enRes.translation, enExtra.translation);
+      Object.assign(trRes.translation, trExtra.translation);
+    }
 
     const resources = {
       "en": enRes,
@@ -28,6 +48,8 @@ function updateContent() {
   document.documentElement.lang = i18next.language;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
+    // Keep the text already in the HTML if the key is missing
+    if (!i18next.exists(key)) return;
     const text = i18next.t(key);
     if (el.tagName === 'INPUT') {
       if (el.hasAttribute('placeholder')) {
