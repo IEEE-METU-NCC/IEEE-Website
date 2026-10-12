@@ -115,7 +115,21 @@
       },
       "calendar": {
         "pageTitle": "Calendar",
-        "headerTitle": "IEEE Events Calendar"
+        "headerTitle": "IEEE Events Calendar",
+        "months": {
+          "jan": "January",
+          "feb": "February",
+          "mar": "March",
+          "apr": "April",
+          "may": "May",
+          "jun": "June",
+          "jul": "July",
+          "aug": "August",
+          "sep": "September",
+          "oct": "October",
+          "nov": "November",
+          "dec": "December"
+        }
       },
       "calculators": {
         "pageTitle": "Engineering Calculators - IEEE METU NCC",

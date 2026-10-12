@@ -119,7 +119,21 @@
       },
       "calendar": {
         "pageTitle": "Takvim",
-        "headerTitle": "IEEE Etkinlik Takvimi"
+        "headerTitle": "IEEE Etkinlik Takvimi",
+        "months": {
+          "jan": "Ocak",
+          "feb": "Şubat",
+          "mar": "Mart",
+          "apr": "Nisan",
+          "may": "Mayıs",
+          "jun": "Haziran",
+          "jul": "Temmuz",
+          "aug": "Ağustos",
+          "sep": "Eylül",
+          "oct": "Ekim",
+          "nov": "Kasım",
+          "dec": "Aralık"
+        }
       },
       "calculators": {
         "pageTitle": "Mühendislik Hesap Makineleri - IEEE ODTÜ KKK",
