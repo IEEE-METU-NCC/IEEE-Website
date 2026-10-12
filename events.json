@@ -1,48 +1,12 @@
 [
     {
-        "title": "IEEEXTREME",
-        "image": "https://i.postimg.cc/fLWfwS6f/IEEE-Extreme.jpg",
-        "date": "2025-10-25"
+        "title": "Circuit Workshop for Beginners",
+        "image": "https://i.postimg.cc/yx7KnzRF/circuit-workshop-for-beginners.jpg",
+        "date": "2026-10-17"
     },
     {
-        "title": "Tanışma Toplantısı",
-        "image": "https://i.postimg.cc/7PRPy1s7/ieee-introductionjpg.jpg",
-        "date": "2025-10-07"
-    },
-    {
-        "title": "CS Tanışma Toplantısı",
-        "image": "https://i.postimg.cc/BntYrkFc/CS-Tan-sma-1.png",
-        "date": "2025-10-13"
-    },
-    {
-        "title": "RAS Tanışma Toplantısı",
-        "image": "https://i.postimg.cc/J401L1Nj/ras-tan-sma.jpg",
-        "date": "2025-10-15"
-    },
-    {
-        "title": "AESS Tanışma",
-        "image": "https://i.postimg.cc/28yBKNV8/aess-tan-smajpg.jpg",
-        "date": "2025-10-14"
-    },
-    {
-        "title": "Web Development Workshop-1",
-        "image": "https://i.postimg.cc/x8KCQ98R/Web-Workshop.png",
-        "date": "2025-10-27"
-    },
-    {
-        "title": "Unity Workshop - 1",
-        "image": "https://i.postimg.cc/13Cm9pvB/Unity-Workshop-1.png",
-        "date": "2025-10-30"
-    },
-    {
-        "title": "Unity Workshop - 2",
-        "image": "https://i.postimg.cc/ydSYpkXY/Unity-Workshop-2.png",
-        "date": "2025-11-05"
-    },
-    {
-        "title": "Ros Lecture - 1",
-        "image": "https://i.postimg.cc/cJtS0PKD/ros-event.jpg",
-        "date": "2025-11-07"
+        "title": "PCB Design Workshop",
+        "image": "https://i.postimg.cc/6qBKzNZf/pcb-design-workshop.jpg",
+        "date": "2026-10-18"
     }
-    
 ]
