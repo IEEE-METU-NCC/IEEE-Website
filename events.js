@@ -1,3 +1,32 @@
+const months = [
+    "jan", "feb", "mar",
+    "apr", "may", "jun",
+    "jul", "aug", "sep",
+    "oct", "nov", "dec"
+];
+
+const formats = {
+    en: (day, month, year) => `${month} ${day}, ${year}`,
+    tr: (day, month, year) => `${day} ${month} ${year}`
+};
+
+function convertToReadableDate(str) {
+    const monthKey = months[+str.slice(5, 7) - 1];
+    const year = str.slice(0, 4);
+    const day = str.slice(8, 10);
+
+    const fallback = monthKey[0].toUpperCase() + monthKey.slice(1);
+    const hasI18n = typeof i18next !== 'undefined';
+
+    const monthName = hasI18n
+        ? i18next.t(`calendar.months.${monthKey}`, { defaultValue: fallback })
+        : fallback;
+
+    const format = formats[hasI18n ? i18next.language : 'en'] || formats.en;
+
+    return format(day, monthName, year);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch('events.json')
         .then(response => {
@@ -30,13 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     eventColumn.className = 'col-sm-12 col-md-4 col-lg-2 mb-4 d-flex';
                 }
                 const eventStatusClass = isUpcoming ? 'upcoming-event' : 'past-event';
+                const readableDate = convertToReadableDate(event.date);
 
                 eventColumn.innerHTML = `
                     <div class="card mx-auto ${eventStatusClass}">
                         <img src="${event.image}" class="card-img-top event-img" alt="${event.title}" style="cursor:pointer;">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title text-center">${event.title}</h5>
-                            <p class="card-text text-center fw-light">${event.date}</p>
+                            <p class="card-text text-center fw-light" data-event-date="${event.date}">${readableDate}</p>
                             ${event.link ? `<a href="${event.link}" class="btn btn-primary">Keşfet</a>` : ""}
                         </div>
                     </div>
@@ -66,6 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     pastEventsContainer.appendChild(eventColumn);
                 }
             });
+            if (typeof i18next !== 'undefined') {
+                i18next.on('languageChanged', () => {
+                    document.querySelectorAll('[data-event-date]').forEach(el => {
+                        const rawDate = el.getAttribute('data-event-date');
+                        if (rawDate) {
+                            el.textContent = convertToReadableDate(rawDate);
+                        }
+                    });
+                });
+            }
         })
         .catch(error => {
             console.error('Fetch işleminde bir sorun oluştu:', error);
