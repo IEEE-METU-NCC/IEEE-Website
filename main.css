@@ -16,3 +16,13 @@
     }
 }
 
+
+/* Under construction page */
+.construction-card:hover {
+    transform: none;
+}
+
+.construction-stripe {
+    height: 14px;
+    background: repeating-linear-gradient(-45deg, #ffc107 0 20px, #212529 20px 40px);
+}

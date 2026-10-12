@@ -1,0 +1,102 @@
+{
+    "translation": {
+        "semiNotes": {
+            "pageTitle": "Semiconductor Lecture Notes - IEEE METU NCC",
+            "title": "Semiconductor Recitation Notes",
+            "lead": "Pick a section, then open its parts one by one to study each topic.",
+            "crumbSections": "Sections",
+            "s2": {
+                "short": "Section 2",
+                "count": "4 Parts",
+                "title": "Solid-State Electronics",
+                "desc": "Semiconductor materials, doping, the energy band model and integrated circuit fabrication.",
+                "heading": "Section 2 · Solid-State Electronics"
+            },
+            "source": "Source: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em> & Lecture Notes from: Assoc. Prof. Dr. Tayfun Nesimoğlu, Simplified by: Mert Kalkancı",
+            "open": "Open Section →",
+            "c1": {
+                "title": "Solid-State Materials and Intrinsic Carriers",
+                "desc": "Resistivity, the covalent bond model, bandgap, intrinsic carrier concentration, drift current and mobility."
+            },
+            "c2": {
+                "title": "Doping, Drift and Diffusion",
+                "desc": "Donor and acceptor impurities, carrier concentrations, mobility, diffusion current and the Einstein relation."
+            },
+            "c3": {
+                "title": "Energy Band Model",
+                "desc": "Conduction band, valence band, donor/acceptor levels and compensated semiconductors."
+            },
+            "simBadge": "Interactive Simulation",
+            "c4": {
+                "title": "Integrated Circuit Fabrication",
+                "desc": "Build a pn diode through oxidation, photolithography, etching, ion implantation, diffusion and metallization."
+            },
+            "backSections": "← Back to Sections",
+            "p1": {
+                "title": "Part 1 · Solid-State Materials and Intrinsic Carriers",
+                "intro": "Electronic materials fall into three categories based on their <strong>resistivity (ρ)</strong>. The resistivity of a semiconductor can be controlled by adding impurity atoms to the crystal.",
+                "thClass": "Category",
+                "thRange": "Resistivity range",
+                "thExample": "Example",
+                "exInsulator": "Diamond ≈ 10<sup>16</sup> Ω·cm",
+                "exConductor": "Copper ≈ 3×10<sup>-6</sup> Ω·cm",
+                "li1": "<strong>Elemental semiconductors</strong> are formed from a single type of atom in column IV of the periodic table; <strong>compound semiconductors</strong> combine elements from columns III and V or II and VI.",
+                "li2": "Germanium was used in many early devices. Silicon replaced it thanks to its higher bandgap, lower cost and the ease of growing an insulating SiO<sub>2</sub> layer.",
+                "li3": "A Si atom has 4 electrons in its outer shell. Each atom forms <strong>covalent bonds</strong> with its 4 nearest neighbors, creating a regular diamond lattice. <strong>Single crystal</strong> material is the most useful for electronics.",
+                "li4": "At 0 K all bonds are complete and Si behaves as an insulator. As temperature rises, some bonds break and <strong>electron-hole pairs</strong> are generated.",
+                "niTitle": "Intrinsic carrier concentration",
+                "niText": "E<sub>G</sub>: bandgap energy (eV), k = 8.62×10<sup>-5</sup> eV/K, T: absolute temperature (K), B = 1.08×10<sup>31</sup> K<sup>-3</sup>cm<sup>-6</sup> (Si). At room temperature n<sub>i</sub> ≈ 10<sup>10</sup> cm<sup>-3</sup> for silicon.",
+                "li5": "An electron leaving a bond leaves behind a vacancy with charge +q, called a <strong>hole</strong>. Hole density is written as p.",
+                "li6": "For intrinsic silicon n = n<sub>i</sub> = p. In <strong>thermal equilibrium</strong>, <strong>pn = n<sub>i</sub><sup>2</sup></strong>.",
+                "driftTitle": "Drift current and mobility",
+                "driftText": "For intrinsic Si, μ<sub>n</sub> = 1350 and μ<sub>p</sub> = 500 cm<sup>2</sup>/V·s. Hole mobility is lower because hole current involves multiple covalent bond disruptions. Example: at room temperature intrinsic Si has conductivity σ = 2.96×10<sup>-6</sup> (Ω·cm)<sup>-1</sup> and resistivity ρ = 3.38×10<sup>5</sup> Ω·cm, so intrinsic silicon is a poor insulator."
+            },
+            "p2": {
+                "title": "Part 2 · Doping, Drift and Diffusion",
+                "intro": "<strong>Doping</strong> is adding very small, well-controlled amounts of impurities to a semiconductor. For silicon, impurities come from columns III and V.",
+                "donorTitle": "Donor (n-type)",
+                "donorText": "Column V atoms such as phosphorus, arsenic and antimony. With five outer electrons, the atom brings one extra electron that needs very little energy to become free. The ionized donor atom has a fixed charge of +q.",
+                "acceptorTitle": "Acceptor (p-type)",
+                "acceptorText": "Column III atoms such as boron. An incomplete bond, i.e. a hole, is created. A nearby electron easily moves into the vacancy and the hole travels like a particle. The ionized acceptor has a fixed charge of −q.",
+                "f1": "Charge neutrality: q(N<sub>D</sub> + p − N<sub>A</sub> − n) = 0 &nbsp;&nbsp; pn = n<sub>i</sub><sup>2</sup>",
+                "li1": "At practical doping levels (10<sup>14</sup> ≤ |N<sub>A</sub>−N<sub>D</sub>| ≤ 10<sup>21</sup> cm<sup>-3</sup>) we can take n ≈ N<sub>D</sub>−N<sub>A</sub> or p ≈ N<sub>A</sub>−N<sub>D</sub>.",
+                "li2": "<strong>Majority carrier</strong> concentration is set during manufacturing and is independent of temperature. <strong>Minority carriers</strong> are proportional to n<sub>i</sub><sup>2</sup> and are therefore strongly temperature dependent.",
+                "li3": "Doping degrades mobility: impurity atoms scatter the carriers. As total doping N<sub>T</sub> = N<sub>A</sub> + N<sub>D</sub> increases, mobility drops rapidly.",
+                "diffTitle": "Diffusion current and total current",
+                "diffText": "Carriers move from regions of high concentration to regions of low concentration, just like a gas spreading across a room.",
+                "f2": "Einstein relation: D<sub>n</sub>/μ<sub>n</sub> = D<sub>p</sub>/μ<sub>p</sub> = kT/q = V<sub>T</sub> ≈ 25 mV (thermal voltage)"
+            },
+            "p3": {
+                "title": "Part 3 · Energy Band Model",
+                "li1": "The <strong>conduction band</strong> and <strong>valence band</strong> are the allowed energy states for electrons.",
+                "li2": "<strong>E<sub>V</sub></strong>: top edge of the valence band. <strong>E<sub>C</sub></strong>: bottom edge of the conduction band. The difference is the <strong>bandgap E<sub>G</sub></strong>.",
+                "li3": "At 0 K all electrons are in the valence band and no conduction occurs. At T &gt; 0 K thermal energy breaks bonds, electrons move up to the conduction band and holes appear in the valence band.",
+                "li4": "The <strong>donor level E<sub>D</sub></strong> is very close to E<sub>C</sub> (about 0.045 eV for phosphorus).",
+                "li5": "The <strong>acceptor level E<sub>A</sub></strong> is very close to E<sub>V</sub> (about 0.044 eV for boron).",
+                "li6": "A <strong>compensated semiconductor</strong> contains both n-type and p-type dopants. If N<sub>D</sub> &gt; N<sub>A</sub>, donor electrons fill the acceptor sites and the remaining N<sub>D</sub>−N<sub>A</sub> electrons can move up to the conduction band."
+            },
+            "backParts": "← Back to Parts",
+            "nextPart": "Next: Part {{n}} →",
+            "nextSim": "Next: Part 4 Simulation →"
+        },
+        "icFab": {
+            "pageTitle": "Integrated Circuit Fabrication Simulation - IEEE METU NCC",
+            "title": "Integrated Circuit Fabrication",
+            "lead": "Interactive simulation: how is a pn diode built step by step on a silicon wafer?",
+            "crossSection": "Cross-Section View",
+            "reset": "Restart",
+            "prev": "← Previous",
+            "next": "Next →",
+            "labels": "Labels",
+            "keyHint": "Tip: you can also use the ← → keys to move between steps.",
+            "thisStep": "This Step",
+            "params": "Process parameters",
+            "done": "<strong>pn diode complete!</strong> 3 masks and 3 photolithography steps were used.",
+            "topView": "Top view",
+            "cutLine": "The dashed line marks where the cross-section is taken.",
+            "glossary": "Process Glossary",
+            "glossaryHint": "Click a term to jump to the related step in the simulation.",
+            "back": "← Back to Section 2"
+        }
+    }
+}
