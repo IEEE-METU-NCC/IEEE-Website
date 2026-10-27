@@ -226,3 +226,29 @@
         transition: none;
     }
 }
+
+/* Diode sembolleri */
+.diode-symbol {
+    width: 100%;
+    max-width: 170px;
+    height: auto;
+    color: var(--bs-body-color);
+}
+
+.diode-symbol path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linejoin: round;
+}
+
+.diode-symbol path.diode-symbol-fill {
+    fill: currentColor;
+}
+
+.diode-symbol text {
+    fill: currentColor;
+    font-family: var(--bs-body-font-family);
+    font-size: 13px;
+    font-weight: 600;
+}
