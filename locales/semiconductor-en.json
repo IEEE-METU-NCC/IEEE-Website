@@ -28,7 +28,9 @@
             "backSections": "← Back to Sections",
             "backParts": "← Back to Parts",
             "nextPart": "Next: Part {{n}} →",
-            "nextSim": "Next: Part {{n}} Simulation →"
+            "nextSim": "Next: Part {{n}} Simulation →",
+            "prevPart": "← Previous: Part {{n}}",
+            "seeParts": "See All Parts"
         }
     }
 }

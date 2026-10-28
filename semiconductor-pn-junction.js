@@ -9,10 +9,17 @@
     const EPS_S = 11.7 * 8.854e-14;   // F/cm
     const NI = 1e10;                  // cm^-3
     const VT = 0.025;                 // V
-    const IS = 1e-15;                 // A, sabit alındı
-    const VZ = 5;                     // V, örnek breakdown voltajı
+    // I_S ve V_Z doping'e göre hesaplanır (aşağıda saturationCurrent ve breakdownVoltage)
+    const AREA = 1e-4;                // cm², diode alanı
+    const DN = 25, DP = 10;           // cm²/s, minority carrier diffusion katsayıları
+    const LN = 1e-3, LP = 1e-3;       // cm, diffusion length
     const RZ = 50;                    // Ω
-    const V_MIN = -6, V_MAX = 0.76;
+    const RS = 50;                    // Ω, forward'da seri direnç (bulk + kontak), akımı sınırlar
+    const V_MIN = -6, V_MAX = 2;
+    // Slider: sol yarı 0 → −6 V, sağ yarı 0 → +2 V; zero bias tam ortada
+    const POS = 600;
+    const toV = (pos) => pos < 0 ? pos * -V_MIN / POS : pos * V_MAX / POS;
+    const toPos = (v) => v < 0 ? v * POS / -V_MIN : v * POS / V_MAX;
 
     // Kesit geometrisi (SVG birimi)
     const X0 = 80, X1 = 680, XJ = 380;   // p ucu, n ucu, metallurgical junction
@@ -70,6 +77,11 @@
         breakdown: {
             badge: 'text-bg-danger',
             title: { tr: 'Reverse breakdown', en: 'Reverse breakdown' },
+            // V_Z < ~5.6 V ise mekanizma tunneling, üstündeyse avalanche
+            textTun: {
+                tr: 'Reverse voltaj V<sub>Z</sub>\'yi geçti. Bu diode çok yoğun doplu olduğu için depletion region çok ince ve field devasa: electron\'lar valence band\'den conduction band\'e bariyerin içinden geçiyor (<strong>tunneling</strong>, yani Zener breakdown). Voltaj neredeyse V<sub>Z</sub>\'de sabit kalırken ters yöndeki akım hızla büyüyor.',
+                en: 'The reverse voltage has exceeded V<sub>Z</sub>. Because this diode is very heavily doped, the depletion region is extremely thin and the field is huge: electrons pass from the valence band to the conduction band straight through the barrier (<strong>tunneling</strong>, i.e. Zener breakdown). The voltage stays near V<sub>Z</sub> while the reverse current rises rapidly.'
+            },
             text: {
                 tr: 'Reverse voltaj V<sub>Z</sub>\'yi geçti. Field o kadar büyüdü ki hızlanan carrier\'lar atomlara çarpıp yeni electron-hole pair\'ler koparıyor (<strong>avalanche</strong>). Diode artık karşı koyamıyor: voltaj neredeyse V<sub>Z</sub>\'de sabit kalırken ters yöndeki akım hızla büyüyor.',
                 en: 'The reverse voltage has exceeded V<sub>Z</sub>. The field is now so large that accelerated carriers collide with atoms and knock loose new electron-hole pairs (<strong>avalanche</strong>). The diode can no longer block: the voltage stays near V<sub>Z</sub> while the reverse current rises rapidly.'
@@ -92,8 +104,14 @@
                 xp: 'p tarafı x<sub>p</sub>',
                 xn: 'n tarafı x<sub>n</sub>',
                 emax: 'E<sub>MAX</sub>',
-                id: 'Diode akımı i<sub>D</sub>'
+                id: 'Diode akımı i<sub>D</sub>',
+                is: 'Saturation current I<sub>S</sub>',
+                von: '1 mA için v<sub>D</sub>',
+                vz: 'Breakdown voltajı V<sub>Z</sub>',
+                type: 'Diode tipi'
             },
+            types: { zenerTun: 'Zener (tunneling)', zenerAv: 'Zener (avalanche)', normal: 'Normal diode' },
+            noBreak: 'bu aralıkta yok',
             ivV: 'v', ivI: 'i', turnOn: 'turn-on'
         },
         en: {
@@ -110,8 +128,14 @@
                 xp: 'p side x<sub>p</sub>',
                 xn: 'n side x<sub>n</sub>',
                 emax: 'E<sub>MAX</sub>',
-                id: 'Diode current i<sub>D</sub>'
+                id: 'Diode current i<sub>D</sub>',
+                is: 'Saturation current I<sub>S</sub>',
+                von: 'v<sub>D</sub> at 1 mA',
+                vz: 'Breakdown voltage V<sub>Z</sub>',
+                type: 'Diode type'
             },
+            types: { zenerTun: 'Zener (tunneling)', zenerAv: 'Zener (avalanche)', normal: 'Normal diode' },
+            noBreak: 'not in this range',
             ivV: 'v', ivI: 'i', turnOn: 'turn-on'
         }
     };
@@ -147,31 +171,58 @@
 
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let vd = Number(vRange.value);
+    let vd = toV(Number(vRange.value));
     let showLabels = true;
     let sweepTimer = null;
     let model = null;
 
     // --- Fizik ---
-    function diodeCurrent(v) {
+    // I_S = qA·n_i²·(D_n/(L_n·N_A) + D_p/(L_p·N_D)): doping arttıkça I_S küçülür, aynı akım için daha büyük v_D gerekir
+    function saturationCurrent(NA, ND) {
+        return Q * AREA * NI * NI * (DN / (LN * NA) + DP / (LP * ND));
+    }
+
+    // Breakdown voltajı az doplu tarafın doping'iyle belirlenir (Sze'nin yaklaşık bağıntısı):
+    // V_Z ≈ 60·(N/10¹⁶)^(-3/4) V, N = N_A·N_D/(N_A + N_D). Çok yoğun doping'de ~2 V'ta sınırlandı.
+    function breakdownVoltage(NA, ND) {
+        const N = NA * ND / (NA + ND);
+        return Math.max(2, 60 * Math.pow(N / 1e16, -0.75));
+    }
+
+    // Forward'da v_D = v_j + i·R_S: junction voltajı v_j bisection ile bulunur
+    function junctionVoltage(v, IS) {
+        if (v <= 0) return v;
+        let lo = 0, hi = v;
+        for (let k = 0; k < 60; k++) {
+            const mid = (lo + hi) / 2;
+            if (mid + IS * (Math.exp(mid / VT) - 1) * RS > v) hi = mid; else lo = mid;
+        }
+        return (lo + hi) / 2;
+    }
+
+    function diodeCurrent(v, IS, VZ) {
         if (v < -VZ) return -IS - (-v - VZ) / RZ;
-        return IS * (Math.exp(v / VT) - 1);
+        return IS * (Math.exp(junctionVoltage(v, IS) / VT) - 1);
     }
 
     function compute() {
         const NA = Math.pow(10, Number(naRange.value));
         const ND = Math.pow(10, Number(ndRange.value));
         const phi = VT * Math.log(NA * ND / (NI * NI));
+        const IS = saturationCurrent(NA, ND);
+        const VZ = breakdownVoltage(NA, ND);
+        const vj = junctionVoltage(vd, IS);
         // Bariyer sıfıra yaklaşınca depletion approximation geçersizleşir, alt sınır koy
-        const clamped = phi - vd < 0.04;
-        const barrier = Math.max(phi - vd, 0.04);
+        const clamped = phi - vj < 0.04;
+        const barrier = Math.max(phi - vj, 0.04);
         const k = 2 * EPS_S / Q * (1 / NA + 1 / ND);
         const wd0 = Math.sqrt(k * phi);
         const wd = Math.sqrt(k * barrier);
         const xn = wd / (1 + ND / NA);
         const xp = wd / (1 + NA / ND);
         const emax = 2 * barrier / wd;
-        const i = diodeCurrent(vd);
+        const i = diodeCurrent(vd, IS, VZ);
+        const vOn = VT * Math.log(1e-3 / IS + 1) + 1e-3 * RS;   // 1 mA için gereken forward voltaj (R_S düşümü dahil)
 
         let region;
         if (vd < -VZ) region = 'breakdown';
@@ -188,7 +239,7 @@
         const [xpPx, xnPx] = side(basePx * Math.sqrt(barrier / phi));
         const [xpPx0, xnPx0] = side(basePx);
 
-        return { NA, ND, phi, barrier, clamped, wd0, wd, xn, xp, emax, i, region, xpPx, xnPx, xpPx0, xnPx0 };
+        return { NA, ND, phi, barrier, clamped, wd0, wd, xn, xp, emax, i, region, xpPx, xnPx, xpPx0, xnPx0, IS, VZ, vOn };
     }
 
     // --- Biçimlendirme ---
@@ -435,25 +486,29 @@
     function drawIV() {
         ivSvg.innerHTML = '';
         const W = 300, H = 200;
-        const px = v => 14 + (v + 6.6) / 7.8 * (W - 28);
+        const px = v => 14 + (v + 6.6) / 8.9 * (W - 28);
         const py = i => H / 2 - Math.max(-21, Math.min(21, i * 1000)) / 21 * (H / 2 - 14);
         const d = el('defs', {}, ivSvg);
         const mk = el('marker', { id: 'pn-iv-arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto' }, d);
         el('path', { d: 'M0,0 L10,5 L0,10 z', fill: COLORS.ink }, mk);
         line(ivSvg, 8, py(0), W - 6, py(0), { 'marker-end': 'url(#pn-iv-arrow)' });
         line(ivSvg, px(0), H - 6, px(0), 6, { 'marker-end': 'url(#pn-iv-arrow)' });
-        for (let v = -6; v <= 1; v++) {
+        for (let v = -6; v <= 2; v++) {
             if (v === 0) continue;
             line(ivSvg, px(v), py(0) - 3, px(v), py(0) + 3, {});
-            if (v % 2 === 0 || v === 1 || v === -VZ) label(ivSvg, px(v), py(0) + 15, minus(v), { 'text-anchor': 'middle', 'font-size': '10' });
+            if (v % 2 === 0 || v === 1) label(ivSvg, px(v), py(0) + 15, minus(v), { 'text-anchor': 'middle', 'font-size': '10' });
         }
         label(ivSvg, W - 8, py(0) - 6, 'v_{D} (V)', { 'text-anchor': 'end', 'font-size': '11', 'font-style': 'italic' });
         label(ivSvg, px(0) - 6, 14, 'i_{D}', { 'text-anchor': 'end', 'font-size': '11', 'font-style': 'italic' });
-        label(ivSvg, px(-VZ), py(0) - 8, '−V_{Z}', { 'text-anchor': 'middle', 'font-size': '11', fill: COLORS.pos });
-        label(ivSvg, px(0.5) - 4, py(0.006), L('turnOn'), { 'text-anchor': 'end', 'font-size': '10', fill: '#6c757d' });
+        // V_Z ve turn-on noktası doping'e göre yer değiştirir
+        if (model.VZ <= 6.4) {
+            line(ivSvg, px(-model.VZ), py(0) - 4, px(-model.VZ), py(0) + 4, { stroke: COLORS.pos, 'stroke-width': 2 });
+            label(ivSvg, px(-model.VZ), py(0) - 8, '−V_{Z}', { 'text-anchor': 'middle', 'font-size': '11', fill: COLORS.pos });
+        }
+        label(ivSvg, px(Math.min(model.vOn, 0.75)) - 6, py(0.006), L('turnOn'), { 'text-anchor': 'end', 'font-size': '10', fill: '#6c757d' });
 
         const pts = [];
-        for (let v = -6.4; v <= 0.78; v += 0.01) pts.push(`${px(v).toFixed(1)},${py(diodeCurrent(v)).toFixed(1)}`);
+        for (let v = -6.4; v <= 2.01; v += 0.01) pts.push(`${px(v).toFixed(1)},${py(diodeCurrent(v, model.IS, model.VZ)).toFixed(1)}`);
         el('polyline', { points: pts.join(' '), fill: 'none', stroke: COLORS.plot, 'stroke-width': 2 }, ivSvg);
         line(ivSvg, px(vd), py(0), px(vd), py(model.i), { stroke: COLORS.ghost, 'stroke-dasharray': '3 3' });
         el('circle', { cx: px(vd), cy: py(model.i), r: 6, fill: COLORS.pos, stroke: '#fff', 'stroke-width': 2 }, ivSvg);
@@ -467,7 +522,9 @@
         badgeEl.className = 'badge align-self-start mb-2 ' + r.badge;
         badgeEl.textContent = ({ zero: 'Zero bias', reverse: 'Reverse bias', forwardLow: 'Forward bias', forwardOn: 'Forward bias', breakdown: 'Breakdown' })[m.region];
         titleEl.textContent = tx2(r.title);
-        textEl.innerHTML = tx2(r.text);
+        textEl.innerHTML = tx2(m.region === 'breakdown' && m.VZ < 5.6 ? r.textTun : r.text);
+        const types = L('types');
+        const type = m.VZ > 6.4 ? types.normal : (m.VZ < 5.6 ? types.zenerTun : types.zenerAv);
         const list = [
             [rows.phi, fmtV(m.phi)],
             [rows.barrier, (m.clamped ? '≈ ' : '') + fmtV(m.barrier)],
@@ -476,7 +533,11 @@
             [rows.xp, um(m.xp)],
             [rows.xn, um(m.xn)],
             [rows.emax, sci(m.emax / 1000) + ' kV/cm'],
-            [rows.id, fmtI(m.i)]
+            [rows.id, fmtI(m.i)],
+            [rows.is, m.IS < 1e-15 ? sci(m.IS) + ' A' : fmtI(m.IS)],
+            [rows.von, fmtV(m.vOn)],
+            [rows.vz, m.VZ > 6.4 ? `≈ ${Math.round(m.VZ)} V (${L('noBreak')})` : fmtV(m.VZ)],
+            [rows.type, type]
         ];
         valuesEl.innerHTML = list.map(([k, v]) =>
             `<li class="list-group-item py-1 d-flex justify-content-between gap-2"><span>${k}</span><span class="fw-semibold text-nowrap">${v}</span></li>`).join('');
@@ -491,7 +552,7 @@
 
     function update() {
         vd = Math.max(V_MIN, Math.min(V_MAX, vd));
-        vRange.value = vd;
+        vRange.value = Math.round(toPos(vd));
         model = compute();
         vOut.textContent = fmtV(vd);
         naOut.textContent = dopingText(Number(naRange.value));
@@ -499,6 +560,12 @@
         draw();
         drawIV();
         drawPanel();
+        document.querySelectorAll('[data-pn-dop]').forEach(b => {
+            const [na, nd] = b.dataset.pnDop.split(',').map(Number);
+            const on = na === Number(naRange.value) && nd === Number(ndRange.value);
+            b.classList.toggle('btn-secondary', on);
+            b.classList.toggle('btn-outline-secondary', !on);
+        });
         document.querySelectorAll('[data-pn-v]').forEach(b => {
             const on = Math.abs(Number(b.dataset.pnV) - vd) < 0.005;
             b.classList.toggle('btn-primary', on);
@@ -579,22 +646,30 @@
         vd = V_MIN;
         sweepBtn.textContent = L('stop');
         sweepTimer = setInterval(() => {
-            vd = Math.round((vd + (vd < -0.5 ? 0.05 : 0.01)) * 100) / 100;
+            vd = Math.round((vd + (vd < -0.5 || vd > 1 ? 0.05 : 0.01)) * 100) / 100;
             if (vd >= V_MAX) { vd = V_MAX; stopSweep(); }
             update();
         }, 50);
         update();
     }
 
-    vRange.min = V_MIN;
-    vRange.max = V_MAX;
-    vRange.addEventListener('input', () => { stopSweep(); vd = Number(vRange.value); update(); });
+    vRange.min = -POS;
+    vRange.max = POS;
+    vRange.addEventListener('input', () => { stopSweep(); vd = Math.round(toV(Number(vRange.value)) * 100) / 100; update(); });
     naRange.addEventListener('input', update);
     ndRange.addEventListener('input', update);
     sweepBtn.addEventListener('click', sweep);
     labelToggle.addEventListener('change', () => { showLabels = labelToggle.checked; update(); });
     document.querySelectorAll('[data-pn-v]').forEach(b => {
         b.addEventListener('click', () => { stopSweep(); vd = Number(b.dataset.pnV); update(); });
+    });
+    document.querySelectorAll('[data-pn-dop]').forEach(b => {
+        b.addEventListener('click', () => {
+            const [na, nd] = b.dataset.pnDop.split(',');
+            naRange.value = na;
+            ndRange.value = nd;
+            update();
+        });
     });
     document.addEventListener('keydown', (e) => {
         if (e.target.closest('input, textarea, select')) return;

@@ -28,7 +28,9 @@
             "backSections": "← Section'lara Dön",
             "backParts": "← Part Listesine Dön",
             "nextPart": "Sonraki: Part {{n}} →",
-            "nextSim": "Sonraki: Part {{n}} Simülasyonu →"
+            "nextSim": "Sonraki: Part {{n}} Simülasyonu →",
+            "prevPart": "← Önceki: Part {{n}}",
+            "seeParts": "Part Listesini Gör"
         }
     }
 }

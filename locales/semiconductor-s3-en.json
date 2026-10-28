@@ -121,7 +121,30 @@
                 "li9": "<strong>Voltage reference</strong>: Zeners near V<sub>Z</sub> ≈ 5.6 V change very little with temperature and are used as reference voltages.",
                 "li10": "<strong>Protection and clipping</strong>: a Zener placed across a sensitive input conducts when the voltage tries to exceed V<sub>Z</sub> and absorbs the excess.",
                 "ex1": "<strong>Example:</strong> V<sub>S</sub> = 20 V, R = 5 kΩ, V<sub>Z</sub> = 5 V and R<sub>L</sub> = 5 kΩ. I<sub>S</sub> = (20 − 5)/5 kΩ = 3 mA, I<sub>L</sub> = 5 V/5 kΩ = 1 mA, I<sub>Z</sub> = 3 − 1 = 2 mA &gt; 0, so the Zener regulates. It dissipates P<sub>Z</sub> = 5 V·2 mA = 10 mW.",
-                "title": "Part 4 · The Zener Diode"
+                "title": "Part 4 · The Zener Diode",
+                "thProp": "Property",
+                "thAv": "Avalanche",
+                "thTun": "Tunneling (Zener)",
+                "rDop": "Doping",
+                "cDopAv": "Moderate (~10<sup>17</sup> cm<sup>-3</sup>)",
+                "cDopTun": "Very heavy on both sides (10<sup>18</sup> – 10<sup>19</sup> cm<sup>-3</sup>)",
+                "rWd": "Depletion region",
+                "cWdAv": "Wider (~0.1 – 1 µm)",
+                "cWdTun": "Very narrow (~10 nm)",
+                "rVz": "V<sub>Z</sub>",
+                "cVzAv": "&gt; ~5.6 V",
+                "cVzTun": "&lt; ~5.6 V",
+                "rHow": "What happens?",
+                "cHowAv": "Carriers accelerated by the field collide with atoms and knock loose new electron-hole pairs, which knock loose more (<strong>impact ionization</strong>).",
+                "cHowTun": "The barrier is so thin that electrons pass <strong>through</strong> it from the valence band to the conduction band, with no collisions needed.",
+                "rTemp": "V<sub>Z</sub> as temperature rises",
+                "cTempAv": "<strong>Increases</strong> (positive coefficient)",
+                "cTempTun": "<strong>Decreases</strong> (negative coefficient)",
+                "rKnee": "Knee of the i-v curve",
+                "cKneeAv": "Sharp",
+                "cKneeTun": "Softer",
+                "h4": "Avalanche Zener vs tunneling Zener",
+                "exam": "<strong>Exam note:</strong> the details of avalanche vs tunneling are not asked in the exam. You do need to know the reason a Zener differs from a normal diode: the <strong>doping level</strong>. Both sides of a Zener are much more heavily doped, so the depletion region is narrow, the field is large and breakdown occurs at a low voltage."
             },
             "s3ps": {
                 "intro": "Replacing one semiconductor region of the pn diode with a non-ohmic <strong>rectifying metal contact</strong> on n-type silicon gives a <strong>Schottky diode</strong>; the metal region is the anode. It turns on at a lower voltage than a pn junction diode and has significantly reduced charge storage under forward bias.",
@@ -188,8 +211,9 @@
             "s3p4": {
                 "thComment": "Comments",
                 "cm1": "Least complexity",
-                "cm2": "Smaller capacitor, requires center-tapped transformer, two diodes",
-                "cm3": "Smaller capacitor, four diodes",
+                "cm2": "Smaller capacitor, requires center-tapped transformer",
+                "cm3": "Smaller capacitor, no center tap needed",
+                "rDiodes": "Number of diodes",
                 "thParam": "Parameter",
                 "intro": "A <strong>rectifier</strong> converts an ac voltage into a pulsating dc voltage. A <strong>filter capacitor</strong> then eliminates the ac components of the waveform to produce a nearly constant dc output. Rectifier circuits are used in virtually all electronic devices to convert the ac power line (240 V, 50 Hz in Cyprus) to the dc voltages required for their operation.",
                 "li1": "In rectifier circuits the diode state changes with time, and a given piecewise linear model is valid only for a certain time interval.",
@@ -219,6 +243,14 @@
                 "noteZ": "A: anode, K: cathode. In the Zener symbol the cathode bar has bent ends (like a \"Z\"). The arrow still shows the forward direction, but a Zener is normally connected <strong>in reverse</strong>, with the cathode at the more positive node.",
                 "schottky": "Schottky diode",
                 "noteAll": "In all three the triangle points in the forward current direction, from anode to cathode. The cathode bar tells them apart: straight for a normal diode, \"Z\"-shaped ends for a Zener, \"S\"-shaped hooks for a Schottky."
+            },
+            "s3fig": {
+                "pn": "pn junction: only fixed ions remain in the depletion region (− on the p side, + on the n side). These charges create an <strong>electric field</strong> pointing from n to p. The field exists only inside the depletion region and is largest at the junction (E<sub>MAX</sub>). Below is the circuit symbol of the same diode: the triangle marks the anode (p), the bar marks the cathode (n), and the forward current i<sub>D</sub> flows from anode to cathode.",
+                "schottky": "Internal structure of a Schottky diode: the anode metal sits directly on lightly doped n-type silicon and forms the <strong>Schottky barrier</strong> (this is the diode). The cathode metal sits on a heavily doped n<sup>+</sup> region, forming an <strong>ohmic contact</strong>. The SiO<sub>2</sub> insulates the rest of the surface.",
+                "hw": "Half-wave rectifier: the diode conducts only during the positive half of the input. With C added it acts as a peak detector; R is the load.",
+                "fw": "Full-wave rectifier: the two halves of the center-tapped transformer feed the load through D<sub>1</sub> and D<sub>2</sub> in turn.",
+                "br": "Full-wave bridge rectifier: in each half cycle current flows through two diagonal diodes (D<sub>1</sub>-D<sub>4</sub> or D<sub>2</sub>-D<sub>3</sub>); no center tap is needed.",
+                "wave": "Output v<sub>O</sub> without a filter capacitor (dashed line: input v<sub>S</sub>). The half-wave rectifier passes only the positive half cycles, and the output is 0 for the other half. The full-wave rectifier also inverts and uses the negative half, so the output peaks every half cycle and the ripple frequency doubles. The bridge gives the same shape, but the current always flows through two diodes, so the peak is 2V<sub>on</sub> lower."
             }
         },
         "pnSim": {
@@ -229,7 +261,7 @@
             "voltage": "Diode voltage v<sub>D</sub>",
             "reverse": "← Reverse bias",
             "forward": "Forward bias →",
-            "preBreak": "Breakdown (−5.5 V)",
+            "preBreak": "−5.5 V (breakdown for Zener)",
             "preReverse": "Reverse (−3 V)",
             "preZero": "Zero bias",
             "preForward": "Forward (0.7 V)",
@@ -246,7 +278,7 @@
             "values": "Values",
             "iv": "i-v characteristic",
             "clamp": "The barrier has almost vanished. Beyond this point the depletion approximation is no longer valid, so a lower limit is shown for the width.",
-            "note": "The simulation uses I<sub>S</sub> = 1 fA, V<sub>T</sub> = 25 mV, n<sub>i</sub> = 10<sup>10</sup> cm<sup>-3</sup> and an example V<sub>Z</sub> = 5 V. The drawing is not to scale; the actual values are listed in the table.",
+            "note": "In the simulation I<sub>S</sub> = qA·n<sub>i</sub><sup>2</sup>·(D<sub>n</sub>/(L<sub>n</sub>N<sub>A</sub>) + D<sub>p</sub>/(L<sub>p</sub>N<sub>D</sub>)) and V<sub>Z</sub> ≈ 60 V·(N/10<sup>16</sup>)<sup>−3/4</sup> (N = N<sub>A</sub>N<sub>D</sub>/(N<sub>A</sub>+N<sub>D</sub>)) are computed from the doping. V<sub>T</sub> = 25 mV, n<sub>i</sub> = 10<sup>10</sup> cm<sup>-3</sup>, A = 10<sup>-4</sup> cm<sup>2</sup>, and in forward bias a series resistance R<sub>S</sub> = 50 Ω limits the current (v<sub>D</sub> = v<sub>j</sub> + i<sub>D</sub>R<sub>S</sub>). The drawing is not to scale; the actual values are listed in the table.",
             "tryTitle": "Things to Try",
             "tryHint": "In each case watch both the cross-section and the ρ(x), E(x), φ(x) plots below it.",
             "t1Title": "1 · Apply reverse bias",
@@ -256,8 +288,11 @@
             "t3Title": "3 · Change the doping",
             "t3": "Make N<sub>A</sub> and N<sub>D</sub> different. The depletion region extends further into the lightly doped side because the total charge on both sides must be equal: qN<sub>A</sub>x<sub>p</sub> = qN<sub>D</sub>x<sub>n</sub>. Increasing both makes the region narrower and φ<sub>j</sub> larger.",
             "t4Title": "4 · Go past the limit",
-            "t4": "Take the voltage below −5 V. The diode enters breakdown and a large reverse current flows. Zener diodes are designed to operate in exactly this region.",
-            "back": "← Back to Section 3"
+            "t4": "Select the <strong>Zener diode</strong> doping preset, then lower the voltage to about −5 V: the diode breaks down near 4.6 V and a large reverse current flows. Now switch to <strong>Normal diode</strong>: at the same voltage the current is back at −I<sub>S</sub>, because the lightly doped diode has a V<sub>Z</sub> of tens of volts. Also compare the v<sub>D</sub> needed for 1 mA in forward bias: higher doping gives a smaller I<sub>S</sub> and a larger v<sub>D</sub>.",
+            "back": "← Back to Section 3",
+            "dopPresets": "Doping presets:",
+            "preNormal": "Normal diode",
+            "preZener": "Zener diode"
         }
     }
 }

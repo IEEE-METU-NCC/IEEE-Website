@@ -252,3 +252,57 @@
     font-size: 13px;
     font-weight: 600;
 }
+
+/* Ders notlarındaki diyagramlar ve devre çizimleri */
+.lecture-svg {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    background: #fff;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+}
+
+.lecture-svg text {
+    font-family: var(--bs-body-font-family);
+    font-size: 13px;
+    fill: #212529;
+}
+
+.circuit-svg {
+    max-width: 380px;
+}
+
+.circuit-svg .w {
+    fill: none;
+    stroke: #212529;
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+
+.circuit-svg .f {
+    fill: #212529;
+    stroke: #212529;
+    stroke-width: 1;
+}
+
+.wave-svg .ax {
+    stroke: #212529;
+    stroke-width: 1;
+}
+
+.wave-svg .in {
+    fill: none;
+    stroke: #9a9a9a;
+    stroke-width: 1.2;
+    stroke-dasharray: 4 3;
+}
+
+.wave-svg .out {
+    fill: none;
+    stroke-width: 2.2;
+}
+
+.wave-svg .tl {
+    font-style: italic;
+}

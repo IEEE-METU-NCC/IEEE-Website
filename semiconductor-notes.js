@@ -9,6 +9,7 @@
     const crumbSection = document.getElementById('crumb-section');
     const crumbPart = document.getElementById('crumb-part');
     const nextBtn = document.getElementById('part-next');
+    const prevBtn = document.getElementById('part-prev');
 
     function t(key, fallback, opts) {
         if (window.i18next && i18next.isInitialized && i18next.exists(key)) return i18next.t(key, opts);
@@ -34,6 +35,10 @@
             crumbSection.classList.remove('active');
             crumbPart.classList.remove('d-none');
             crumbPart.textContent = `Part ${n}`;
+            // Part 1'de önceki part yok
+            prevBtn.classList.toggle('d-none', n === 1);
+            prevBtn.href = `#part-${n - 1}`;
+            prevBtn.textContent = t('semiNotes.prevPart', `← Önceki: Part ${n - 1}`, { n: n - 1 });
             if (n < PARTS) {
                 nextBtn.href = `#part-${n + 1}`;
                 nextBtn.textContent = t('semiNotes.nextPart', `Sonraki: Part ${n + 1} →`, { n: n + 1 });
