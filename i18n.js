@@ -2,30 +2,46 @@
 // Simple key-based replacement using data-i18n attributes
 
 // update cacheKey const to prevent translation keys not being updated
+// semiconductor-*.html sayfalarındaki script tag'leri de ?v=<cacheKey> kullanır, değiştirince onları da güncelle
 
 // Alt klasördeki sayfalar da ana çeviri dosyalarını sitenin kökünden yüklesin
 const i18nScript = document.currentScript;
 const i18nBase = i18nScript ? new URL('.', i18nScript.src).href : './';
 // Sayfaya özel ek çeviriler: <script src="i18n.js" data-extra-locales="locales/semiconductor-"> -> locales/semiconductor-tr.json
-const i18nExtraLocales = i18nScript ? i18nScript.dataset.extraLocales : null;
+// Boşlukla ayrılmış birden fazla önek verilebilir: data-extra-locales="locales/semiconductor- locales/semiconductor-s3-"
+const i18nExtraLocales = i18nScript && i18nScript.dataset.extraLocales ? i18nScript.dataset.extraLocales.trim().split(/\s+/) : [];
+
+// Ek çevirileri iç içe birleştir (aynı üst anahtar birden fazla dosyada olabilir)
+function i18nDeepMerge(target, source) {
+  for (const key in source) {
+    const val = source[key];
+    if (val && typeof val === 'object' && !Array.isArray(val) && target[key] && typeof target[key] === 'object') {
+      i18nDeepMerge(target[key], val);
+    } else {
+      target[key] = val;
+    }
+  }
+  return target;
+}
 
 document.addEventListener("DOMContentLoaded", async function() {
   // Changes once per hour, so cached locale files are reused within the hour
-  const cacheKey = 234523423232325234;
-  const loadLocale = (dir, lng) => fetch(`${dir}${lng}.json?v=${cacheKey}`).then(res => res.json());
+  const cacheKey = 234523345345423232325600;
+  // no-cache: tarayıcı her yüklemede sunucuya sorar (ETag/Last-Modified), dosya değişmediyse 304 ile cache'ten gelir
+  const loadLocale = (dir, lng) => fetch(`${dir}${lng}.json?v=${cacheKey}`, { cache: 'no-cache' }).then(res => res.json());
   const [enRes, trRes] = await Promise.all([
       loadLocale(`${i18nBase}locales/`, 'en'),
       loadLocale(`${i18nBase}locales/`, 'tr')
     ]);
 
-    if (i18nExtraLocales) {
-      const [enExtra, trExtra] = await Promise.all([
-        loadLocale(i18nExtraLocales, 'en'),
-        loadLocale(i18nExtraLocales, 'tr')
-      ]);
-      Object.assign(enRes.translation, enExtra.translation);
-      Object.assign(trRes.translation, trExtra.translation);
-    }
+    const extras = await Promise.all(i18nExtraLocales.map(dir => Promise.all([
+      loadLocale(dir, 'en'),
+      loadLocale(dir, 'tr')
+    ])));
+    extras.forEach(([enExtra, trExtra]) => {
+      i18nDeepMerge(enRes.translation, enExtra.translation);
+      i18nDeepMerge(trRes.translation, trExtra.translation);
+    });
 
     const resources = {
       "en": enRes,

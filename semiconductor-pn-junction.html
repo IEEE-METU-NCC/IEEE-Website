@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pnSim.pageTitle">pn Junction Simülasyonu - IEEE ODTÜ KKK</title>
+    <meta name="description" content="İnteraktif pn junction simülasyonu: depletion region reverse bias ve forward bias altında nasıl davranır, diode akımı nasıl değişir?">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="semiconductor.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar sticky-top navbar-expand-xl bg-light" data-bs-theme = "light">
+    <div class="container-lg px-lg-3">
+        <a class="navbar-brand" href="index.html">
+        <img src="https://i.postimg.cc/DZfP24t6/metuieee.png" alt="IEEE Logo" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+            <li class="nav-item"><a class="nav-link" href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+            <li class="nav-item"><a class="nav-link" href="teknofest.html" data-i18n="nav.teknofest">Teknofest</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html" data-i18n="nav.contact">İletişim</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav.about">Hakkımızda</a></li>
+            <li class="nav-item"><a class="nav-link" href="calender.html" data-i18n="nav.calendar">Takvim</a></li>
+            <li class="nav-item"><a class="nav-link" href="calculators.html" data-i18n="nav.calculators">Hesap Makinesi</a></li>
+            <li class="nav-item"><a class="nav-link" href="apex-racing.html">Apex Racing</a></li>
+        </ul>
+        <div class="d-flex ms-xl-3 mt-2 mt-xl-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-lang-toggle id="langToggle"></button>
+        </div>
+        </div>
+    </div>
+    </nav>
+    <hr class="border-dark border-2 my-0">
+
+    <header class="text-center px-3">
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mt-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="semiconductor-notes.html" data-i18n="semiNotes.title">Semiconductor Ders Notları</a></li>
+                <li class="breadcrumb-item"><a href="semiconductor-section-3.html" data-i18n="semiNotes.s3.short">Chapter 3</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Part 8</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mt-2 mb-2" data-i18n="pnSim.title">pn Junction ve Depletion Region</h1>
+        <p class="lead mb-4" data-i18n="pnSim.lead">İnteraktif simülasyon: diode'a voltaj uygulayınca depletion region ne yapıyor?</p>
+    </header>
+
+    <main class="container mb-5 flex-grow-1">
+        <div class="row g-4" id="pn-sim">
+            <!-- Kesit ve grafikler -->
+            <div class="col-12 col-xl-8">
+                <div class="card lecture-card shadow h-100">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h2 class="h5 mb-0" data-i18n="pnSim.device">Diode Kesiti</h2>
+                        <span class="small">v<sub>D</sub> = <span id="pn-v-out">0.00 V</span></span>
+                    </div>
+                    <div class="card-body">
+                        <svg id="pn-svg" class="fab-svg pn-svg" viewBox="0 0 760 556" role="img" aria-label="pn junction cross-section, charge density, electric field and potential"></svg>
+
+                        <div class="fab-legend mt-3">
+                            <span><span class="pn-dot pn-dot-hole"></span><span data-i18n="pnSim.legHole">Hole</span></span>
+                            <span><span class="pn-dot pn-dot-electron"></span><span data-i18n="pnSim.legElectron">Elektron</span></span>
+                            <span><span class="pn-dot pn-dot-acceptor">−</span><span data-i18n="pnSim.legAcceptor">Ionized acceptor (sabit)</span></span>
+                            <span><span class="pn-dot pn-dot-donor">+</span><span data-i18n="pnSim.legDonor">Ionized donor (sabit)</span></span>
+                            <span><span class="fab-swatch" style="background:#fffdf0"></span><span data-i18n="pnSim.legDep">Depletion region</span></span>
+                            <span><span class="fab-swatch" style="background:#eaf4ee"></span>p-type Si</span>
+                            <span><span class="fab-swatch" style="background:#f7d6ec"></span>n-type Si</span>
+                        </div>
+
+                        <label for="pn-v" class="form-label fw-semibold mt-3 mb-0" data-i18n="pnSim.voltage">Diode voltajı v<sub>D</sub></label>
+                        <input type="range" class="form-range" id="pn-v" min="-600" max="600" step="1" value="0">
+                        <div class="d-flex justify-content-between small text-body-secondary mb-3">
+                            <span data-i18n="pnSim.reverse">← Reverse bias</span>
+                            <span data-i18n="pnSim.forward">Forward bias →</span>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 justify-content-center align-items-center">
+                            <button type="button" class="btn btn-outline-primary" data-pn-v="-5.5" data-i18n="pnSim.preBreak">Breakdown (−5.5 V)</button>
+                            <button type="button" class="btn btn-outline-primary" data-pn-v="-3" data-i18n="pnSim.preReverse">Reverse (−3 V)</button>
+                            <button type="button" class="btn btn-outline-primary" data-pn-v="0" data-i18n="pnSim.preZero">Zero bias</button>
+                            <button type="button" class="btn btn-outline-primary" data-pn-v="0.7" data-i18n="pnSim.preForward">Forward (0.7 V)</button>
+                            <button type="button" class="btn second-button text-white px-4" id="pn-sweep">Voltajı Tara</button>
+                            <div class="form-check form-switch ms-sm-3">
+                                <input class="form-check-input" type="checkbox" role="switch" id="pn-labels" checked>
+                                <label class="form-check-label" for="pn-labels" data-i18n="pnSim.labels">Etiketler</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <label for="pn-na" class="form-label mb-0 d-flex justify-content-between"><span data-i18n="pnSim.na">p tarafı doping N<sub>A</sub></span><span class="fw-semibold" id="pn-na-out"></span></label>
+                                <input type="range" class="form-range" id="pn-na" min="15" max="20" step="0.5" value="17">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pn-nd" class="form-label mb-0 d-flex justify-content-between"><span data-i18n="pnSim.nd">n tarafı doping N<sub>D</sub></span><span class="fw-semibold" id="pn-nd-out"></span></label>
+                                <input type="range" class="form-range" id="pn-nd" min="15" max="20" step="0.5" value="16">
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center align-items-center gap-2 mt-1">
+                            <span class="small text-body-secondary" data-i18n="pnSim.dopPresets">Hazır doping:</span>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-secondary" data-pn-dop="17,16" data-i18n="pnSim.preNormal">Normal diode</button>
+                                <button type="button" class="btn btn-outline-secondary" data-pn-dop="19,17.5" data-i18n="pnSim.preZener">Zener diode</button>
+                            </div>
+                        </div>
+                        <p class="text-center small text-body-secondary mt-2 mb-0" data-i18n="pnSim.keyHint">İpucu: klavyedeki ← → tuşlarıyla voltajı 50 mV adımlarla değiştirebilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Açıklama ve değerler -->
+            <div class="col-12 col-xl-4">
+                <div class="card lecture-card shadow h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="pnSim.now">Şu Anda</h2>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge align-self-start mb-2" id="pn-region"></span>
+                        <h3 class="h5" id="pn-title"></h3>
+                        <p id="pn-text"></p>
+                        <h4 class="h6" data-i18n="pnSim.values">Değerler</h4>
+                        <ul class="list-group list-group-flush small mb-2" id="pn-values"></ul>
+                        <div class="alert alert-warning small py-2 d-none" id="pn-clamp" data-i18n="pnSim.clamp">Bariyer neredeyse sıfırlandı. Bu noktadan sonra depletion region hesabı (depletion approximation) geçerliliğini yitirir, genişlik için alt sınır gösteriliyor.</div>
+                        <div class="mt-auto text-center">
+                            <h4 class="h6" data-i18n="pnSim.iv">i-v karakteristiği</h4>
+                            <svg id="pn-iv" class="fab-topview" viewBox="0 0 300 200" role="img" aria-label="Diode i-v characteristic"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-center small text-body-secondary mt-3 mb-0" data-i18n="pnSim.note">Simülasyonda I<sub>S</sub> = 1 fA, V<sub>T</sub> = 25 mV, n<sub>i</sub> = 10<sup>10</sup> cm<sup>-3</sup> ve örnek olarak V<sub>Z</sub> = 5 V alındı. Çizim ölçekli değildir, gerçek değerler tabloda yazıyor.</p>
+
+        <!-- Denenecekler -->
+        <h2 class="text-center mt-5 mb-1" data-i18n="pnSim.tryTitle">Şunları Dene</h2>
+        <p class="text-center text-body-secondary mb-4" data-i18n="pnSim.tryHint">Her birinde hem kesite hem alttaki ρ(x), E(x), φ(x) grafiklerine bak.</p>
+        <div class="row g-3">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="pnSim.t1Title">1 · Ters yönde zorla</span>
+                    <span class="small text-body-secondary" data-i18n="pnSim.t1">Voltajı 0'dan −5 V'a doğru çek. Carrier'lar junction'dan uzaklaşıyor, depletion region genişliyor, E<sub>MAX</sub> ve bariyer büyüyor. Akım ise −I<sub>S</sub>'de çakılı kalıyor: diode karşı koyuyor.</span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="pnSim.t2Title">2 · Doğru yönde aç</span>
+                    <span class="small text-body-secondary" data-i18n="pnSim.t2">Voltajı yavaşça 0.7 V'a getir. Bariyer düşüyor, depletion region daralıyor ve bir noktadan sonra carrier'lar karşıya akmaya başlıyor. 0.6 V ile 0.66 V arasındaki akım farkına bak (10 kat gülüm).</span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="pnSim.t3Title">3 · Doping ile oyna</span>
+                    <span class="small text-body-secondary" data-i18n="pnSim.t3">N<sub>A</sub> ve N<sub>D</sub>'yi farklı yap. Depletion region az doplu tarafa doğru uzuyor çünkü iki taraftaki toplam yük eşit olmak zorunda: qN<sub>A</sub>x<sub>p</sub> = qN<sub>D</sub>x<sub>n</sub>. İkisini de artırırsan bölge daralır, φ<sub>j</sub> büyür.</span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="pnSim.t4Title">4 · Sınırı aş</span>
+                    <span class="small text-body-secondary" data-i18n="pnSim.t4">Voltajı −5 V'un altına indir. Diode artık dayanamıyor ve breakdown'a giriyor: ters yönde büyük bir akım akmaya başlıyor. Zener diode'lar tam olarak bu bölgede çalıştırılır.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="semiconductor-section-3.html" class="btn btn-primary btn-lg px-4" data-i18n="pnSim.back">← Chapter 3'e Dön</a>
+        </div>
+    </main>
+
+    <footer class = "bg-light text-center py-3 mt-auto" data-bs-theme = "light">
+        <div class="container">
+            <span class="lead me-3" data-i18n="footer.follow">Bizi takip edin:</span>
+            <a href="https://www.instagram.com/ieeemetuncc/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" height="40" class="me-1">
+            </a>
+            <a href="https://www.linkedin.com/company/ieee-metu-nothern-cyprus-student-branch/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" height="40" class="me-1">
+            </a>
+            <a href="https://github.com/IEEE-METU-NCC/" target="_blank" class="text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" height="40" class="me-1">
+            </a>
+        </div>
+
+    </footer>
+
+    <script src="https://unpkg.com/i18next@23.11.2/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" data-extra-locales="locales/semiconductor- locales/semiconductor-s3-"></script>
+    <script src="semiconductor-pn-junction.js?v=234523423232325600"></script>
+</body>
+</html>
