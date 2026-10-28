@@ -3,29 +3,30 @@
         "semiNotes": {
             "pageTitle": "Semiconductor Lecture Notes - IEEE METU NCC",
             "title": "Semiconductor Recitation Notes",
-            "lead": "Pick a section, then open its parts one by one to study each topic.",
-            "crumbSections": "Sections",
+            "lead": "Pick a chapter, then open its parts one by one to study each topic.",
+            "author": "Prepared by Mert Kalkancı",
+            "crumbSections": "Chapters",
             "s2": {
-                "short": "Section 2",
+                "short": "Chapter 2",
                 "count": "4 Parts",
                 "title": "Solid-State Electronics",
                 "desc": "Semiconductor materials, doping, the energy band model and integrated circuit fabrication.",
-                "heading": "Section 2 · Solid-State Electronics",
-                "pageTitle": "Section 2 · Semiconductor Lecture Notes - IEEE METU NCC"
+                "heading": "Chapter 2 · Solid-State Electronics",
+                "pageTitle": "Chapter 2 · Semiconductor Lecture Notes - IEEE METU NCC"
             },
             "s3": {
-                "short": "Section 3",
+                "short": "Chapter 3",
                 "count": "8 Parts",
                 "title": "Solid-State Diodes and Diode Circuits",
                 "desc": "The pn junction, diode equation, reverse bias, breakdown, Zener and Schottky diodes, diode circuit analysis and rectifier circuits.",
-                "heading": "Section 3 · Solid-State Diodes and Diode Circuits",
+                "heading": "Chapter 3 · Solid-State Diodes and Diode Circuits",
                 "simLink": "Try the depletion region in the simulation →",
-                "pageTitle": "Section 3 · Semiconductor Lecture Notes - IEEE METU NCC"
+                "pageTitle": "Chapter 3 · Semiconductor Lecture Notes - IEEE METU NCC"
             },
             "source": "Source: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em> & Lecture Notes from: Assoc. Prof. Dr. Tayfun Nesimoğlu, Simplified by: Mert Kalkancı",
-            "open": "Open Section →",
+            "open": "Open Chapter →",
             "simBadge": "Interactive Simulation",
-            "backSections": "← Back to Sections",
+            "backSections": "← Back to Chapters",
             "backParts": "← Back to Parts",
             "nextPart": "Next: Part {{n}} →",
             "nextSim": "Next: Part {{n}} Simulation →",

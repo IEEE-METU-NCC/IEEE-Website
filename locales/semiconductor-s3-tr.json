@@ -289,7 +289,7 @@
             "t3": "N<sub>A</sub> ve N<sub>D</sub>'yi farklı yap. Depletion region az doplu tarafa doğru uzuyor çünkü iki taraftaki toplam yük eşit olmak zorunda: qN<sub>A</sub>x<sub>p</sub> = qN<sub>D</sub>x<sub>n</sub>. İkisini de artırırsan bölge daralır, φ<sub>j</sub> büyür.",
             "t4Title": "4 · Sınırı aş",
             "t4": "Önce <strong>Zener diode</strong> doping'ine bas, sonra voltajı −5 V civarına indir: diode ~4.6 V'ta breakdown'a giriyor ve ters yönde büyük akım akıyor. Şimdi <strong>Normal diode</strong>'a geç: aynı voltajda akım yine −I<sub>S</sub>'de, çünkü az doplu diode'un V<sub>Z</sub>'si onlarca volt. Bir de forward'da 1 mA için gereken v<sub>D</sub>'ye bak, doping arttıkça I<sub>S</sub> küçülüyor ve v<sub>D</sub> büyüyor.",
-            "back": "← Section 3'e Dön",
+            "back": "← Chapter 3'e Dön",
             "dopPresets": "Hazır doping:",
             "preNormal": "Normal diode",
             "preZener": "Zener diode"

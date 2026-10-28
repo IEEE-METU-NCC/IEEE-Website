@@ -289,7 +289,7 @@
             "t3": "Make N<sub>A</sub> and N<sub>D</sub> different. The depletion region extends further into the lightly doped side because the total charge on both sides must be equal: qN<sub>A</sub>x<sub>p</sub> = qN<sub>D</sub>x<sub>n</sub>. Increasing both makes the region narrower and φ<sub>j</sub> larger.",
             "t4Title": "4 · Go past the limit",
             "t4": "Select the <strong>Zener diode</strong> doping preset, then lower the voltage to about −5 V: the diode breaks down near 4.6 V and a large reverse current flows. Now switch to <strong>Normal diode</strong>: at the same voltage the current is back at −I<sub>S</sub>, because the lightly doped diode has a V<sub>Z</sub> of tens of volts. Also compare the v<sub>D</sub> needed for 1 mA in forward bias: higher doping gives a smaller I<sub>S</sub> and a larger v<sub>D</sub>.",
-            "back": "← Back to Section 3",
+            "back": "← Back to Chapter 3",
             "dopPresets": "Doping presets:",
             "preNormal": "Normal diode",
             "preZener": "Zener diode"

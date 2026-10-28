@@ -3,29 +3,30 @@
         "semiNotes": {
             "pageTitle": "Semiconductor Ders Notları - IEEE ODTÜ KKK",
             "title": "Semiconductor Recitation Notları",
-            "lead": "Bir section seçin, ardından bölümlere tek tek tıklayarak konuları inceleyin.",
-            "crumbSections": "Section'lar",
+            "lead": "Bir chapter seçin, ardından bölümlere tek tek tıklayarak konuları inceleyin.",
+            "author": "Mert Kalkancı tarafından hazırlanmıştır",
+            "crumbSections": "Chapter'lar",
             "s2": {
-                "short": "Section 2",
+                "short": "Chapter 2",
                 "count": "4 Part",
                 "title": "Solid-State Electronics",
                 "desc": "Semiconductor materials, doping, energy band model ve integrated circuit fabrication.",
-                "heading": "Section 2 · Solid-State Electronics",
-                "pageTitle": "Section 2 · Semiconductor Ders Notları - IEEE ODTÜ KKK"
+                "heading": "Chapter 2 · Solid-State Electronics",
+                "pageTitle": "Chapter 2 · Semiconductor Ders Notları - IEEE ODTÜ KKK"
             },
             "s3": {
-                "short": "Section 3",
+                "short": "Chapter 3",
                 "count": "8 Part",
                 "title": "Solid-State Diodes and Diode Circuits",
                 "desc": "pn junction, diode equation, reverse bias, breakdown, Zener ve Schottky diode, diode circuit analysis ve rectifier circuit'ler.",
-                "heading": "Section 3 · Solid-State Diodes and Diode Circuits",
+                "heading": "Chapter 3 · Solid-State Diodes and Diode Circuits",
                 "simLink": "Depletion region'u simülasyonda dene →",
-                "pageTitle": "Section 3 · Semiconductor Ders Notları - IEEE ODTÜ KKK"
+                "pageTitle": "Chapter 3 · Semiconductor Ders Notları - IEEE ODTÜ KKK"
             },
             "source": "Kaynak: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em>  & Ders notları: Mert Kalkancı tarafından Assoc. Prof. Dr. Tayfun Nesimoğlu'nun ders notları sadeleştirilerek yapılmıştır",
-            "open": "Section'a Gir →",
+            "open": "Chapter'a Gir →",
             "simBadge": "İnteraktif Simülasyon",
-            "backSections": "← Section'lara Dön",
+            "backSections": "← Chapter'lara Dön",
             "backParts": "← Part Listesine Dön",
             "nextPart": "Sonraki: Part {{n}} →",
             "nextSim": "Sonraki: Part {{n}} Simülasyonu →",
