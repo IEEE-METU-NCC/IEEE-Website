@@ -16,6 +16,15 @@
         "globalMember": "Become an IEEE Global Member",
         "registerBranch": "Register to IEEE METU NCC"
       },
+      "roomStatus": {
+        "title": "Community Room Activity Status",
+        "text": "Member on-site?",
+        "open": "Open",
+        "closed": "Closed",
+        "loading": "Loading...",
+        "error": "Unavailable",
+        "refresh": "Refresh"
+      },
       "section": {
         "subsocieties": "Sub Societies",
         "announcements": "Announcements & Events",
