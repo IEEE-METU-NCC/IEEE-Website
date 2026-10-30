@@ -17,6 +17,15 @@
         "globalMember": "IEEE Global Üyesi Ol",
         "registerBranch": "IEEE METU NCC'ye Kayıt Ol"
       },
+      "roomStatus": {
+        "title": "Topluluk Odası Aktiflik Durumu",
+        "text": "Odada üye var mı?",
+        "open": "Açık",
+        "closed": "Kapalı",
+        "loading": "Yükleniyor...",
+        "error": "Bağlanılamadı",
+        "refresh": "Yenile"
+      },
       "section": {
         "subsocieties": "Alt Topluluklar",
         "announcements": "Duyurular & Etkinlikler",
