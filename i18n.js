@@ -2,7 +2,7 @@
 // Simple key-based replacement using data-i18n attributes
 
 // update cacheKey const to prevent translation keys not being updated
-// semiconductor-*.html sayfalarındaki script tag'leri de ?v=<cacheKey> kullanır, değiştirince onları da güncelle
+// semiconductor-*.html sayfalarındaki script tag'leri (i18n.js ve semiconductor-*.js) de ?v=<cacheKey> kullanır, değiştirince onları da güncelle
 
 // Alt klasördeki sayfalar da ana çeviri dosyalarını sitenin kökünden yüklesin
 const i18nScript = document.currentScript;
@@ -25,10 +25,19 @@ function i18nDeepMerge(target, source) {
 }
 
 document.addEventListener("DOMContentLoaded", async function() {
-  // Changes once per hour, so cached locale files are reused within the hour
-  const cacheKey = 234523345345423232325600;
+  // Bump this string when translations or JS change (keep it short: big numbers print as 2.3e+23 and the server rejects the "+")
+  const cacheKey = '20261104a';
   // no-cache: tarayıcı her yüklemede sunucuya sorar (ETag/Last-Modified), dosya değişmediyse 304 ile cache'ten gelir
-  const loadLocale = (dir, lng) => fetch(`${dir}${lng}.json?v=${cacheKey}`, { cache: 'no-cache' }).then(res => res.json());
+  const loadLocale = (dir, lng) => fetch(`${dir}${lng}.json?v=${cacheKey}`, { cache: 'no-cache' })
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .catch(err => {
+      // Tek bir dosya yüklenemezse (403/404/bozuk JSON) diğer çeviriler yine çalışsın
+      console.warn(`i18n: ${dir}${lng}.json yüklenemedi`, err);
+      return { translation: {} };
+    });
   const [enRes, trRes] = await Promise.all([
       loadLocale(`${i18nBase}locales/`, 'en'),
       loadLocale(`${i18nBase}locales/`, 'tr')
