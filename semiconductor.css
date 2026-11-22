@@ -306,3 +306,14 @@
 .wave-svg .tl {
     font-style: italic;
 }
+
+/* FET simülasyonları (Chapter 4) */
+.fet-symbol {
+    max-width: 110px;
+}
+
+.fet-eq {
+    white-space: normal;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}

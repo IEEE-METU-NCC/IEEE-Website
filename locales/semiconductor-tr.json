@@ -23,6 +23,14 @@
                 "simLink": "Depletion region'u simülasyonda dene →",
                 "pageTitle": "Chapter 3 · Semiconductor Ders Notları - IEEE ODTÜ KKK"
             },
+            "s4": {
+                "short": "Chapter 4",
+                "count": "9 Part",
+                "title": "Field-Effect Transistors",
+                "desc": "MOS capacitor, NMOS ve PMOS, cutoff/triode/saturation, depletion-mode MOSFET, body effect, biasing, current mirror ve JFET.",
+                "heading": "Chapter 4 · Field-Effect Transistors",
+                "pageTitle": "Chapter 4 · Semiconductor Ders Notları - IEEE ODTÜ KKK"
+            },
             "source": "Kaynak: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em>  & Ders notları: Mert Kalkancı tarafından Assoc. Prof. Dr. Tayfun Nesimoğlu'nun ders notları sadeleştirilerek yapılmıştır",
             "open": "Chapter'a Gir →",
             "simBadge": "İnteraktif Simülasyon",

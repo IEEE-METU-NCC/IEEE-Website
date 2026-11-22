@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="fetSim.pageTitle">Part 8 · MOSFET Simülasyonu - IEEE ODTÜ KKK</title>
+    <meta name="description" content="İnteraktif MOSFET simülasyonu: NMOS ve PMOS, enhancement ve depletion mode, cutoff, triode ve saturation bölgeleri, output ve transfer characteristic.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="semiconductor.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar sticky-top navbar-expand-xl bg-light" data-bs-theme = "light">
+    <div class="container-lg px-lg-3">
+        <a class="navbar-brand" href="index.html">
+        <img src="https://i.postimg.cc/DZfP24t6/metuieee.png" alt="IEEE Logo" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+            <li class="nav-item"><a class="nav-link" href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+            <li class="nav-item"><a class="nav-link" href="teknofest.html" data-i18n="nav.teknofest">Teknofest</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html" data-i18n="nav.contact">İletişim</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav.about">Hakkımızda</a></li>
+            <li class="nav-item"><a class="nav-link" href="calender.html" data-i18n="nav.calendar">Takvim</a></li>
+            <li class="nav-item"><a class="nav-link" href="calculators.html" data-i18n="nav.calculators">Hesap Makinesi</a></li>
+            <li class="nav-item"><a class="nav-link" href="apex-racing.html">Apex Racing</a></li>
+        </ul>
+        <div class="d-flex ms-xl-3 mt-2 mt-xl-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-lang-toggle id="langToggle"></button>
+        </div>
+        </div>
+    </div>
+    </nav>
+    <hr class="border-dark border-2 my-0">
+
+    <header class="text-center px-3">
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mt-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="semiconductor-notes.html" data-i18n="semiNotes.title">Semiconductor Ders Notları</a></li>
+                <li class="breadcrumb-item"><a href="semiconductor-section-4.html" data-i18n="semiNotes.s4.short">Chapter 4</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Part 8</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mt-2 mb-2" data-i18n="fetSim.title">MOSFET: NMOS / PMOS, Enhancement / Depletion</h1>
+        <p class="lead mb-4" data-i18n="fetSim.lead">İnteraktif simülasyon: gate ve drain voltajını değiştirince kanal ne yapıyor?</p>
+    </header>
+
+    <main class="container mb-5 flex-grow-1">
+        <div class="row g-4" id="mos-sim">
+            <!-- Kesit, kontroller ve grafikler -->
+            <div class="col-12 col-xl-8">
+                <div class="card lecture-card shadow h-100">
+                    <div class="card-header bg-primary text-white d-flex flex-wrap justify-content-between align-items-center gap-2">
+                        <h2 class="h5 mb-0" data-i18n="fetSim.device">Transistör Kesiti</h2>
+                        <span class="small" id="mos-head"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mb-3">
+                            <div class="btn-group" role="group" aria-label="Transistor type">
+                                <button type="button" class="btn btn-primary" data-mos-type="n">NMOS</button>
+                                <button type="button" class="btn btn-outline-primary" data-mos-type="p">PMOS</button>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Mode">
+                                <button type="button" class="btn btn-primary" data-mos-mode="enh">Enhancement</button>
+                                <button type="button" class="btn btn-outline-primary" data-mos-mode="dep">Depletion</button>
+                            </div>
+                        </div>
+                        <svg id="mos-svg" class="fab-svg pn-svg" viewBox="0 0 760 330" role="img" aria-label="MOSFET cross-section with channel, depletion region and terminal voltages"></svg>
+
+                        <div class="fab-legend mt-3">
+                            <span><span class="pn-dot pn-dot-electron"></span><span data-i18n="fetSim.legElectron">Elektron</span></span>
+                            <span><span class="pn-dot pn-dot-hole"></span>Hole</span>
+                            <span><span class="pn-dot pn-dot-acceptor">−</span><span data-i18n="fetSim.legAcceptor">Ionized acceptor (sabit)</span></span>
+                            <span><span class="pn-dot pn-dot-donor">+</span><span data-i18n="fetSim.legDonor">Ionized donor (sabit)</span></span>
+                            <span><span class="fab-swatch" style="background:#fffdf0"></span>Depletion region</span>
+                            <span><span class="fab-swatch" style="background:#d9e6f5"></span>Gate oxide (SiO<sub>2</sub>)</span>
+                            <span><span class="fab-swatch" style="background:#9a9a9a"></span>Polysilicon gate</span>
+                        </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-6">
+                                <label for="mos-vgs" class="form-label fw-semibold mb-0 d-flex justify-content-between"><span data-i18n="fetSim.vgs">Gate-source voltajı v<sub>GS</sub></span><span id="mos-vgs-out"></span></label>
+                                <input type="range" class="form-range" id="mos-vgs" step="0.05" value="0">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="mos-vds" class="form-label fw-semibold mb-0 d-flex justify-content-between"><span data-i18n="fetSim.vds">Drain-source voltajı v<sub>DS</sub></span><span id="mos-vds-out"></span></label>
+                                <input type="range" class="form-range" id="mos-vds" step="0.05" value="0">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="mos-vsb" class="form-label fw-semibold mb-0 d-flex justify-content-between"><span id="mos-vsb-label">Body bias v<sub>SB</sub></span><span id="mos-vsb-out"></span></label>
+                                <input type="range" class="form-range" id="mos-vsb" min="0" max="4" step="0.05" value="0">
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <p class="small text-body-secondary mb-0" data-i18n="fetSim.vsbHint">Body effect: body'yi source'a göre ters yönde biasla, threshold kayar.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 justify-content-center align-items-center mt-2">
+                            <span class="small text-body-secondary" data-i18n="fetSim.presets">Hazır çalışma noktası:</span>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-secondary" data-mos-pre="cutoff" data-i18n="fetSim.preCut">Cutoff</button>
+                                <button type="button" class="btn btn-outline-secondary" data-mos-pre="triode" data-i18n="fetSim.preTri">Triode</button>
+                                <button type="button" class="btn btn-outline-secondary" data-mos-pre="sat" data-i18n="fetSim.preSat">Saturation</button>
+                            </div>
+                            <button type="button" class="btn btn-sm second-button text-white px-3" id="mos-sweep-gs"></button>
+                            <button type="button" class="btn btn-sm second-button text-white px-3" id="mos-sweep-ds"></button>
+                        </div>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center mt-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="mos-lambda">
+                                <label class="form-check-label" for="mos-lambda" data-i18n="fetSim.lambda">Channel-length modulation (λ)</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="mos-labels" checked>
+                                <label class="form-check-label" for="mos-labels" data-i18n="fetSim.labels">Etiketler</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6 text-center">
+                                <h3 class="h6 mb-1" data-i18n="fetSim.outTitle">Output characteristic</h3>
+                                <svg id="mos-out" class="fab-svg" viewBox="0 0 360 250" role="img" aria-label="Output characteristic"></svg>
+                                <p class="small text-body-secondary mt-1 mb-0" data-i18n="fetSim.outHint">Pembe eğri seçili v<sub>GS</sub>, nokta çalışma noktası. Gri eğriler diğer v<sub>GS</sub> değerleri, kesikli çizgi triode/saturation sınırı.</p>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <h3 class="h6 mb-1" data-i18n="fetSim.trTitle">Transfer characteristic</h3>
+                                <svg id="mos-tr" class="fab-svg" viewBox="0 0 360 250" role="img" aria-label="Transfer characteristic"></svg>
+                                <p class="small text-body-secondary mt-1 mb-0" data-i18n="fetSim.trHint">Seçili v<sub>DS</sub> için i<sub>D</sub>(v<sub>GS</sub>). Kesikli dikey çizgi threshold voltage.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Açıklama ve değerler -->
+            <div class="col-12 col-xl-4">
+                <div class="card lecture-card shadow h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0" data-i18n="fetSim.now">Şu Anda</h2>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge align-self-start mb-2" id="mos-region"></span>
+                        <h3 class="h5" id="mos-title"></h3>
+                        <p id="mos-text"></p>
+
+                        <h4 class="h6" data-i18n="fetSim.eqTitle">Aktif denklem</h4>
+                        <div class="lecture-formula fet-eq" id="mos-eq"></div>
+                        <h4 class="h6" data-i18n="fetSim.values">Değerler</h4>
+                        <ul class="list-group list-group-flush small mb-3" id="mos-values"></ul>
+                        <div class="mt-auto text-center">
+                            <h4 class="h6" data-i18n="fetSim.symbol">Devre sembolü</h4>
+                            <svg id="mos-sym" class="diode-symbol fet-symbol" viewBox="0 0 130 124" role="img" aria-label="Circuit symbol"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-center small text-body-secondary mt-3 mb-0" data-i18n="fetSim.note">Simülasyonda NMOS için K<sub>n</sub>' = 100 µA/V<sup>2</sup>, W/L = 10; PMOS için K<sub>p</sub>' = 40 µA/V<sup>2</sup>, W/L = 25 alındı (hole mobility düşük olduğu için PMOS daha geniş seçildi, iki tipin K değeri de 1 mA/V<sup>2</sup>). V<sub>TO</sub> = ±1 V (enhancement), ∓2 V (depletion), γ = 0.5 √V, 2φ<sub>F</sub> = 0.6 V, λ = 0.05 V<sup>-1</sup>. PMOS grafiklerinde eksenler −v<sub>DS</sub> ve −v<sub>GS</sub>'dir. Çizim ölçekli değildir.</p>
+
+        <!-- Denenecekler -->
+        <h2 class="text-center mt-5 mb-1" data-i18n="fetSim.tryTitle">Şunları Dene</h2>
+        <p class="text-center text-body-secondary mb-4" data-i18n="fetSim.tryHint">Her birinde kesite, sağdaki açıklamaya ve iki grafikteki noktaya birlikte bak.</p>
+        <div class="row g-3">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="fetSim.t1Title">1 · Kanalı oluştur</span>
+                    <span class="small text-body-secondary" data-i18n="fetSim.t1">NMOS enhancement'ta v<sub>DS</sub> = 1 V iken v<sub>GS</sub>'yi −2 V'tan 4 V'a çek. Önce yüzeyde hole'lar birikiyor (accumulation), sonra depletion region oluşuyor, V<sub>TN</sub> = 1 V'u geçince de elektronlardan bir kanal beliriyor.</span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="fetSim.t2Title">2 · Pinch-off'u bul</span>
+                    <span class="small text-body-secondary" data-i18n="fetSim.t2">v<sub>GS</sub> = 3 V'ta v<sub>DS</sub>'yi 0'dan 6 V'a artır. Kanal drain tarafında inceliyor ve v<sub>DS</sub> = v<sub>GS</sub> − V<sub>TN</sub> = 2 V'ta drain ucunda kayboluyor. Bu noktadan sonra akım sabitleniyor. λ'yı açıp aynı şeyi tekrarla.</span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="fetSim.t3Title">3 · Depletion-mode</span>
+                    <span class="small text-body-secondary" data-i18n="fetSim.t3">Depletion'a geç ve v<sub>GS</sub> = 0 yap: kanal zaten var ve akım akıyor. Transistörü kapatmak için v<sub>GS</sub>'yi −2 V'un altına indir. Transfer characteristic'te eğrinin sola kaydığına bak.</span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card lecture-card shadow-sm h-100 p-3">
+                    <span class="fw-semibold mb-1" data-i18n="fetSim.t4Title">4 · PMOS ve body effect</span>
+                    <span class="small text-body-secondary" data-i18n="fetSim.t4">PMOS'a geç: bütün voltajlar negatif, kanalı hole'lar oluşturuyor ama davranış aynı. Sonra body bias'ı artır: threshold kayıyor ve aynı v<sub>GS</sub> ile akım azalıyor.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-5">
+            <a href="semiconductor-section-4.html" class="btn btn-primary btn-lg px-4" data-i18n="fetSim.back">← Chapter 4'e Dön</a>
+            <a href="semiconductor-jfet.html" class="btn btn-primary btn-lg px-4" data-i18n="fetSim.next">Sonraki: Part 9 JFET Simülasyonu →</a>
+        </div>
+    </main>
+
+
+    <footer class = "bg-light text-center py-3 mt-auto" data-bs-theme = "light">
+        <div class="container">
+            <span class="lead me-3" data-i18n="footer.follow">Bizi takip edin:</span>
+            <a href="https://www.instagram.com/ieeemetuncc/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" height="40" class="me-1">
+            </a>
+            <a href="https://www.linkedin.com/company/ieee-metu-nothern-cyprus-student-branch/" target="_blank" class="me-3 text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" height="40" class="me-1">
+            </a>
+            <a href="https://github.com/IEEE-METU-NCC/" target="_blank" class="text-decoration-none text-dark">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" height="40" class="me-1">
+            </a>
+        </div>
+
+    </footer>
+
+    <script src="https://unpkg.com/i18next@23.11.2/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js?v=20261122a" data-extra-locales="locales/semiconductor- locales/semiconductor-s4-"></script>
+    <script src="semiconductor-fet.js?v=20261122a"></script>
+</body>
+</html>

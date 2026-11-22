@@ -23,6 +23,14 @@
                 "simLink": "Try the depletion region in the simulation →",
                 "pageTitle": "Chapter 3 · Semiconductor Lecture Notes - IEEE METU NCC"
             },
+            "s4": {
+                "short": "Chapter 4",
+                "count": "9 Parts",
+                "title": "Field-Effect Transistors",
+                "desc": "The MOS capacitor, NMOS and PMOS, cutoff/triode/saturation, the depletion-mode MOSFET, body effect, biasing, the current mirror and the JFET.",
+                "heading": "Chapter 4 · Field-Effect Transistors",
+                "pageTitle": "Chapter 4 · Semiconductor Lecture Notes - IEEE METU NCC"
+            },
             "source": "Source: R. C. Jaeger &amp; T. N. Blalock, <em>Microelectronic Circuit Design</em> & Lecture Notes from: Assoc. Prof. Dr. Tayfun Nesimoğlu, Simplified by: Mert Kalkancı",
             "open": "Open Chapter →",
             "simBadge": "Interactive Simulation",

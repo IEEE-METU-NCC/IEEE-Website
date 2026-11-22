@@ -53,6 +53,21 @@
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>https://ieee.ncc.metu.edu.tr/semiconductor-section-4.html</loc>
+  <lastmod>2026-11-22T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://ieee.ncc.metu.edu.tr/semiconductor-mosfet.html</loc>
+  <lastmod>2026-11-22T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://ieee.ncc.metu.edu.tr/semiconductor-jfet.html</loc>
+  <lastmod>2026-11-22T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://ieee.ncc.metu.edu.tr/semiconductor-ic-fabrication.html</loc>
   <lastmod>2026-10-08T00:00:00+00:00</lastmod>
   <priority>0.80</priority>

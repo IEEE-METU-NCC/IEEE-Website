@@ -26,7 +26,7 @@ function i18nDeepMerge(target, source) {
 
 document.addEventListener("DOMContentLoaded", async function() {
   // Bump this string when translations or JS change (keep it short: big numbers print as 2.3e+23 and the server rejects the "+")
-  const cacheKey = '20261104a';
+  const cacheKey = '20261122a';
   // no-cache: tarayıcı her yüklemede sunucuya sorar (ETag/Last-Modified), dosya değişmediyse 304 ile cache'ten gelir
   const loadLocale = (dir, lng) => fetch(`${dir}${lng}.json?v=${cacheKey}`, { cache: 'no-cache' })
     .then(res => {
