@@ -330,8 +330,23 @@
         function depthUnderGate() {
             // gate altındaki depletion derinliği (px): yüzey potansiyeli + body bias
             const vt = m.vt;
+            // enhancement + v_GS ≤ 0: accumulation, gate altında depletion yok (substrate rengi)
+            if (mode === 'enh' && g <= 0) return 0;
             const psi = mode === 'enh' ? Math.max(0, Math.min(g, vt)) / Math.max(vt, 0.1) : 1;
-            return 22 + 50 * Math.sqrt((psi * PHI2 + b) / (PHI2 + 4));
+            const ramp = mode === 'enh' ? Math.min(1, g / 0.3) : 1;
+            return ramp * (22 + 50 * Math.sqrt((psi * PHI2 + b) / (PHI2 + 4)));
+        }
+
+        // kanal etiketinin konumu: kanalın ortasında, yüzeyin biraz altında
+        function chanTag() {
+            const w = (k) => 18 + 7 * L(k).length;
+            if (m.region === 'sat') {
+                const xp = XS + pinchU() * (XD - XS);
+                return { key: 'pinch', x: Math.min(xp, XD - w('pinch') / 2 - 6), ax: xp, y: YS + 44, w: w('pinch') };
+            }
+            if (m.vov > 0) return { key: 'chan', x: 330, ax: 330, y: YS + 44, w: w('chan') };
+            if (mode === 'dep') return { key: 'implant', x: 330, ax: 330, y: YS + 44, w: w('implant') };
+            return null;
         }
 
         function draw() {
@@ -355,8 +370,12 @@
             // depletion region'daki sabit iyonlar
             const ionSign = n ? '−' : '+';
             const ionCol = n ? COLORS.neg : COLORS.pos;
+            // kanal / pinch-off etiketinin altındaki iyonlar çizilmez (etiket okunabilsin)
+            const tag = chanTag();
+            const hidden = (x, y) => showLabels && tag && Math.abs(x - tag.x) < tag.w / 2 + 8 && Math.abs(y - tag.y) < 15;
             for (let x = XS + 22; x < XD - 14; x += 34) {
                 for (let y = YS + dep - 9; y > YS + (m.vov > 0 ? 30 : 18); y -= 18) {
+                    if (hidden(x, y)) continue;
                     const gI = el('g', {}, gDep);
                     el('rect', { x: x - 6, y: y - 6, width: 12, height: 12, rx: 3, fill: '#fff', stroke: ionCol }, gI);
                     el('text', { x, y: y + 4, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 700, fill: ionCol }, gI).textContent = ionSign;
@@ -425,14 +444,14 @@
                 label(gLab, 120, YS + 145, L('sub')[type], { 'text-anchor': 'start', 'font-size': 12 });
                 label(gLab, 712, YS - 18, 'SiO_{2}', { 'text-anchor': 'end', 'font-size': 11, fill: COLORS.muted });
                 el('path', { d: `M${XD + 6},${YS - 6} L686,${YS - 22}`, stroke: COLORS.muted, 'stroke-dasharray': '2 2' }, gLab);
-                if (dep > 16) label(gLab, 380, YS + dep + 14, L('depl'), { 'text-anchor': 'middle', 'font-size': 11, fill: '#9a7d0a' });
-                if (m.region === 'sat') {
-                    const xp = XS + pinchU() * (XD - XS);
-                    label(gLab, xp, YS + 36, L('pinch'), { 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 600 });
-                } else if (m.vov > 0) {
-                    label(gLab, 300, YS + 36, L('chan'), { 'text-anchor': 'middle', 'font-size': 11, fill: carCol, 'font-weight': 600 });
-                } else if (mode === 'dep') {
-                    label(gLab, 300, YS + 36, L('implant'), { 'text-anchor': 'middle', 'font-size': 11, fill: carCol });
+                if (dep > 16) label(gLab, 380, YS + Math.max(dep + 14, chanTag() ? 72 : 0), L('depl'), { 'text-anchor': 'middle', 'font-size': 11, fill: '#9a7d0a' });
+                const tg = chanTag();
+                if (tg) {
+                    // etiket beyaz bir kutuda; kısa bir çizgiyle kanala bağlı
+                    const col = tg.key === 'pinch' ? COLORS.ink : carCol;
+                    el('line', { x1: tg.ax, y1: YS + 3, x2: tg.ax, y2: tg.y - 10, stroke: col, 'stroke-width': 1.2 }, gLab);
+                    el('rect', { x: tg.x - tg.w / 2, y: tg.y - 10, width: tg.w, height: 19, rx: 9.5, fill: '#fff', stroke: col, 'stroke-width': 1.2 }, gLab);
+                    label(gLab, tg.x, tg.y + 4, L(tg.key), { 'text-anchor': 'middle', 'font-size': 12, fill: col, 'font-weight': 700 });
                 }
             }
             // akım oku
@@ -794,8 +813,9 @@
         }
 
         // Geometri
-        const X0 = 80, X1 = 680, XG0 = 220, XG1 = 540, YT = 70, YB = 250, YC = 160;
+        const X0 = 80, X1 = 640, XG0 = 220, XG1 = 540, YT = 70, YB = 250, YC = 160;
         const GATE_H = 24;
+        const XL = 742;                          // iki gate'i bağlayan telin dikey kolu: cihazın tamamen dışında
         const OPEN = (YB - YT) / 2 - GATE_H;     // gate kenarından merkeze mesafe (px)
         const gStatic = el('g', {}, svg);
         const gDep = el('g', {}, svg);
@@ -830,7 +850,7 @@
             const gateCol = n ? COLORS.pPlus : COLORS.nPlus;
             [gStatic, gDep, gGate, gLab].forEach(x => { x.textContent = ''; });
 
-            el('path', { d: `M380,${YT} L380,${YT - 34} L600,${YT - 34} L600,${YB + 26} L380,${YB + 26} L380,${YB}`, fill: 'none', stroke: COLORS.ink, 'stroke-width': 2 }, gStatic);
+            el('path', { d: `M380,${YT} L380,${YT - 34} L${XL},${YT - 34} L${XL},${YB + 26} L380,${YB + 26} L380,${YB}`, fill: 'none', stroke: COLORS.ink, 'stroke-width': 2 }, gStatic);
             el('rect', { x: X0, y: YT, width: X1 - X0, height: YB - YT, fill: chanCol, stroke: '#555' }, gStatic);
             // depletion: üst ve alt
             const N = 64, top = [], bot = [];
@@ -867,12 +887,12 @@
             el('rect', { x: X0 - 16, y: YC - 40, width: 16, height: 80, fill: COLORS.metal }, gStatic);
             el('rect', { x: X1, y: YC - 40, width: 16, height: 80, fill: COLORS.metal }, gStatic);
             el('path', { d: `M${X0 - 16},${YC} L${X0 - 40},${YC} M${X1 + 16},${YC} L${X1 + 40},${YC}`, stroke: COLORS.ink, 'stroke-width': 2 }, gStatic);
-            el('circle', { cx: 600, cy: YT - 34, r: 3, fill: COLORS.ink }, gStatic);
+            el('circle', { cx: 560, cy: YT - 34, r: 3, fill: COLORS.ink }, gStatic);
 
             const s = n ? 1 : -1;
             label(gLab, 8, YC - 50, 'S  0 V', { 'text-anchor': 'start', 'font-weight': 700, 'font-size': 13 });
-            label(gLab, 752, YC - 50, 'D  ' + fmtV(s * d), { 'text-anchor': 'end', 'font-weight': 700, 'font-size': 13 });
-            label(gLab, 608, YT - 40, 'G  ' + fmtV(s * g), { 'text-anchor': 'start', 'font-weight': 700, 'font-size': 13 });
+            label(gLab, X1 + 6, YC - 50, 'D  ' + fmtV(s * d), { 'text-anchor': 'start', 'font-weight': 700, 'font-size': 13 });
+            label(gLab, 566, YT - 40, 'G  ' + fmtV(s * g), { 'text-anchor': 'start', 'font-weight': 700, 'font-size': 13 });
             if (showLabels) {
                 const gl = (n ? 'p^{+} ' : 'n^{+} ') + L('gate');
                 label(gLab, 380, YT + 17, gl, { 'text-anchor': 'middle', 'font-size': 12 });
@@ -889,7 +909,7 @@
             if (m.i > 1e-9) {
                 const y1 = YC + 52, x1 = n ? X1 + 64 : X1 + 26, x2 = n ? X1 + 26 : X1 + 64;
                 el('path', { d: `M${x1},${y1} L${x2},${y1}`, stroke: COLORS.plot, 'stroke-width': 2.5, 'marker-end': 'url(#jf-arr)' }, gLab);
-                label(gLab, 752, y1 + 20, 'i_{D} = ' + fmtI(m.i), { 'text-anchor': 'end', 'font-size': 12, fill: COLORS.plot, 'font-weight': 600 });
+                label(gLab, X1 + 6, y1 + 20, 'i_{D} = ' + fmtI(m.i), { 'text-anchor': 'start', 'font-size': 12, fill: COLORS.plot, 'font-weight': 600 });
             }
         }
 
